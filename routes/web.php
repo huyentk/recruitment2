@@ -11,6 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/sign-in',[
+    'uses' => 'UserController@postSignIn',
+    'as' => 'signin'
+]);
