@@ -8,13 +8,66 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
-class UserController
+class UserController extends Controller
 {
-    public function postSignIn()
+    public function postSignIn(Request $request)
     {
-        return view('auth.sign-in');
+        if(Auth::check()){
+            $message_warning = "You have already login";
+            return redirect()->route('home')->with($message_warning);
+        }
+        $this->validate($request,[
+            'email' => 'required|email',
+            'password' => 'required'
+        ]);
+        Auth::attempt(['email' => $request['email'], 'password' => $request['password']]);
+        $user = User::where('email',$request['email'])->first();
+        if($user){
+            Auth::login($user);
+            return redirect()->route('home');
+        }
+        $message = ['message_danger' => 'Sorry, unrecognised username or password.'];
+        return redirect()->route('get-sign-in')->with($message);
+    }
+
+    public function postSignUp(Request $request)
+    {
+        if(Auth::check()) //if user already login
+        {
+            $message_warning = "You have already login";
+            return redirect()->route('home')->with($message_warning);
+        }
+        $this->validate( $request, [
+            'email' => 'required|email|unique:users',
+            'fullname' => 'required|max:120',
+            'password' => 'required|min:4',
+            'password-confirm' => 'required|min:4'
+        ]);
+        $email = $request['email'];
+        $fullname = $request['fullname'];
+        $password = $request['password'];
+        $password_confirm = $request['password-confirm'];
+        if($password != $password_confirm){
+            return redirect()->back()->with(['message'=>'Password must match']);
+        }
+        //create User
+        $user = new User();
+        $user->full_name = $fullname;
+        $user->email = $email;
+        $user->password = bcrypt($password);
+        $user->save();
+        Auth::login($user);
+        return redirect()->route('home');
+    }
+
+    public function getLogout(){
+        Auth::logout();
+        return redirect()->route('home');
     }
 }
