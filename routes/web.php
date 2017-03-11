@@ -11,9 +11,9 @@
 |
 */
 
-Route::get('/',function (){
-    return view('homepage');
-})->name('home');
+Route::get('/',[
+    'uses' => 'HomeController@getHomepage'
+])->name('home');
 
 Route::get('/signin',function () {
     return view('auth.sign-in');

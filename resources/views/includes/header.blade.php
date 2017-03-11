@@ -36,7 +36,7 @@
                     @else
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="background-color: #2a88bd;">{{ Auth::user()->full_name }} <span class="caret"></span></a>
-                                @if(Auth::user()->role_id == 1)
+                                @if(Auth::user()->role_id == 3)
                                     <ul class="dropdown-menu" role="menu" style="background-color: #3B4F6B;">
                                         <li><a href="#">My page (Your Account)</a></li>
                                         <li role="separator" class="divider"></li>
@@ -52,6 +52,8 @@
                                         <li role="separator" class="divider"></li>
                                         <li><a href="#">One more separated link</a></li>
                                     </ul>
+                                @elseif(Auth::user()->role_id == 1)
+
                                 @endif
                             </li>
                     @endif

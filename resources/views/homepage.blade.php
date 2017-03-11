@@ -43,7 +43,7 @@
         </a>
     </div>
     <br/>
-    <div class="above">
+    <div class="search">
         <div style="padding-top: 5px;padding-left: 20px;">
             <h4>Start your search here!</h4>
             <hr style="margin-top: 0px;margin-bottom: 0px;margin-right: 20px;"/>
@@ -61,9 +61,77 @@
                     </div>
                 </div>
                 <div class="col-md-2">
-                    <button type="submit" class="btn btn-warning" style="width: 135px;text-align: center;"><span class="glyphicon glyphicon-search"></span> Search</button>
+                    <button type="submit" class="btn" style="width: 135px;text-align: center;background-color: #e58618;color: white;"><span class="glyphicon glyphicon-search"></span> Search</button>
                 </div>
             </div>
+        </div>
+    </div>
+    <hr style="border-color: #9a9a9a"/>
+    <div class="row" style="margin-left: 5px;">
+        <div class="col-md-8">
+            <div class="row" style="margin-left: 5px;">
+                <lable style="font-size: 24px; color: #2b1e9a">New Jobs</lable>
+                <button class="btn btn-default btn-md" type="submit" style="float: right;margin-right: 20px;">View All</button>
+            </div>
+            <br/>
+            <div class="row">
+                @foreach($jobs as $job)
+                    <a href="#">
+                        <div class="col-md-6" style="margin-bottom: 25px;">
+                            <div class="row">
+                                <div class="col-md-4" style="margin-top: 15px;">
+                                    <center><img class="img-circle" src="{{ $job->image }}" style="border:1px solid #262626;"></center>
+                                </div>
+                                <div class="col-md-7" style="text-align: center;">
+                                    <h3 style="font-weight: bold">{{ $job->name }}</h3>
+                                    <h4>{{ $job->salary }} / month</h4>
+                                    <h4>{{ $job->num_register }} registered</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                @endforeach
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="row">
+                <lable style="font-size: 24px;color: #2b1e9a;">Lastest Articles</lable>
+                <button class="btn btn-default btn-md" type="submit" style="float: right;margin-right: 35px;">View All</button>
+            </div>
+            <br/>
+            <div class="row">
+                @foreach($articles as $article)
+                <div class="col-md-6" style="padding-left: 0px;">
+                    <img src="{{ $article->image  }}" class="img-rounded">
+                    <h4 style="padding-right: 15px;">{{ $article->title }}</h4>
+                </div>
+                @endforeach
+            </div>
+        </div>
+    </div>
+    <hr style="border-color: #9a9a9a"/>
+    <div class="row" style="padding-left: 15px;margin-left: 0;">
+        <lable style="font-size: 24px;color: #2b1e9a;">Top Companies</lable>
+        <button class="btn btn-default btn-md" type="submit" style="float: right;margin-right: 35px;">View All</button>
+    </div>
+    <div class="row" style="padding-left: 15px;">
+        <div class="col-md-2">
+            <center><img src="{{ Storage::url('/companies/ved.png') }}" class="img-rounded"></center>
+        </div>
+        <div class="col-md-2">
+            <center><img src="{{ Storage::url('/companies/fpt.jpeg') }}" class="img-rounded"></center>
+        </div>
+        <div class="col-md-2">
+            <center><img src="{{ Storage::url('/companies/ved.png') }}" class="img-rounded"></center>
+        </div>
+        <div class="col-md-2">
+            <center><img src="{{ Storage::url('/companies/fpt.jpeg') }}" class="img-rounded"></center>
+        </div>
+        <div class="col-md-2">
+            <center><img src="{{ Storage::url('/companies/ved.png') }}" class="img-rounded"></center>
+        </div>
+        <div class="col-md-2">
+            <center><img src="{{ Storage::url('/companies/fpt.jpeg') }}" class="img-rounded"></center>
         </div>
     </div>
 @endsection

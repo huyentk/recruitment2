@@ -13,7 +13,7 @@ class CreateStudentApplyJobsTable extends Migration
      */
     public function up()
     {
-        Schema::create('student__apply__jobs', function (Blueprint $table) {
+        Schema::create('student_apply_jobs', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('stu_id');
             $table->unsignedInteger('job_id');

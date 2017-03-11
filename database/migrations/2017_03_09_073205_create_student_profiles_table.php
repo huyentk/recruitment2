@@ -13,7 +13,7 @@ class CreateStudentProfilesTable extends Migration
      */
     public function up()
     {
-        Schema::create('student__profiles', function (Blueprint $table) {
+        Schema::create('student_profiles', function (Blueprint $table) {
             $table->increments('id');
             $table->string('university',120);
             $table->string('major');

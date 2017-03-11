@@ -13,7 +13,7 @@ class CreateJobSkillsTable extends Migration
      */
     public function up()
     {
-        Schema::create('job__skills', function (Blueprint $table) {
+        Schema::create('job_skills', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('job_id');
             $table->unsignedInteger('skill_id');

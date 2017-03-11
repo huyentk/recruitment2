@@ -40,7 +40,7 @@ class UserController extends Controller
     {
         if(Auth::check()) //if user already login
         {
-            $message_warning = "You have already login";
+            $message_warning = ['message_warning' => 'You are already logged in.'];
             return redirect()->route('home')->with($message_warning);
         }
         $this->validate( $request, [
@@ -54,7 +54,8 @@ class UserController extends Controller
         $password = $request['password'];
         $password_confirm = $request['password-confirm'];
         if($password != $password_confirm){
-            return redirect()->back()->with(['message'=>'Password must match']);
+            $message_warning = ['message_warning' => 'Password did not match'];
+            return redirect()->back()->with($message_warning);
         }
         //create User
         $user = new User();

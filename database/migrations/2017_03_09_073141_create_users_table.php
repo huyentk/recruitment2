@@ -24,7 +24,7 @@ class CreateUsersTable extends Migration
             $table->char('skype_id',120)->default('');
             $table->char('phone',20)->default('');
             $table->string('facebook_id')->default('');
-            $table->unsignedSmallInteger('role_id')->default(1); //student
+            $table->unsignedSmallInteger('role_id')->default(3);
             $table->rememberToken();
             $table->timestamps();
         });
