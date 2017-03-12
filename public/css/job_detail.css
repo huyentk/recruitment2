@@ -1,0 +1,23 @@
+.box{
+    margin-top: 50px;
+    margin-left: 30px;
+    padding: 20px;
+    width: 85%;
+    height: 500px;
+    background-color: #e4e4e4;
+}
+
+.company-info{
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+
+.job_detail{
+    padding-top: 50px;
+}
+
+.paragraph{
+    font-size: 18px;
+    padding-left: 25px;
+}

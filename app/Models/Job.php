@@ -19,6 +19,6 @@ class Job extends Model
     }
 
     public function companyProfile(){
-        return $this->belongsTo('App\Models\CompanyProfile');
+        return $this->belongsTo('App\Models\CompanyProfile','created_by','id');
     }
 }

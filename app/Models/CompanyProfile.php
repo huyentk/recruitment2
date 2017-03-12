@@ -11,7 +11,7 @@ class CompanyProfile extends Model
     }
 
     public function jobs(){
-        return $this->hasMany('App\Models\Job','created_by');
+        return $this->hasMany('App\Models\Job');
     }
 
     public function company(){

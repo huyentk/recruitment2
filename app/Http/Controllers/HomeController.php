@@ -8,13 +8,14 @@
 
 namespace App\Http\Controllers;
 use App\Models\Articles;
+use App\Models\Company;
 use App\Models\Job;
 use Illuminate\Support\Facades\Storage;
 
 class HomeController
 {
     public function getHomepage(){
-        $jobs = Job::all();
+        $jobs = Job::orderBy('created_at','desc')->limit(8)->get();
         foreach ($jobs as $job) {
             $job->image = Storage::url('/job_images/'.$job->id.'.png');
             if(!$job->image){
@@ -22,7 +23,7 @@ class HomeController
             }
         }
 
-        $articles = Articles::all();
+        $articles = Articles::orderBy('created_at','desc')->limit(2)->get();
         foreach ($articles as $article) {
             $article->image = Storage::url('/articles/'.$article->id.'.png');
             if(!$article->image){
@@ -30,9 +31,17 @@ class HomeController
             }
         }
 
+        $companies = Company::all();
+        foreach ($companies as $company) {
+            $company->image = Storage::url('/companies/'.$company->id.'.png');
+            if(!$company->image){
+                $company->image = Storage::url('/companies/default.png');
+            }
+        }
         return view('homepage')->with([
             'jobs' => $jobs,
-            'articles' => $articles
+            'articles' => $articles,
+            'companies' => $companies
         ]);
     }
 }

@@ -35,5 +35,52 @@ class CompanyTableSeeder extends Seeder
             'url' => 'http://www.fpt.vn/',
             'num_employee' => '300.000'
         ]);
+        Company::create([
+            'name' => 'Framgia',
+            'slogan' => 'The leading provider of software outsourcing services in Vietnam',
+            'description' => 'Established in 1999, ranking in Top 100 Global Outsourcing, recognized as Top Best IT Company To Work in Vietnam (2014), FPT Software is a global software company with presence in US, Japan, EU, Asia Pacific and Australia.\n 
+                            FPT Software staff take pride in fair competition with work quality equal to that of the world’s 500 biggest companies’ staff in central area of technology such as Mobility, Cloud Computing, Big Data... \n
+                            Annually, thousands of staff have gone on business trips overseas.\n
+                            FPT Software‘s members consist of Vietnam, US, Japan, EU, Slovakia, Singapore, Myanmar‘s citizens. Though from different origins, they all share the common mission of turning FPT Software into one of the world’s leading software companies.\n 
+                            You can make it too!',
+            'address' => 'Tòa nhà Vietnam Esports, 15 Trương Định, Phường 6, Quận 3, Tp. Hồ Chí Minh.',
+            'url' => 'http://www.fpt.vn/',
+            'num_employee' => '300.000'
+        ]);
+        Company::create([
+            'name' => 'Arrow County Supplies',
+            'slogan' => 'We inspire cleaning professionals to rethink traditional approaches to deliver higher standards, improved team performance, regulatory compliance and sustainable working',
+            'description' => 'About us \n
+                              Our heritage and history has helped us shape the modern and thriving business we are today. \n
+                              Our customer-centric operations are supported by the right tools, processes and systems to make sure we provide a consistently high and dependable service.\n
+                              Established in 1976, we have over 40 years’ experience within the cleaning and janitorial industry and always strive to be different.',
+            'address' => 'Tòa nhà Vietnam Esports, 15 Trương Định, Phường 6, Quận 3, Tp. Hồ Chí Minh.',
+            'url' => 'https://www.arrowcounty.com/',
+            'num_employee' => '500.000'
+        ]);
+        Company::create([
+            'name' => 'FPT',
+            'slogan' => 'The leading provider of software outsourcing services in Vietnam',
+            'description' => 'Established in 1999, ranking in Top 100 Global Outsourcing, recognized as Top Best IT Company To Work in Vietnam (2014), FPT Software is a global software company with presence in US, Japan, EU, Asia Pacific and Australia.\n 
+                            FPT Software staff take pride in fair competition with work quality equal to that of the world’s 500 biggest companies’ staff in central area of technology such as Mobility, Cloud Computing, Big Data... \n
+                            Annually, thousands of staff have gone on business trips overseas.\n
+                            FPT Software‘s members consist of Vietnam, US, Japan, EU, Slovakia, Singapore, Myanmar‘s citizens. Though from different origins, they all share the common mission of turning FPT Software into one of the world’s leading software companies.\n 
+                            You can make it too!',
+            'address' => 'Tòa nhà Vietnam Esports, 15 Trương Định, Phường 6, Quận 3, Tp. Hồ Chí Minh.',
+            'url' => 'http://www.fpt.vn/',
+            'num_employee' => '300.000'
+        ]);
+        Company::create([
+            'name' => 'FPT',
+            'slogan' => 'The leading provider of software outsourcing services in Vietnam',
+            'description' => 'Established in 1999, ranking in Top 100 Global Outsourcing, recognized as Top Best IT Company To Work in Vietnam (2014), FPT Software is a global software company with presence in US, Japan, EU, Asia Pacific and Australia.\n 
+                            FPT Software staff take pride in fair competition with work quality equal to that of the world’s 500 biggest companies’ staff in central area of technology such as Mobility, Cloud Computing, Big Data... \n
+                            Annually, thousands of staff have gone on business trips overseas.\n
+                            FPT Software‘s members consist of Vietnam, US, Japan, EU, Slovakia, Singapore, Myanmar‘s citizens. Though from different origins, they all share the common mission of turning FPT Software into one of the world’s leading software companies.\n 
+                            You can make it too!',
+            'address' => 'Tòa nhà Vietnam Esports, 15 Trương Định, Phường 6, Quận 3, Tp. Hồ Chí Minh.',
+            'url' => 'http://www.fpt.vn/',
+            'num_employee' => '300.000'
+        ]);
     }
 }

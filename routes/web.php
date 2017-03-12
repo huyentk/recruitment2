@@ -43,3 +43,9 @@ Route::get('auth/facebook',[
     'as' => 'auth-facebook'
 ]);
 Route::get('auth/facebook/callback', 'Auth\LoginController@handleProviderCallback');
+
+//Job
+Route::get('/{id}/job-detail',[
+    'uses' => 'JobsController@getJobDetail',
+    'as' => 'job_detail'
+]);

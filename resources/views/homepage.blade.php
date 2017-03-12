@@ -76,14 +76,14 @@
             <br/>
             <div class="row">
                 @foreach($jobs as $job)
-                    <a href="#">
+                    <a href="{{ route('job_detail',['id' => $job->id]) }}">
                         <div class="col-md-6" style="margin-bottom: 25px;">
                             <div class="row">
-                                <div class="col-md-4" style="margin-top: 15px;">
+                                <div class="col-md-4">
                                     <center><img class="img-circle" src="{{ $job->image }}" style="border:1px solid #262626;"></center>
                                 </div>
                                 <div class="col-md-7" style="text-align: center;">
-                                    <h3 style="font-weight: bold">{{ $job->name }}</h3>
+                                    <h4 style="font-weight: bold">{{ $job->name }}</h4>
                                     <h4>{{ $job->salary }} / month</h4>
                                     <h4>{{ $job->num_register }} registered</h4>
                                 </div>
@@ -99,14 +99,17 @@
                 <button class="btn btn-default btn-md" type="submit" style="float: right;margin-right: 35px;">View All</button>
             </div>
             <br/>
-            <div class="row">
-                @foreach($articles as $article)
-                <div class="col-md-6" style="padding-left: 0px;">
-                    <img src="{{ $article->image  }}" class="img-rounded">
-                    <h4 style="padding-right: 15px;">{{ $article->title }}</h4>
+            @foreach($articles as $article)
+                <div class="row" style="padding-left: 50px;">
+                    <a href="#">
+                        <div class="col-md-6">
+                            <img class="img-rounded" style="border: 1px solid #b1b7ba;" src="{{ $article->image }}">
+                            <p style="width: 220px;font-size: 16px;font-weight: bold">{{ $article->title }}</p>
+                        </div>
+                    </a>
                 </div>
-                @endforeach
-            </div>
+                <br/>
+            @endforeach
         </div>
     </div>
     <hr style="border-color: #9a9a9a"/>
@@ -115,23 +118,12 @@
         <button class="btn btn-default btn-md" type="submit" style="float: right;margin-right: 35px;">View All</button>
     </div>
     <div class="row" style="padding-left: 15px;">
-        <div class="col-md-2">
-            <center><img src="{{ Storage::url('/companies/ved.png') }}" class="img-rounded"></center>
-        </div>
-        <div class="col-md-2">
-            <center><img src="{{ Storage::url('/companies/fpt.jpeg') }}" class="img-rounded"></center>
-        </div>
-        <div class="col-md-2">
-            <center><img src="{{ Storage::url('/companies/ved.png') }}" class="img-rounded"></center>
-        </div>
-        <div class="col-md-2">
-            <center><img src="{{ Storage::url('/companies/fpt.jpeg') }}" class="img-rounded"></center>
-        </div>
-        <div class="col-md-2">
-            <center><img src="{{ Storage::url('/companies/ved.png') }}" class="img-rounded"></center>
-        </div>
-        <div class="col-md-2">
-            <center><img src="{{ Storage::url('/companies/fpt.jpeg') }}" class="img-rounded"></center>
-        </div>
+        @foreach($companies as $company)
+            <a href="{{ $company->url }}">
+                <div class="col-md-2">
+                    <center><img src="{{ $company->image }}" class="img-rounded"></center>
+                </div>
+            </a>
+        @endforeach
     </div>
 @endsection
