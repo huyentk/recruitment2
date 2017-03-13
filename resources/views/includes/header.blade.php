@@ -20,7 +20,7 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
-                    <li><a href="#">&nbsp Jobs</a></li>
+                    <li><a href="{{ route('get-jobs-list') }}">&nbsp Jobs</a></li>
                     <li><a href="#">Companies</a></li>
                     <li><a href="#">Articles</a></li>
                     <li><a href="#">Introduce</a></li>

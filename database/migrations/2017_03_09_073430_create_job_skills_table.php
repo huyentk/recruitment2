@@ -17,6 +17,7 @@ class CreateJobSkillsTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('job_id');
             $table->unsignedInteger('skill_id');
+            $table->string('skill_name');
             $table->timestamps();
         });
     }

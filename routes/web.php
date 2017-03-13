@@ -49,3 +49,8 @@ Route::get('/{id}/job-detail',[
     'uses' => 'JobsController@getJobDetail',
     'as' => 'job_detail'
 ]);
+
+Route::get('jobs-list',[
+   'uses' => 'JobsController@getJobsList',
+    'as' => 'get-jobs-list'
+]);

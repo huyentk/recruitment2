@@ -71,7 +71,7 @@
         <div class="col-md-8">
             <div class="row" style="margin-left: 5px;">
                 <lable style="font-size: 24px; color: #2b1e9a">New Jobs</lable>
-                <button class="btn btn-default btn-md" type="submit" style="float: right;margin-right: 20px;">View All</button>
+                <button class="btn btn-default btn-md" type="submit" style="float: right;margin-right: 20px;"><a href="{{ route('get-jobs-list') }}" style="text-decoration: none;">View All</a></button>
             </div>
             <br/>
             <div class="row">

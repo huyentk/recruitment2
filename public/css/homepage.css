@@ -43,3 +43,32 @@
     background-clip: initial;
     background-color: initial;
 }
+
+.job_content:hover {
+     background: #fdfdfd !important;
+     z-index: 5;
+     border-color: transparent;
+     box-shadow: 0 0 5px 1px #bcbcbc;
+}
+
+.job_content{
+    height: auto;
+    margin-left: 25px;
+    margin-top: 50px;
+    margin-right: 25px;
+}
+
+.job_content_div{
+    padding: 26px;
+    height: 100%;
+}
+
+.cut-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    line-height: 16px;     /* fallback */
+    max-height: 32px;      /* fallback */
+    -webkit-line-clamp: 2; /* number of lines to show */
+    -webkit-box-orient: vertical;
+}

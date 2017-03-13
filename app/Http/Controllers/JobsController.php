@@ -8,7 +8,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Company;
+use App\Models\CompanyProfile;
 use App\Models\Job;
+use App\Models\JobSkill;
 use App\Models\Skill;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
@@ -30,5 +33,19 @@ class JobsController
             'company' => $company,
             'job_skills' => $job_skills,
         ]);
+    }
+
+    public function getJobsList()
+    {
+        $jobs = Job::all();
+        foreach ($jobs as $job){
+            $company_id = CompanyProfile::where('id',$job->created_by)->pluck('company_id');
+            $company = Company::select('name')->where('id',$company_id)->first();
+            $job->company_name = $company->name;
+            $job->image = Storage::url('/job_images/'.$job->id.'.png');
+            $skills = JobSkill::select('skill_name')->where('job_id',$job->id)->get();
+            $job->skills = $skills;
+        }
+        return view('jobs.jobs_list')->with(['jobs'=> $jobs]);
     }
 }
