@@ -6,6 +6,7 @@
 
 @section('script_and_style')
     <link rel="stylesheet" type="text/css" href="{{ URL::to('css/homepage.css') }}">
+    <script src="{{URL::to('js/search_job.js')}}"></script>
 @endsection
 
 @section('content')
@@ -14,23 +15,26 @@
         <div style="padding-top: 5px;padding-left: 20px;">
             <h4>Start your search here!</h4>
             <hr style="margin-top: 0px;margin-bottom: 0px;margin-right: 20px;"/>
-            <div class="row" style="margin-top: 15px;">
-                <div class="col-md-6">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-tag" aria-hidden="true"></i></span>
-                        <input type="text" id="skill_tags" class="form-control" placeholder="Search for your skill (i.e: PHP, Python,...)" name="tag">
+            <form method="post" action="{{ route('post-jobs-list') }}">
+                <div class="row" style="margin-top: 15px;">
+                    <div class="col-md-6">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-tag" aria-hidden="true"></i></span>
+                            <input type="text" id="skill_tags" class="form-control" placeholder="Search for your skill (i.e: PHP, Python,...)" name="skill">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-map-marker" aria-hidden="true"></i></span>
+                            <input type="text" id="city" class="form-control" placeholder="City..." name="city">
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <input type="hidden" name="_token" value="{{ Session::token() }}">
+                        <button type="submit" class="btn" style="width: 135px;text-align: center;background-color: #e58618;color: white;"><span class="glyphicon glyphicon-search"></span> Search</button>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-map-marker" aria-hidden="true"></i></span>
-                        <input type="text" class="form-control" placeholder="City..." name="city">
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <button type="submit" class="btn" style="width: 135px;text-align: center;background-color: #e58618;color: white;"><span class="glyphicon glyphicon-search"></span> Search</button>
-                </div>
-            </div>
+            </form>
         </div>
     </div>
     @foreach($jobs as $job)
@@ -62,4 +66,14 @@
             </div>
     </div>
     @endforeach
+    @if(!isset($do_not_render))
+        <div class="row">
+            <div style="text-align: right;padding-right: 40px;">
+                {{ $jobs->render() }}
+            </div>
+        </div>
+    @endif
+    <script>
+        var urlGetJobs = '{{ route('getJobSources') }}';
+    </script>
 @endsection

@@ -72,3 +72,9 @@
     -webkit-line-clamp: 2; /* number of lines to show */
     -webkit-box-orient: vertical;
 }
+
+.ui-autocomplete {
+    width: 20%;
+    background: #ffffff;
+    border-radius: 1px;
+}

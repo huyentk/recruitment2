@@ -50,7 +50,18 @@ Route::get('/{id}/job-detail',[
     'as' => 'job_detail'
 ]);
 
+//get for job in header
 Route::get('jobs-list',[
-   'uses' => 'JobsController@getJobsList',
+    'uses' => 'JobsController@getJobsList',
     'as' => 'get-jobs-list'
+]);
+
+Route::post('jobs-list',[
+    'uses' => 'JobsController@postJobsList',
+    'as' => 'post-jobs-list'
+]);
+
+Route::get('jobs',[
+    'uses' => 'SkillsController@getSkillSourses',
+    'as' => 'getJobSources'
 ]);
