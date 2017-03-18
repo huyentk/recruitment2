@@ -16,7 +16,7 @@
             <h4>Start your search here!</h4>
             <hr style="margin-top: 0px;margin-bottom: 0px;margin-right: 20px;"/>
             <form method="post" action="{{ route('post-jobs-list') }}">
-                <div class="row" style="margin-top: 15px;">
+                <div class="row" style="margin-top: 15px; padding-bottom: 20px;">
                     <div class="col-md-6">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-tag" aria-hidden="true"></i></span>

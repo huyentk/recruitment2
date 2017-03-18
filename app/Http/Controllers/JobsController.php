@@ -17,7 +17,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
-class JobsController
+class JobsController extends Controller
 {
     public function getJobDetail($id){
         $job = Job::where('id',$id)->first();

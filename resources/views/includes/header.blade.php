@@ -38,19 +38,17 @@
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="background-color: #2a88bd;">{{ Auth::user()->full_name }} <span class="caret"></span></a>
                                 @if(Auth::user()->role_id == 3)
                                     <ul class="dropdown-menu" role="menu" style="background-color: #3B4F6B;">
-                                        <li><a href="#">My page (Your Account)</a></li>
+                                        <li><a href="{{ route('get-student-page',['id' => Auth::user()->id]) }}">My page (Your Account)</a></li>
                                         <li role="separator" class="divider"></li>
                                         <li><a href="{{ route('log-out') }}">Logout</a></li>
                                     </ul>
                                 @elseif(Auth::user()->role_id == 2)
                                     <ul class="dropdown-menu" role="menu" style="background-color: #3B4F6B;">
-                                        <li><a href="#">Action</a></li>
-                                        <li><a href="#">Another action</a></li>
-                                        <li><a href="#">Something else here</a></li>
+                                        <li><a href="#">My page (Your Account)</a></li>
+                                        <li><a href="#">My Company Page</a></li>
+                                        <li><a href="#">Jobs Management</a></li>
                                         <li role="separator" class="divider"></li>
-                                        <li><a href="#">Separated link</a></li>
-                                        <li role="separator" class="divider"></li>
-                                        <li><a href="#">One more separated link</a></li>
+                                        <li><a href="{{ route('log-out') }}">Logout</a></li>
                                     </ul>
                                 @elseif(Auth::user()->role_id == 1)
 

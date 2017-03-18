@@ -12,7 +12,7 @@ use App\Models\Company;
 use App\Models\Job;
 use Illuminate\Support\Facades\Storage;
 
-class HomeController
+class HomeController extends Controller
 {
     public function getHomepage(){
         $jobs = Job::orderBy('created_at','desc')->limit(8)->get();

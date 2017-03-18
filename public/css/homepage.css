@@ -7,8 +7,8 @@
 .search{
     color: whitesmoke;
     margin-left: 23px;
-    width: 96%;
-    height: 115px;
+    width: auto;
+    height: auto;
     background-color: rgb(70, 130, 180);
     z-index: 5;
 }

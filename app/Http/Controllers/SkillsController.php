@@ -9,7 +9,7 @@
 namespace App\Http\Controllers;
 use App\Models\Skill;
 
-class SkillsController
+class SkillsController extends Controller
 {
     public function getSkillSourses(){
         return Skill::pluck('name');

@@ -65,3 +65,27 @@ Route::get('jobs',[
     'uses' => 'SkillsController@getSkillSourses',
     'as' => 'getJobSources'
 ]);
+
+//Student
+Route::get('{id}/student-page',[
+   'uses' => 'StudentController@getStudentPage',
+    'as' => 'get-student-page'
+]);
+
+//update account infomation has pas
+Route::post('update-account-info-has-pass',[
+    'uses' => 'StudentController@postUpdateAccountInfoHasPass',
+    'as' => 'update-account-info-has-pass'
+]);
+
+//update account infomation has pas
+Route::post('update-account-info-no-pass',[
+    'uses' => 'StudentController@postUpdateAccountInfoNoPass',
+    'as' => 'update-account-info-no-pass'
+]);
+
+//update persional details
+Route::post('update-persional-detail',[
+    'uses' => 'StudentController@postUpdatePersionalDetails',
+    'as' => 'update-persional-detail'
+]);

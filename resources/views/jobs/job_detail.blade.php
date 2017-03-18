@@ -19,7 +19,7 @@
                     <p style="text-align: left;"><i class="fa fa-map-marker fa-lg" style="color: #9a5406;" aria-hidden="true"></i>&nbsp; {{ $company->address }}</p>
                     <br/>
                     <br/>
-                    <h4 style="color: red"><a href="{{ route('get-sign-in') }}">About Us ></a></h4>
+                    <h4 style="color: red"><a href="#">About Us ></a></h4>
                 </div>
             </div>
         </div>

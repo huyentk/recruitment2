@@ -1,0 +1,79 @@
+body
+{
+    counter-reset: Serial;           /* Set the Serial counter to 0 */
+}
+#avatar{
+    margin-top: 50px;
+    margin-left: 30px;
+}
+
+#account_info{
+    margin-top: 50px;
+}
+
+hr{
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.update_and_save{
+    display:flex;
+}
+
+.update_and_save #h2_2{
+    width: 56%;
+    text-align:right;
+}
+.update_and_save #h2_1{
+    width: 44%;
+}
+.info{
+    margin: 15px;
+}
+.info label{
+    padding-right: 10px;
+    font-size: 18px;
+    width: 32%;
+    text-align: right;
+    font-weight: normal !important;
+}
+.info .input_info{
+    width: 67%;
+}
+/*to make placeholder italic*/
+::-webkit-input-placeholder {
+    font-style: italic;
+}
+:-moz-placeholder {
+    font-style: italic;
+}
+::-moz-placeholder {
+    font-style: italic;
+}
+:-ms-input-placeholder {
+    font-style: italic;
+}
+
+table{
+    line-height: 40px;
+    margin-top: 25px;
+    font-size: 18px;
+    border-collapse: collapse;
+    width: 90%;
+}
+th{
+    background-color: #54b244;
+    color: white;
+}
+th, td{
+    text-align: center;
+}
+tr:nth-child(even){
+    background-color: #f2f2f2;
+}
+
+tr td:first-child:before
+{
+    counter-increment: Serial;      /* Increment the Serial counter */
+    content: counter(Serial); /* Display the counter */
+}
