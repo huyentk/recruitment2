@@ -1,0 +1,22 @@
+.col-md-8{
+    margin-left: 20px;
+}
+.row{
+    line-height: 35px;
+    font-size: 18px;
+    padding-top: 3px;
+}
+.row1{
+    line-height: 35px;
+    font-size: 18px;
+    padding-top: 15px;
+    margin-left: 0px;"
+}
+h2{
+    color:#0d631a;
+    font-style: italic;
+    font-weight: bold;
+}
+.form-inline{
+    display: flex;
+}

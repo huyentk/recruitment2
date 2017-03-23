@@ -1,5 +1,5 @@
 <nav class="navbar navbar-default navbar-static-top navbar-fixed-top" style="margin-bottom: 0px">
-    <div class="row" id="header-content">
+    <div class="row" id="header-content" style="padding-top: 0px;">
         <div class="container">
             <div class="navbar-header">
                 <!-- Collapsed Hamburger -->
@@ -24,7 +24,7 @@
                     <li><a href="#">Companies</a></li>
                     <li><a href="#">Articles</a></li>
                     <li><a href="#">Introduce</a></li>
-                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="{{ route('get-contact') }}">Contact Us</a></li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->

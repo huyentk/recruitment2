@@ -13,7 +13,11 @@ use App\Models\CompanyProfile;
 use App\Models\Job;
 use App\Models\JobSkill;
 use App\Models\Skill;
+use App\Models\StudentApplyJob;
+use App\Models\StudentProfile;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
@@ -29,10 +33,22 @@ class JobsController extends Controller
         $company->image = Storage::url('companies/'.$company->id.'.png');
         if(!$company->image)
             $company->image = Storage::url('companies/default.png');
+        $result = 0;
+        if(Auth::user())
+        {
+            //check if user is student
+            if(Auth::user()->role_id == 3){
+                $student_apply_job = StudentApplyJob::where('stu_id',Auth::user()->id)->where('job_id',$id)->first();
+                if($student_apply_job != null)
+                    $result = $student_apply_job->result;
+            }
+
+        }
         return view('jobs.job_detail')->with([
             'job' => $job,
             'company' => $company,
-            'job_skills' => $job_skills
+            'job_skills' => $job_skills,
+            'result' => $result
         ]);
     }
 
@@ -72,6 +88,20 @@ class JobsController extends Controller
         return view('jobs.jobs_list')->with([
             'jobs'=> $jobs,
             'do_not_render' => 1
+        ]);
+    }
+
+    public function getRegisterJob($job_id){
+        if(Auth::guest() || Auth::user()->role_id != 3){
+            $message = ['message_danger'=>'You do not have permission!'];
+            return redirect()->route('home')->with($message);
+        }
+        $student_info = User::find(Auth::user()->id);
+        $student_info->university = StudentProfile::where('id',Auth::user()->id)->first();
+        Log::info($student_info);
+        return view('jobs.register_job')->with([
+            'student_info' => $student_info,
+            'job_id' => $job_id
         ]);
     }
 }

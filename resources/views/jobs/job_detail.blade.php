@@ -37,7 +37,17 @@
                 @if(Auth::guest())
                     <button type="button" class="btn btn-primary btn-lg" style="width: 130px;"><a href="{{ route('get-sign-in') }}" style="text-decoration: none;color: whitesmoke">Apply</a></button>
                 @elseif(Auth::user()->role_id == 3)
-                    <button type="button" class="btn btn-primary btn-lg" style="width: 130px;"><a href="#" style="text-decoration: none;color: whitesmoke">Apply</a></button>
+                    @if($result == 0)
+                        <button type="button" class="btn btn-success btn-lg" style="width: 130px;"><a href="{{ route('get-register-page',['job_id'=>$job->id]) }}" style="text-decoration: none;color: whitesmoke">Apply</a></button>
+                    @elseif($result == 10)
+                        <button type="button" class="btn btn-success btn-lg disabled" style="width: 130px;">Wating</button>
+                    @elseif($result == 11)
+                        <button type="button" class="btn btn-info btn-lg disabled" style="width: 130px;">Fail</button>
+                    @elseif($result == 12)
+                        <button type="button" class="btn btn-danger btn-lg disabled" style="width: 130px;">Joining</button>
+                    @elseif($result == 13)
+                        <button type="button" class="btn btn-warning btn-lg disabled" style="width: 130px;">Finished</button>
+                    @endif
                 @endif
                 <hr/>
                 <h3>Job Description</h3>

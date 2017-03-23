@@ -10,6 +10,7 @@ namespace App\Http\Controllers;
 use App\Models\Articles;
 use App\Models\Company;
 use App\Models\Job;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
 class HomeController extends Controller
@@ -38,10 +39,15 @@ class HomeController extends Controller
                 $company->image = Storage::url('/companies/default.png');
             }
         }
+
         return view('homepage')->with([
             'jobs' => $jobs,
             'articles' => $articles,
             'companies' => $companies
         ]);
+    }
+
+    public function getContactUs(){
+        return view('contact');
     }
 }

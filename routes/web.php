@@ -50,7 +50,7 @@ Route::get('/{id}/job-detail',[
     'as' => 'job_detail'
 ]);
 
-//get for job in header
+//get for job in header (for search)
 Route::get('jobs-list',[
     'uses' => 'JobsController@getJobsList',
     'as' => 'get-jobs-list'
@@ -66,6 +66,20 @@ Route::get('jobs',[
     'as' => 'getJobSources'
 ]);
 
+Route::get('{id}/register-page',[
+    'uses' => 'JobsController@getRegisterJob',
+    'as' => 'get-register-page'
+]);
+
+Route::post('apply-job',[
+   'uses' => 'StudentController@postRegisterJob',
+    'as' => 'post-register-job'
+]);
+
+Route::post('save-file',[
+    'uses' => 'StudentController@postSaveFile',
+    'as' => 'post-save-file'
+]);
 //Student
 Route::get('{id}/student-page',[
    'uses' => 'StudentController@getStudentPage',
@@ -88,4 +102,10 @@ Route::post('update-account-info-no-pass',[
 Route::post('update-persional-detail',[
     'uses' => 'StudentController@postUpdatePersionalDetails',
     'as' => 'update-persional-detail'
+]);
+
+//Contact Us
+Route::get('contact-us',[
+    'uses' => 'HomeController@getContactUs',
+    'as' => 'get-contact'
 ]);

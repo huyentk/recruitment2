@@ -42,14 +42,6 @@
                 <p>fb.com/recruitment_uit</p>
             </div>
         </div>
-        {{--<div class="col-md-2 phone">--}}
-            {{--<div class="image">--}}
-                {{--<img class="img-responsive" src="{{ Storage::url('/contactus/twitter.png') }}"/>--}}
-            {{--</div>--}}
-            {{--<div>--}}
-                {{--<p>https://twitter.com/recruitment_uit</p>--}}
-            {{--</div>--}}
-        {{--</div>--}}
     </div>
 
 
