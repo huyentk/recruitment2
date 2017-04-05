@@ -11,6 +11,8 @@ namespace App\Http\Controllers;
 use App\Models\Company;
 use App\Models\CompanyProfile;
 use App\Models\Job;
+use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
@@ -113,5 +115,57 @@ class CompanyController extends Controller
             'company' => $company,
             'jobs' => $jobs_all
         ]);
+    }
+
+    public function getCreateCompanyAccount(){
+        if(Auth::guest() || Auth::user()->role_id != 1){
+            $message = ['message_danger'=>'You do not have permission!'];
+            return redirect()->route('home')->with($message);
+        }
+        return view('company/create_account');
+    }
+
+    public function postCreateCompanyAccount(Request $request){
+        if(Auth::guest() || Auth::user()->role_id != 1){
+            $message = ['message_danger'=>'You do not have permission!'];
+            return redirect()->route('home')->with($message);
+        }
+        Log::info('0');
+        $this->validate( $request,[
+            'email' => 'required|email|unique:users',
+            'fullname' => 'required|max:120',
+            'password' => 'required|min:4',
+            'password-confirm' => 'required|min:4'
+        ]);
+        Log::info('ab');
+        $email = $request['email'];
+        $fullname = $request['fullname'];
+        $password = $request['password'];
+        $password_confirm = $request['password-confirm'];
+        if($password != $password_confirm){
+            $message_warning = ['message_warning' => 'Password did not match'];
+            return redirect()->back()->with($message_warning);
+        }
+        //create User
+        $user = new User();
+        $user->full_name = $fullname;
+        Log::info('1');
+        $user->email = $email;
+        Log::info('2');
+        $user->password = bcrypt($password);
+        Log::info('3');
+        $user->role_id = 1;
+        Log::info('4');
+        $user->save();
+        Log::info($user);
+//        $employee = new CompanyProfile();
+//        if(!$request['department'])
+//            $request['department'] = "";
+//        $employee->id = User::max('id');
+//        $employee->department = $request['department'];
+//        $employee->company_id = $request['company'];
+//        $employee->save();
+        $message_success = ['message_success' => 'Create employee\'s account successfully!'];
+        return redirect()->back()->with($message_success);
     }
 }

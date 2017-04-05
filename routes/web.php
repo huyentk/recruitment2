@@ -157,3 +157,13 @@ Route::get('/job_management',[
     'uses' => 'CompanyController@getJobManagement',
     'as' => 'get-job-management'
 ]);
+
+Route::get('/create_account_company',[
+    'uses' => 'CompanyController@getCreateCompanyAccount',
+    'as' => 'create-company-account'
+]);
+
+Route::post('/create_account_company',[
+    'uses' => 'CompanyController@postCreateCompanyAccount',
+    'as' => 'create-company-account'
+]);
