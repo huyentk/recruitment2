@@ -39,31 +39,31 @@
     </div>
     @foreach($jobs as $job)
     <div class="row job_content">
-            <div class="col-md-2 job_content_div">
-                <img src="{{ $job->image }}" class="img-rounded"/>
-            </div>
-            <div class="col-md-8 job_content_div" style="padding-left: 0;">
-                <h3 style="margin-top: 0;">{{ $job->name }}</h3>
-                <div class="row">
-                    @foreach($job->skills as $job_skill)
-                        <div class="col-md-3">
-                            <p style="font-size: 18px;"><i class="fa fa-tag fa-lg" style="color: #9a5406;" aria-hidden="true"></i> {{ $job_skill->skill_name }}</p>
-                        </div>
-                    @endforeach
-                </div>
-                <div class="row">
+        <div class="col-md-2 job_content_div">
+            <img src="{{ $job->image }}" class="img-rounded"/>
+        </div>
+        <div class="col-md-8 job_content_div" style="padding-left: 0;">
+            <h3 style="margin-top: 0;">{{ $job->name }}</h3>
+            <div class="row">
+                @foreach($job->skills as $job_skill)
                     <div class="col-md-3">
-                        <p style="font-size: 16px;"><i class="fa fa-money fa-lg" style="color: #9a5406;" aria-hidden="true"></i>&nbsp; {{ $job->salary }} /month</p>
+                        <p style="font-size: 18px;"><i class="fa fa-tag fa-lg" style="color: #9a5406;" aria-hidden="true"></i> {{ $job_skill->skill_name }}</p>
                     </div>
-                    <div class="col-md-3">
-                        <p style="font-size: 16px;"><i class="fa fa-building fa-lg" style="color: #9a5406;" aria-hidden="true"></i>&nbsp; {{ $job->company_name }}</p>
-                    </div>
+                @endforeach
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <p style="font-size: 16px;"><i class="fa fa-money fa-lg" style="color: #9a5406;" aria-hidden="true"></i>&nbsp; {{ $job->salary }} /month</p>
                 </div>
-                <div class="cut-text">{{ $job->description }}</div>
+                <div class="col-md-3">
+                    <p style="font-size: 16px;"><i class="fa fa-building fa-lg" style="color: #9a5406;" aria-hidden="true"></i>&nbsp; {{ $job->company_name }}</p>
+                </div>
             </div>
-            <div class="col-md-2 job_content_div" style="padding-left: 0;">
-                <h4 style="text-align: right;margin-top: 0; font-style: italic;"><a href="{{ route('job_detail',['id' => $job->id]) }}">Detail</a></h4>
-            </div>
+            <div class="cut-text">{{ $job->description }}</div>
+        </div>
+        <div class="col-md-2 job_content_div" style="padding-left: 0;">
+            <h4 style="text-align: right;margin-top: 0; font-style: italic;"><a href="{{ route('job_detail',['id' => $job->id]) }}">Detail</a></h4>
+        </div>
     </div>
     @endforeach
     @if(!isset($do_not_render))

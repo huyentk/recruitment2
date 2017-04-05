@@ -1,3 +1,22 @@
+$('#button_update').on('click',function (event) {
+    event.preventDefault();
+    var val = $("#update_ava").val();
+    if(val != ''){
+        $.ajax({
+            method: 'POST',
+            url: urlSaveAva,
+            headers: {'X-CSRF-Token': _token},
+            processData: false,
+            contentType: false,
+            data: new FormData($('#file_upload')[0]),
+            success: function (data) {
+                // $('#ava').attr('src',data);
+                window.location.href = url_emp_page;
+            }
+        })
+    }
+});
+
 $('#save-account-info').on('click',function (event) {
     var full_name = $('#full_name').val();
     var email = $('#email').val();
@@ -39,8 +58,7 @@ $('#save-account-info').on('click',function (event) {
 $('#save-persional-detail').on('click', function (event) {
     event.preventDefault();
     var gender = $('input[name=gender]:checked').val();
-    var university = $('#university').val();
-    var major = $('#major').val();
+    var deparment = $('#department').val();
     var address = $('#address').text();
     var phone = $('#phone').val();
     var skypeId = $('#skypeId').val();
@@ -50,8 +68,7 @@ $('#save-persional-detail').on('click', function (event) {
         url: urlChangePersionalDetail,
         data: {
             gender: gender,
-            university: university,
-            major: major,
+            department: deparment,
             address: address,
             phone: phone,
             skypeId: skypeId,
@@ -60,24 +77,4 @@ $('#save-persional-detail').on('click', function (event) {
     }).done(function (msg) {
         alert('Saved your changes!');
     });
-});
-
-
-$('#button_update').on('click',function (event) {
-    event.preventDefault();
-    var val = $("#update_ava").val();
-    if(val != ''){
-        $.ajax({
-            method: 'POST',
-            url: urlSaveAva,
-            headers: {'X-CSRF-Token': _token},
-            processData: false,
-            contentType: false,
-            data: new FormData($('#file_upload')[0]),
-            success: function (data) {
-                // $('#ava').attr('src',data);
-                window.location.href = url_student_page;
-            }
-        })
-    }
 });

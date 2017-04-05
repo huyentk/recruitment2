@@ -79,3 +79,15 @@
     background: #ffffff;
     border-radius: 1px;
 }
+
+.job_content_management_page:hover {
+    background: #fdfdfd !important;
+    z-index: 5;
+    border-color: transparent;
+    box-shadow: 0 0 5px 1px #bcbcbc;
+}
+
+.job_content_management_page{
+    height: auto;
+    margin-top: 50px;
+}

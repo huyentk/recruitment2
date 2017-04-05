@@ -44,7 +44,7 @@ Route::get('auth/facebook',[
 ]);
 Route::get('auth/facebook/callback', 'Auth\LoginController@handleProviderCallback');
 
-//Job
+/*-------------------Job--------------------*/
 Route::get('/{id}/job-detail',[
     'uses' => 'JobsController@getJobDetail',
     'as' => 'job_detail'
@@ -80,7 +80,23 @@ Route::post('save-file',[
     'uses' => 'StudentController@postSaveFile',
     'as' => 'post-save-file'
 ]);
-//Student
+
+Route::get('create-job',[
+    'uses' => 'JobsController@getCreateJob',
+    'as' => 'get-create-job'
+]);
+
+Route::post('create-job',[
+    'uses' => 'JobsController@postCreateJob',
+    'as' => 'post-create-job'
+]);
+
+Route::post('post-update-job',[
+   'uses' => 'JobsController@postUpdateJob',
+    'as' => 'post-update-job'
+]);
+
+/*------------------Student--------------------*/
 Route::get('{id}/student-page',[
    'uses' => 'StudentController@getStudentPage',
     'as' => 'get-student-page'
@@ -92,7 +108,7 @@ Route::post('update-account-info-has-pass',[
     'as' => 'update-account-info-has-pass'
 ]);
 
-//update account infomation has pas
+//update account infomation no pas
 Route::post('update-account-info-no-pass',[
     'uses' => 'StudentController@postUpdateAccountInfoNoPass',
     'as' => 'update-account-info-no-pass'
@@ -104,8 +120,40 @@ Route::post('update-persional-detail',[
     'as' => 'update-persional-detail'
 ]);
 
+//change ava
+Route::post('update-ava',[
+    'uses' => 'StudentController@postUpdateAva',
+    'as' => 'update-ava'
+]);
+
 //Contact Us
 Route::get('contact-us',[
     'uses' => 'HomeController@getContactUs',
     'as' => 'get-contact'
+]);
+
+/*-----------------Company------------------*/
+Route::get('{id}/employee-page',[
+    'uses' => 'EmployeeController@getEmployeePage',
+    'as' => 'get-employee-page'
+]);
+
+Route::post('update-persional-detail-emp',[
+   'uses' => 'EmployeeController@postUpdatePersionalDetails',
+    'as' => 'update-persional-detail-emp'
+]);
+
+Route::get('{id}/company-page',[
+   'uses' => 'CompanyController@getCompanyPage',
+    'as' => 'get-company-page'
+]);
+
+Route::get('emp/{emp_id}/company-page',[
+    'uses' => 'CompanyController@employee_getCompanyPage',
+    'as' => 'employee-get-company-page'
+]);
+
+Route::get('/job_management',[
+    'uses' => 'CompanyController@getJobManagement',
+    'as' => 'get-job-management'
 ]);

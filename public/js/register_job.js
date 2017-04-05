@@ -77,6 +77,7 @@ $(document).ready(function () {
                         success: function (data) {
                             if(data == 1000){
                                 alert('Send email successfully!');
+                                window.location.href = job_url;
                             }
                             else{
                                 alert('Error occurs when send mail!');
@@ -89,5 +90,5 @@ $(document).ready(function () {
                 }
             }
         });
-    })
+    });
 });

@@ -21,7 +21,7 @@
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
                     <li><a href="{{ route('get-jobs-list') }}">&nbsp Jobs</a></li>
-                    <li><a href="#">Companies</a></li>
+                    {{--<li><a href="#">Companies</a></li>--}}
                     <li><a href="#">Articles</a></li>
                     <li><a href="#">Introduce</a></li>
                     <li><a href="{{ route('get-contact') }}">Contact Us</a></li>
@@ -44,9 +44,10 @@
                                     </ul>
                                 @elseif(Auth::user()->role_id == 2)
                                     <ul class="dropdown-menu" role="menu" style="background-color: #3B4F6B;">
-                                        <li><a href="#">My page (Your Account)</a></li>
-                                        <li><a href="#">My Company Page</a></li>
-                                        <li><a href="#">Jobs Management</a></li>
+                                        <li><a href="{{ route('get-employee-page',['id' => Auth::user()->id]) }}">My page (Your Account)</a></li>
+                                        <li><a href="{{ route('employee-get-company-page',['emp_id' => Auth::user()->id]) }}">My Company Page</a></li>
+                                        <li><a href="{{ route('get-create-job') }}">Create Job</a></li>
+                                        <li><a href="{{ route('get-job-management') }}">Jobs Management</a></li>
                                         <li role="separator" class="divider"></li>
                                         <li><a href="{{ route('log-out') }}">Logout</a></li>
                                     </ul>
