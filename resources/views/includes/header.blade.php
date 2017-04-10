@@ -22,7 +22,7 @@
                 <ul class="nav navbar-nav">
                     <li><a href="{{ route('get-jobs-list') }}">&nbsp Jobs</a></li>
                     <li><a href="#">Companies</a></li>
-                    <li><a href="#">Articles</a></li>
+                    <li><a href="{{ route('articles-list') }}">Articles</a></li>
                     <li><a href="#">Introduce</a></li>
                     <li><a href="{{ route('get-contact') }}">Contact Us</a></li>
                 </ul>

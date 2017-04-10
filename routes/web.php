@@ -109,3 +109,25 @@ Route::get('contact-us',[
     'uses' => 'HomeController@getContactUs',
     'as' => 'get-contact'
 ]);
+
+//Articles List
+Route::get('articles',[
+    'uses' => 'ArticlesController@getArticlesList',
+    'as' => 'articles-list'
+]);
+
+//Articles Detail
+Route::get('/{id}/article-detail',[
+    'uses' => 'ArticlesController@getArticleDetail',
+    'as' => 'article-detail'
+]);
+
+//Post article
+Route::get('post-article',function(){
+    return view('articles.post_article');
+});
+
+Route::post('submit-article',[
+    'uses' => 'ArticleController@postArticle',
+    'as' => 'submit-article'
+]);
