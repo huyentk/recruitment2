@@ -18,6 +18,7 @@ class OrderShipped extends Mailable
      */
     public $intro, $full_name, $gender, $birthday, $university, $major,
             $email, $phone, $address, $skype_id, $gpa, $cv;
+
     public function __construct($intro, $full_name, $gender, $birthday, $university, $major,
                                 $email, $phone, $address, $skype_id, $gpa, $cv)
     {
@@ -48,7 +49,7 @@ class OrderShipped extends Mailable
                 'mime' => 'application/pdf'
             ))
             ->attach($this->cv, array(
-                'as' => 'GPA File',
+                'as' => 'CV File',
                 'mime' => 'application/pdf'
             ))
             ->view('sendEmailToCompany');

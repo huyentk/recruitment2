@@ -11,6 +11,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
 {
@@ -27,6 +28,7 @@ class UserController extends Controller
         Auth::attempt(['email' => $request['email'], 'password' => $request['password']]);
         $user = User::where('email',$request['email'])->first();
         if($user){
+            Log::info('yea');
             Auth::login($user);
             return redirect()->route('home');
         }

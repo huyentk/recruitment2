@@ -12,8 +12,10 @@ use App\Models\Job;
 use App\Models\StudentApplyJob;
 use App\Models\StudentProfile;
 use App\Models\User;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
@@ -28,6 +30,8 @@ class StudentController extends Controller
         }
         $student_info = User::find($id);
         $student_info->university = StudentProfile::where('id',$id)->first();
+        $student_info->image = file_exists(public_path().'/storage/avatars/'.Auth::user()->id.'.png') ? Storage::url('/avatars/'.Auth::user()->id.'.png') : Storage::url('/avatars/user.png');
+
         $jobs = array();
         $student_apply_jobs = StudentApplyJob::where('stu_id',$id)->get();
         if($student_apply_jobs) {
@@ -55,7 +59,7 @@ class StudentController extends Controller
     }
 
     public function postUpdateAccountInfoHasPass(Request $request){
-        if(Auth::guest() || Auth::user()->role_id != 3){
+        if(Auth::guest()){
             $message = ['message_danger'=>'You do not have permission!'];
             return redirect()->route('home')->with($message);
         }
@@ -79,7 +83,7 @@ class StudentController extends Controller
     }
 
     public function postUpdateAccountInfoNoPass(Request $request){
-        if(Auth::guest() || Auth::user()->role_id != 3){
+        if(Auth::guest()){
             $message = ['message_danger'=>'You do not have permission!'];
             return redirect()->route('home')->with($message);
         }
@@ -140,11 +144,44 @@ class StudentController extends Controller
         }
         $gpa = storage_path().'/app/public/GPA/'.Auth::user()->id . '-' . $request['job_id'] . '.pdf' ;
         $cv = storage_path().'/app/public/CV/'.Auth::user()->id . '-' . $request['job_id'] . '.pdf' ;
-        Mail::to('huyentk1296@gmail.com')->send(new OrderShipped(
+        $company = Job::select('created_by')->where('id',$request['job_id'])->first();
+        $email = User::select('email')->where('id',$company->created_by)->first();
+        Mail::to($email->email)->send(new OrderShipped(
                         $request['intro'], $request['full_name'], $request['gender'],
                         $request['birthday'], $request['university'], $request['major'],
                         $request['email'], $request['phone'], $request['address'],
                         $request['skype_id'], $gpa, $cv));
+
+        $student_apply_job = new StudentApplyJob();
+        $student_apply_job->stu_id = Auth::user()->id;
+        $student_apply_job->job_id = $request['job_id'];
+        $student_apply_job->result = 10;
+        $student_apply_job->save();
+
+        $job = Job::find($request['job_id']);
+        $job->num_register += 1;
+        $job->save();
+
         return 1000;
+    }
+
+    public function postUpdateAva(Request $request){
+        if(Auth::guest()){
+            $message = ['message_danger'=>'You do not have permission!'];
+            return redirect()->route('home')->with($message);
+        }
+        if($request->hasFile('update_ava')) {
+            $validator = Validator::make($request->all(), [
+                'update_ava' => 'required'
+            ]);
+            if ($validator->failed())
+                return -1000;
+            $ava = $request->file('update_ava');
+            Storage::put('/public/avatars/' . Auth::user()->id .'.png', file_get_contents($ava->getRealPath()));
+            $ava_update = Storage::url('/avatars/'.Auth::user()->id.'.png');
+//                storage_path().'/app/public/avatars/'.Auth::user()->id . '.png';
+            return $ava_update;
+        }
+        return -1000;
     }
 }

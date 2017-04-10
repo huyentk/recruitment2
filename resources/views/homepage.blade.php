@@ -83,7 +83,7 @@
                     <a href="{{ route('job_detail',['id' => $job->id]) }}">
                         <div class="col-md-6" style="margin-bottom: 25px;">
                             <div class="row">
-                                <div class="col-md-4">
+                                <div class="col-md-5">
                                     <center><img class="img-circle" src="{{ $job->image }}" style="border:1px solid #262626;"></center>
                                 </div>
                                 <div class="col-md-7" style="text-align: center;">
@@ -123,7 +123,7 @@
     </div>
     <div class="row" style="padding-left: 15px;">
         @foreach($companies as $company)
-            <a href="{{ $company->url }}">
+            <a href="{{ route('get-company-page',['id' => $company->id]) }}">
                 <div class="col-md-2">
                     <center><img src="{{ $company->image }}" class="img-rounded"></center>
                 </div>

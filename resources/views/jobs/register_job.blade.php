@@ -117,6 +117,7 @@
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
     <script>
+        var job_url = '{{ route('job_detail',['id'=>$job_id]) }}';
         var job_id = '{{ $job_id }}';
         var urlSaveFile = '{{ route('post-save-file') }}';
         var urlSendMail = '{{ route('post-register-job') }}';

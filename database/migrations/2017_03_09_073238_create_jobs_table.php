@@ -19,7 +19,7 @@ class CreateJobsTable extends Migration
             $table->text('description');
             $table->text('requirements');
             $table->text('benefits');
-            $table->double('salary', 15, 8);
+            $table->string('salary', 10)->default('');
             $table->unsignedSmallInteger('num_register')->default(0);
             $table->unsignedInteger('created_by');
             $table->timestamps();

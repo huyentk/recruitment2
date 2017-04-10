@@ -21,6 +21,8 @@
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
                     <li><a href="{{ route('get-jobs-list') }}">&nbsp Jobs</a></li>
+                    {{--<li><a href="#">Companies</a></li>--}}
+                    <li><a href="#">Articles</a></li>
                     <li><a href="#">Companies</a></li>
                     <li><a href="{{ route('articles-list') }}">Articles</a></li>
                     <li><a href="#">Introduce</a></li>
@@ -34,26 +36,23 @@
                         <button type="button" class="btn btn-success navbar-btn"><span class="glyphicon glyphicon-user"></span><a href="{{ route('get-sign-up') }}" style="text-decoration: none;">&nbsp; Sign up</a></button>
                         <button type="button" class="btn btn-info navbar-btn"><span class="glyphicon glyphicon-log-in"></span><a href="{{ route('get-sign-in') }}" style="text-decoration: none;">&nbsp; Sign in</a></button>
                     @else
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="background-color: #2a88bd;">{{ Auth::user()->full_name }} <span class="caret"></span></a>
-                                @if(Auth::user()->role_id == 3)
-                                    <ul class="dropdown-menu" role="menu" style="background-color: #3B4F6B;">
-                                        <li><a href="{{ route('get-student-page',['id' => Auth::user()->id]) }}">My page (Your Account)</a></li>
-                                        <li role="separator" class="divider"></li>
-                                        <li><a href="{{ route('log-out') }}">Logout</a></li>
-                                    </ul>
-                                @elseif(Auth::user()->role_id == 2)
-                                    <ul class="dropdown-menu" role="menu" style="background-color: #3B4F6B;">
-                                        <li><a href="#">My page (Your Account)</a></li>
-                                        <li><a href="#">My Company Page</a></li>
-                                        <li><a href="#">Jobs Management</a></li>
-                                        <li role="separator" class="divider"></li>
-                                        <li><a href="{{ route('log-out') }}">Logout</a></li>
-                                    </ul>
-                                @elseif(Auth::user()->role_id == 1)
-
-                                @endif
-                            </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="background-color: #2a88bd;">{{ Auth::user()->full_name }} <span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu" style="background-color: #3B4F6B;">
+                            @if(Auth::user()->role_id == 3)
+                                <li><a href="{{ route('get-student-page',['id' => Auth::user()->id]) }}">My page (Your Account)</a></li>
+                            @elseif(Auth::user()->role_id == 2)
+                                <li><a href="{{ route('get-employee-page',['id' => Auth::user()->id]) }}">My page (Your Account)</a></li>
+                                <li><a href="{{ route('employee-get-company-page',['emp_id' => Auth::user()->id]) }}">My Company Page</a></li>
+                                <li><a href="{{ route('get-create-job') }}">Create Job</a></li>
+                                <li><a href="{{ route('get-job-management') }}">Jobs Management</a></li>
+                            @elseif(Auth::user()->role_id == 1)
+                                <li><a href="{{ route('create-company-account') }}">Create company account</a></li>
+                            @endif
+                                <li role="separator" class="divider"></li>
+                                <li><a href="{{ route('log-out') }}">Logout</a></li>
+                            </ul>
+                        </li>
                     @endif
                 </ul>
             </div>
