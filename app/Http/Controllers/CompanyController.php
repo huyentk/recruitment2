@@ -11,12 +11,13 @@ namespace App\Http\Controllers;
 use App\Models\Company;
 use App\Models\CompanyProfile;
 use App\Models\Job;
+use App\Models\StudentJoinedJob;
 use App\Models\User;
+use App\Models\StudentApplyJob;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
-use Psy\Util\Json;
 
 class CompanyController extends Controller
 {
@@ -167,5 +168,36 @@ class CompanyController extends Controller
 //        $employee->save();
         $message_success = ['message_success' => 'Create employee\'s account successfully!'];
         return redirect()->back()->with($message_success);
+    }
+
+    public function postAcceptJoin(Request $request){
+        $stu_id = $request['id'];
+        $job_id = $request['job_id'];
+        $accept = $request['accept'];
+        if($accept){
+            $application = StudentApplyJob::where('stu_id', $stu_id)->where('job_id', $job_id)->first();
+            $application->result = 12;
+            $application->save();
+
+            $join = new StudentJoinedJob();
+            $join->stu_id = $stu_id;
+            $join->job_id = $job_id;
+            $join->save();
+            return 1000;
+        }
+        return -1000;
+    }
+    public function postRejectJoin(Request $request){
+        $stu_id = $request['id'];
+        $job_id = $request['job_id'];
+        $accept = $request['accept'];
+        if($accept == 'false'){
+            Log::info('a');
+            $application = StudentApplyJob::where('stu_id', $stu_id)->where('job_id', $job_id)->first();
+            $application->result = 11;
+            $application->save();
+            return 1000;
+        }
+        return -1000;
     }
 }

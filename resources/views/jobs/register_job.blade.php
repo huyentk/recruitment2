@@ -75,13 +75,13 @@
                 <div class="row row1" >
                     <div class="form-inline">
                         <label>GPA file:&nbsp; </label>
-                        <input type="file" class="form-control" accept="application/pdf" name="gpa">
+                        <input id="gpa_file" type="file" class="form-control" accept="application/pdf" name="gpa">
                     </div>
                 </div>
                 <div class="row row1">
                     <div class="form-inline">
                         <label>CV file:&nbsp;</label>
-                        <input type="file" class="form-control" accept="application/pdf" name="cv">
+                        <input id="cv_file" type="file" class="form-control" accept="application/pdf" name="cv">
                     </div>
                 </div>
                 <input hidden value="{{ $job_id }}" name="job_id"/>

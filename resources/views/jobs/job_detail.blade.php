@@ -5,6 +5,7 @@
 @endsection
 @section('script_and_style')
     <link type="text/css" rel="stylesheet" href="{{ URL::to('/css/job_detail.css') }}"/>
+    <script src="{{ URL::to('js/accept_reject.js') }}"></script>
     <script src="{{ URL::to('js/edit_job.js') }}"></script>
 @endsection
 @section('content')
@@ -94,30 +95,81 @@
     </div>
     @if(isset($students_apply_job))
         <div class="row" style="margin: 25px;">
-            <table class="table table-striped">
+            <table class="table table-striped" id="table">
                 <thead style="text-align: center">
                     <tr>
-                        <th class="col-md-4">Full Name</th>
-                        <th class="col-md-5">University</th>
+                        <th class="col-md-3">Full Name</th>
+                        <th class="col-md-4">University</th>
                         <th class="col-md-3">Major</th>
+                        <th class="col-md-2">&nbsp;</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($students_apply_job as $student_apply_job)
-                        <tr>
-                            <td>{{ $student_apply_job->full_name }}</td>
+                        <tr id="{{ $student_apply_job->id }}">
+                            <td>{{ $student_apply_job->fullname }}</td>
                             <td>{{ $student_apply_job->university }}</td>
                             <td>{{ $student_apply_job->major }}</td>
+                            <td style="text-align: center;">
+                                @if($student_apply_job->result == 10)
+                                    <i class="fa fa-check-circle fa-2x fa-icon-button" id='accept' style="color: green; padding-right: 35px;" aria-hidden="true"></i>
+                                    <i class="fa fa-times-circle fa-2x fa-icon-button" id='reject' style="color: red" aria-hidden="true"></i>
+                                @elseif($student_apply_job->result == 12)
+                                    Accepted!
+                                @elseif($student_apply_job->result == 11)
+                                    Rejected!
+                                @endif
+                            </td>
+
+
                         </tr>
                     @endforeach
                 </tbody>
             </table>
         </div>
     @endif
+    {{--for accept--}}
+    <div class="modal fade" tabindex="-1" role="dialog" id="ConfirmModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Confirm Register</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure to accept this student?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="sure">Sure</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    {{--for reject--}}
+    <div class="modal fade" tabindex="-1" role="dialog" id="RejectModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Confirm Register</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure to reject this student?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="sureReject">Sure</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
     <script>
         var urlJobDetail = '{{ route('job_detail',['id'=>$job->id]) }}';
         var urlUpdateJob = '{{ route('post-update-job') }}';
         var job_id = '{{ $job->id }}';
         var _token = '{{ Session::token() }}';
+        var urlAccept = '{{ route('accept-join') }}';
+        var urlReject = '{{ route('reject-join') }}';
     </script>
 @endsection

@@ -6,6 +6,14 @@ $(document).ready(function () {
 
     $('#sure').on('click',function (event) {
         event.preventDefault();
+        if(document.getElementById("gpa_file").files.length == 0){
+            alert('You must upload a GPA file!');
+            return;
+        }
+        if(document.getElementById("cv_file").files.length == 0){
+            alert('You must upload a CV file!');
+            return;
+        }
         var intro = $('#intro').text();
         var full_name = $('#full_name').text();
         if(full_name.length < 5){

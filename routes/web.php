@@ -167,3 +167,13 @@ Route::post('/create_account_company',[
     'uses' => 'CompanyController@postCreateCompanyAccount',
     'as' => 'create-company-account'
 ]);
+
+Route::post('accept-join',[
+   'uses' => 'CompanyController@postAcceptJoin',
+    'as' => 'accept-join'
+]);
+
+Route::post('reject-join',[
+    'uses' => 'CompanyController@postRejectJoin',
+    'as' => 'reject-join'
+]);
