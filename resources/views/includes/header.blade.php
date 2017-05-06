@@ -13,7 +13,7 @@
 
                 <!-- Branding Image -->
                 <a href="{{ route('home') }}">
-                    <img id="img-nav"src="{{ Storage::url('/logo/Capture.PNG') }}">
+                    <img id="img-nav" src="{{ Storage::url('/logo/Capture.PNG') }}">
                 </a>
             </div>
 

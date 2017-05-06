@@ -14,7 +14,7 @@ $(document).ready(function () {
             alert('You must upload a CV file!');
             return;
         }
-        var intro = $('#intro').text();
+        var intro = $('#intro').val();
         var full_name = $('#full_name').text();
         if(full_name.length < 5){
             alert('Full name is not valid!');
@@ -73,6 +73,7 @@ $(document).ready(function () {
                             job_id: job_id,
                             intro: intro,
                             full_name: full_name,
+                            birthday: birthday,
                             gender: gender,
                             university: university,
                             major: major,

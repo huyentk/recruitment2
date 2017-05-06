@@ -7,8 +7,10 @@
     <link type="text/css" rel="stylesheet" href="{{ URL::to('/css/job_detail.css') }}"/>
     <script src="{{ URL::to('js/accept_reject.js') }}"></script>
     <script src="{{ URL::to('js/edit_job.js') }}"></script>
+    <script src="{{ URL::to('js/delete_job.js') }}"></script>
 @endsection
 @section('content')
+    <div class="front"></div>
     <div class="row">
         <div class="col-md-4">
             <div class="box">
@@ -26,7 +28,7 @@
             </div>
         </div>
         <div class="col-md-8">
-            <div class="job_detail">
+            <div>
                 <h2 style="margin-bottom: 20px;" id="job_name">{{ $job->name }}</h2>
                 <div class="row" id="own_skill">
                     @foreach($job_skills as $job_skill)
@@ -72,6 +74,7 @@
                     @else
                         <button type="button" class="btn btn-primary btn-lg" id="edit" style="width: 130px;">Edit</button>
                         <button type="button" class="btn btn-success btn-lg" id="save-change" style="width: 130px;display: none" >Save</button>
+                        <button type="button" class="btn btn-danger btn-lg" id="delete" style="width: 130px;">Delete</button>
                     @endif
                 @endif
                 <hr/>
@@ -120,8 +123,6 @@
                                     Rejected!
                                 @endif
                             </td>
-
-
                         </tr>
                     @endforeach
                 </tbody>
@@ -146,6 +147,7 @@
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
+
     {{--for reject--}}
     <div class="modal fade" tabindex="-1" role="dialog" id="RejectModal">
         <div class="modal-dialog" role="document">
@@ -164,6 +166,25 @@
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
+
+    {{--for delete job--}}
+    <div class="modal fade" tabindex="-1" role="dialog" id="DeleteModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Delete Job</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to delete this job?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="sureDelete">Sure</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
     <script>
         var urlJobDetail = '{{ route('job_detail',['id'=>$job->id]) }}';
         var urlUpdateJob = '{{ route('post-update-job') }}';
@@ -171,5 +192,7 @@
         var _token = '{{ Session::token() }}';
         var urlAccept = '{{ route('accept-join') }}';
         var urlReject = '{{ route('reject-join') }}';
+        var urlDeleteJob = '{{ route('delete-job') }}';
+        var urlJobManagement = '{{ route('get-job-management') }}';
     </script>
 @endsection

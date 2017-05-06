@@ -96,6 +96,11 @@ Route::post('post-update-job',[
     'as' => 'post-update-job'
 ]);
 
+Route::post('post-delete-job',[
+   'uses' => 'JobsController@postDeleteJob',
+    'as' => 'delete-job'
+]);
+
 /*------------------Student--------------------*/
 Route::get('{id}/student-page',[
    'uses' => 'StudentController@getStudentPage',
@@ -116,7 +121,7 @@ Route::post('update-account-info-no-pass',[
 
 //update persional details
 Route::post('update-persional-detail',[
-    'uses' => 'StudentController@postUpdatePersionalDetails',
+    'uses' => 'StudentController@postUpdatePersonalDetails',
     'as' => 'update-persional-detail'
 ]);
 
@@ -139,7 +144,7 @@ Route::get('{id}/employee-page',[
 ]);
 
 Route::post('update-persional-detail-emp',[
-   'uses' => 'EmployeeController@postUpdatePersionalDetails',
+   'uses' => 'EmployeeController@postUpdatePersonalDetails',
     'as' => 'update-persional-detail-emp'
 ]);
 

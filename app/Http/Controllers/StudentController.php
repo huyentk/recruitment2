@@ -43,9 +43,9 @@ class StudentController extends Controller
                 if($result == 10)
                     $job->result = 'Waiting';
                 if($result == 11)
-                    $job->result = 'Joining';
-                if($result == 12)
                     $job->result = 'Fail';
+                if($result == 12)
+                    $job->result = 'Joining';
                 array_push($jobs, $job);
             }
             return view('student_page')->with([
@@ -99,7 +99,7 @@ class StudentController extends Controller
         return $user;
     }
 
-    public function postUpdatePersionalDetails(Request $request){
+    public function postUpdatePersonalDetails(Request $request){
         if(Auth::guest() || Auth::user()->role_id != 3){
             $message = ['message_danger'=>'You do not have permission!'];
             return redirect()->route('home')->with($message);

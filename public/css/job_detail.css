@@ -1,5 +1,4 @@
 .box{
-    margin-top: 50px;
     margin-left: 30px;
     padding: 20px;
     width: 85%;
@@ -13,11 +12,12 @@
     text-align: center;
 }
 
-.job_detail{
-    padding-top: 50px;
-}
 
 .paragraph{
     font-size: 18px;
     padding-left: 25px;
+}
+
+.front{
+    height: 50px;
 }

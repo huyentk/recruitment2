@@ -33,7 +33,7 @@ class EmployeeController extends Controller
         ]);
     }
 
-    public function postUpdatePersionalDetails(Request $request){
+    public function postUpdatePersonalDetails(Request $request){
         if(Auth::guest() || Auth::user()->role_id != 2){
             $message = ['message_danger'=>'You do not have permission!'];
             return redirect()->route('home')->with($message);

@@ -71,7 +71,7 @@ $('#save-persional-detail').on('click', function (event) {
             department: deparment,
             address: address,
             phone: phone,
-            skypeId: skypeId,
+            skype_id: skypeId,
             _token: _token
         }
     }).done(function (msg) {

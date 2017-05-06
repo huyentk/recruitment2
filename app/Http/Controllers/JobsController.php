@@ -54,13 +54,12 @@ class JobsController extends Controller
                     $students_apply_job = StudentApplyJob::where('job_id',$id)->get();
                     if($students_apply_job != null){
                         foreach ($students_apply_job as $student_apply_job){
-                            $student_info = StudentProfile::find($student_apply_job->id)->first();
+                            $student_info = StudentProfile::find($student_apply_job->stu_id)->first();
                             $student_apply_job->fullname = User::find($student_info->id)->value('full_name');
                             $student_apply_job->university = $student_info->university;
                             $student_apply_job->major = $student_info->major;
                         }
                     }
-                    Log::info($students_apply_job);
                     return view('jobs.job_detail')->with([
                         'job' => $job,
                         'company' => $company,
@@ -87,7 +86,7 @@ class JobsController extends Controller
 
     public function getJobsList()
     {
-        $jobs = Job::paginate(5);
+        $jobs = Job::orderBy('created_at','desc')->paginate(5);
 //        dd(get_class($jobs)); //show where paginate come from
 //        "Illuminate\Pagination\LengthAwarePaginator"
         foreach ($jobs as $job){
@@ -205,7 +204,19 @@ class JobsController extends Controller
             $job_skill->skill_name = $skill['name'];
             $job_skill->save();
         }
+        return 1000;
+    }
 
+    public function postDeleteJob(Request $request){
+        if(Auth::guest() || Auth::user()->role_id != 2){
+            $message = ['message_danger'=>'You do not have permission!'];
+            return redirect()->route('home')->with($message);
+        }
+
+        $job = Job::find($request['job_id']);
+        if($job->num_register != 0)
+            return -1000;
+        $job->delete();
         return 1000;
     }
 }

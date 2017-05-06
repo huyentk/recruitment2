@@ -13,6 +13,7 @@ $("#select_list").change(function(){
 });
 
 $('#edit').on('click', function (event) {
+    $("#delete").hide();
     event.preventDefault();
 
     var job_name = $('#job_name').text();

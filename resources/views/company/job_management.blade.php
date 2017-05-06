@@ -9,6 +9,7 @@
     <script src="{{ URL::to('js/create_job.js') }}"></script>
 @endsection
 @section('content')
+    <div class="front"></div>
     <div class="row">
         <div class="col-md-4">
             <div class="box">
@@ -28,7 +29,7 @@
                 @foreach($jobs_all as $job)
                     <div class="col-md-6 job_content_management_page">
                         <a href="{{ route('job_detail',['id' => $job->id]) }}">
-                            <div style="text-align: justify;">
+                            <div>
                                 <h4 style="font-weight: bold">{{ $job->name }}</h4>
                                 <h4>{{ $job->salary }} / month</h4>
                                 <h4>{{ $job->num_register }} registered</h4>

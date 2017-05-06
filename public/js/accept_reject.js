@@ -34,12 +34,12 @@ $('#sure').on('click',function (event) {
 });
 
 $('#sureReject').on('click',function (event) {
+    // console.log(id);
     $.ajax({
         method:'POST',
         url: urlReject,
         data: {
             id: id,
-            job_id: job_id,
             accept: false,
             _token: _token
         },

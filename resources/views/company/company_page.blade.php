@@ -16,7 +16,7 @@
     <div style="height: 100%;display: flex; padding-top: 30px;padding-bottom:20px;background-color: transparent; z-index: 3;border: 1px solid #ded7d7">
         <div class="logo-container">
             <div class="left-position-logo logo">
-                <img src="{{ $company->image }}" alt="">
+                <img src="{{ $company->image }}" alt="logo" style="padding-left: 20px;">
             </div>
         </div>
         <div class="name-and-info">

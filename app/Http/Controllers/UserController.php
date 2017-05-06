@@ -8,6 +8,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\StudentProfile;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -28,7 +29,6 @@ class UserController extends Controller
         Auth::attempt(['email' => $request['email'], 'password' => $request['password']]);
         $user = User::where('email',$request['email'])->first();
         if($user){
-            Log::info('yea');
             Auth::login($user);
             return redirect()->route('home');
         }
@@ -63,6 +63,14 @@ class UserController extends Controller
         $user->email = $email;
         $user->password = bcrypt($password);
         $user->save();
+
+        //create User
+        $student_profile = new StudentProfile();
+        $student_profile->id = $user->id;
+        $student_profile->university = '';
+        $student_profile->major = '';
+        $student_profile->save();
+
         Auth::login($user);
         return redirect()->route('home');
     }

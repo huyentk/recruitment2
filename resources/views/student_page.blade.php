@@ -71,7 +71,7 @@
                 <hr/>
                 <div class="update_and_save">
                     <h5 id="h2_1" style="font-style: italic;">Update your personal details here</h5>
-                    <h5 id="h2_2"><span><a id="save-persional-detail" href="" ><i class="fa fa-floppy-o fa-lg" aria-hidden="true"></i> Save changes</a></span></h5>
+                    <h5 id="h2_2"><span><a id="save-personal-detail" href="" ><i class="fa fa-floppy-o fa-lg" aria-hidden="true"></i> Save changes</a></span></h5>
                 </div>
                 <div class="col-md-6">
                     <div class="info">
