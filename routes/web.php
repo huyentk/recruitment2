@@ -132,6 +132,8 @@ Route::get('contact-us',[
     'as' => 'get-contact'
 ]);
 
+/*-----------------Article------------------*/
+
 //Articles List
 Route::get('articles',[
     'uses' => 'ArticlesController@getArticlesList',
@@ -145,14 +147,33 @@ Route::get('/{id}/article-detail',[
 ]);
 
 //Post article
-Route::get('post-article',function(){
+Route::get('post-article', function(){
     return view('articles.post_article');
-});
+})->name('post-article');
 
-Route::post('submit-article',[
-    'uses' => 'ArticleController@postArticle',
-    'as' => 'submit-article'
+
+Route::post('add-article',[
+    'uses' => 'ArticleController@addArticle',
+    'as' => 'add-article'
 ]);
+
+// Edit article
+Route::get('edit-article',[
+    'uses' => 'ArticlesController@getEditArticle',
+    'as' => 'edit-article'
+]);
+
+// Update article
+Route::post('update-article',[
+    'uses' => 'ArticleController@updateArticle',
+    'as' => 'update-article'
+]);
+
+
+//Delete article
+Route::get('/{id}/delete-article',[
+    'uses' => 'ArticlesController@deleteArticle',
+    'as' => 'delete-article'
 ]);
 
 /*-----------------Company------------------*/
@@ -190,3 +211,8 @@ Route::post('/create_account_company',[
     'uses' => 'CompanyController@postCreateCompanyAccount',
     'as' => 'create-company-account'
 ]);
+
+/*-----------------Introduce------------------*/
+Route::get('introduce', function(){
+    return view('introduce');
+})->name('introduce');

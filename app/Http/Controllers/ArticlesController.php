@@ -22,7 +22,7 @@ class ArticlesController extends Controller
     public function getArticlesList()
     {
         $articles = Articles::orderBy('id','desc')->paginate(3);
-        Log::info($articles);
+//        Log::info($articles);
         foreach($articles as $article){
             $article->image = Storage::url('/articles/'.$article->id.'.png');
             if(!$article->image){
@@ -41,9 +41,13 @@ class ArticlesController extends Controller
      */
     public function getArticleDetail($id)
     {
-        $article = Articles::where('id',$id) ->first();
+        $article = Articles::find($id);
+        Log::info($article);
+
         $article->image = Storage::url('/articles/'.$article->id.'.png');
+        Log::info($article->image);
         if(!$article->image){
+            Log::info(22222);
             $article->image = Storage::url('/articles/default.png');
         }
         $others = Articles::where('id','<',$id)->limit(4)->get();
@@ -58,15 +62,35 @@ class ArticlesController extends Controller
 
     }
 
-    public function postArticle(Request $request){
+    public function addArticle(Request $request){
         $title = $request['title'];
         $content = $request['content'];
         $article = new Articles();
         $article->title = $title;
         $article->content = $content;
         $article->save();
-        return redirect()->back();
+        return redirect()->route('article-detail',['id' => $article->id]);
+    }
 
+    public function getEditArticle($id)
+    {
+        $article = Articles::where('id',$id) ->first();
+        return view('articles.edit_article')->with(['article' => $article]);
+    }
+
+    public function updateArticle(Request $request){
+        $title = $request['title'];
+        $content = $request['content'];
+        $article = Articles::where('id',$request['id']);
+        $article -> update(['title'=>$title,'content'=>$content]);
+        $article->save();
+        return redirect()->route('article-detail',['id' => $article->id]);
+    }
+
+    public function deleteArticle($id){
+        $post = articles::where('id',$id);
+        $post->delete();
+        return redirect()->route('articles-list')->with(['message'=>'The article has been deleted!']);
     }
 }
 

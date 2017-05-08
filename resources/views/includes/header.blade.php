@@ -22,10 +22,8 @@
                 <ul class="nav navbar-nav">
                     <li><a href="{{ route('get-jobs-list') }}">&nbsp Jobs</a></li>
                     {{--<li><a href="#">Companies</a></li>--}}
-                    <li><a href="#">Articles</a></li>
-                    <li><a href="#">Companies</a></li>
                     <li><a href="{{ route('articles-list') }}">Articles</a></li>
-                    <li><a href="#">Introduce</a></li>
+                    <li><a href="{{ route('introduce') }}">Introduce</a></li>
                     <li><a href="{{ route('get-contact') }}">Contact Us</a></li>
                 </ul>
 
@@ -48,6 +46,7 @@
                                 <li><a href="{{ route('get-job-management') }}">Jobs Management</a></li>
                             @elseif(Auth::user()->role_id == 1)
                                 <li><a href="{{ route('create-company-account') }}">Create company account</a></li>
+                                <li><a href="{{ route('post-article') }}">Post article</a></li>
                             @endif
                                 <li role="separator" class="divider"></li>
                                 <li><a href="{{ route('log-out') }}">Logout</a></li>
