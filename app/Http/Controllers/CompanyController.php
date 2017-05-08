@@ -11,12 +11,13 @@ namespace App\Http\Controllers;
 use App\Models\Company;
 use App\Models\CompanyProfile;
 use App\Models\Job;
+use App\Models\StudentJoinedJob;
 use App\Models\User;
+use App\Models\StudentApplyJob;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
-use Psy\Util\Json;
 
 class CompanyController extends Controller
 {
@@ -86,8 +87,8 @@ class CompanyController extends Controller
     }
 
     public function employee_getCompanyPage($emp_id){
-        $company_id = CompanyProfile::find($emp_id)->value('company_id');
-        $company = Company::find($company_id)->first();
+        $company_id = CompanyProfile::where('id',$emp_id)->value('company_id');
+        $company = Company::find($company_id);
         $company->banner = Storage::url('/companies/banners/'.$company->id.'.png');
         if(!$company->banner)
             $company->banner = Storage::url('/companies/banners/default.png');
@@ -130,14 +131,12 @@ class CompanyController extends Controller
             $message = ['message_danger'=>'You do not have permission!'];
             return redirect()->route('home')->with($message);
         }
-        Log::info('0');
         $this->validate( $request,[
             'email' => 'required|email|unique:users',
             'fullname' => 'required|max:120',
             'password' => 'required|min:4',
             'password-confirm' => 'required|min:4'
         ]);
-        Log::info('ab');
         $email = $request['email'];
         $fullname = $request['fullname'];
         $password = $request['password'];
@@ -149,23 +148,50 @@ class CompanyController extends Controller
         //create User
         $user = new User();
         $user->full_name = $fullname;
-        Log::info('1');
         $user->email = $email;
-        Log::info('2');
         $user->password = bcrypt($password);
-        Log::info('3');
-        $user->role_id = 1;
-        Log::info('4');
+        $user->role_id = 2;
         $user->save();
-        Log::info($user);
-//        $employee = new CompanyProfile();
-//        if(!$request['department'])
-//            $request['department'] = "";
-//        $employee->id = User::max('id');
-//        $employee->department = $request['department'];
-//        $employee->company_id = $request['company'];
-//        $employee->save();
+
+        $employee = new CompanyProfile();
+        if(!$request['department'])
+            $request['department'] = "";
+        $employee->id = $user->id;
+        $employee->department = $request['department'];
+        $employee->company_id = $request['company'];
+        $employee->save();
         $message_success = ['message_success' => 'Create employee\'s account successfully!'];
         return redirect()->back()->with($message_success);
+    }
+
+    public function postAcceptJoin(Request $request){
+        $id = $request['id'];
+        $job_id = $request['job_id'];
+        $accept = $request['accept'];
+        if($accept){
+            $application = StudentApplyJob::where('stu_id', $id)->first();
+            $application->result = 12;
+            $application->save();
+
+            $stu_id = $application->stu_id;
+
+            $join = new StudentJoinedJob();
+            $join->stu_id = $stu_id;
+            $join->job_id = $job_id;
+            $join->save();
+            return 1000;
+        }
+        return -1000;
+    }
+    public function postRejectJoin(Request $request){
+        $id = $request['id'];
+        $accept = $request['accept'];
+        if($accept == 'false'){
+            $application = StudentApplyJob::where('id', $id)->first();
+            $application->result = 11;
+            $application->save();
+            return 1000;
+        }
+        return -1000;
     }
 }

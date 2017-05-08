@@ -36,15 +36,14 @@ $('#save-account-info').on('click',function (event) {
     }
 });
 
-$('#save-persional-detail').on('click', function (event) {
+$('#save-personal-detail').on('click', function (event) {
     event.preventDefault();
     var gender = $('input[name=gender]:checked').val();
     var university = $('#university').val();
     var major = $('#major').val();
-    var address = $('#address').text();
+    var address = $('#address').val();
     var phone = $('#phone').val();
     var skypeId = $('#skypeId').val();
-
     $.ajax({
         method: 'POST',
         url: urlChangePersionalDetail,
@@ -54,7 +53,7 @@ $('#save-persional-detail').on('click', function (event) {
             major: major,
             address: address,
             phone: phone,
-            skypeId: skypeId,
+            skype_id: skypeId,
             _token: _token
         }
     }).done(function (msg) {

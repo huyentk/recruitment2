@@ -46,16 +46,16 @@
             <h3 style="margin-top: 0;">{{ $job->name }}</h3>
             <div class="row">
                 @foreach($job->skills as $job_skill)
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <p style="font-size: 18px;"><i class="fa fa-tag fa-lg" style="color: #9a5406;" aria-hidden="true"></i> {{ $job_skill->skill_name }}</p>
                     </div>
                 @endforeach
             </div>
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <p style="font-size: 16px;"><i class="fa fa-money fa-lg" style="color: #9a5406;" aria-hidden="true"></i>&nbsp; {{ $job->salary }} /month</p>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <p style="font-size: 16px;"><i class="fa fa-building fa-lg" style="color: #9a5406;" aria-hidden="true"></i>&nbsp; {{ $job->company_name }}</p>
                 </div>
             </div>

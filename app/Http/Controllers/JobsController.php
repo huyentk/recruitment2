@@ -51,14 +51,13 @@ class JobsController extends Controller
             }
             if(Auth::user()->role_id == 2){
                 if(CompanyProfile::where('id',Auth::user()->id)->value('company_id') == $company->id){
-                    $student_apply_job_ids = StudentApplyJob::where('job_id',$id)->get();
-                    $students_apply_job = array();
-                    if($student_apply_job_ids != null){
-                        foreach ($student_apply_job_ids as $student_apply_job_id){
-                            $student_info = StudentProfile::find($student_apply_job_id->id)->first();
-                            $student_info->full_name = User::find($student_info->id)->value('full_name');
-                            Log::info($student_info);
-                            array_push($students_apply_job, $student_info);
+                    $students_apply_job = StudentApplyJob::where('job_id',$id)->get();
+                    if($students_apply_job != null){
+                        foreach ($students_apply_job as $student_apply_job){
+                            $student_info = StudentProfile::find($student_apply_job->stu_id)->first();
+                            $student_apply_job->fullname = User::find($student_info->id)->value('full_name');
+                            $student_apply_job->university = $student_info->university;
+                            $student_apply_job->major = $student_info->major;
                         }
                     }
                     return view('jobs.job_detail')->with([
@@ -87,7 +86,7 @@ class JobsController extends Controller
 
     public function getJobsList()
     {
-        $jobs = Job::paginate(8);
+        $jobs = Job::orderBy('created_at','desc')->paginate(5);
 //        dd(get_class($jobs)); //show where paginate come from
 //        "Illuminate\Pagination\LengthAwarePaginator"
         foreach ($jobs as $job){
@@ -111,10 +110,10 @@ class JobsController extends Controller
             array_push($jobs, $job_skill->job);
 
         foreach ($jobs as $job){
-            $company_id = CompanyProfile::where('id',$job->created_by)->pluck('company_id');
+            $company_id = CompanyProfile::where('id',$job->created_by)->value('company_id');
             $company = Company::select('name')->where('id',$company_id)->first();
             $job->company_name = $company->name;
-            $job->image = Storage::url('/job_images/'.$job->id.'.png');
+            $job->image = Storage::url('/companies/'.$company_id.'.png');
             $skills = JobSkill::select('skill_name')->where('job_id', $job->id)->get();
             $job->skills = $skills;
         }
@@ -205,7 +204,19 @@ class JobsController extends Controller
             $job_skill->skill_name = $skill['name'];
             $job_skill->save();
         }
+        return 1000;
+    }
 
+    public function postDeleteJob(Request $request){
+        if(Auth::guest() || Auth::user()->role_id != 2){
+            $message = ['message_danger'=>'You do not have permission!'];
+            return redirect()->route('home')->with($message);
+        }
+
+        $job = Job::find($request['job_id']);
+        if($job->num_register != 0)
+            return -1000;
+        $job->delete();
         return 1000;
     }
 }

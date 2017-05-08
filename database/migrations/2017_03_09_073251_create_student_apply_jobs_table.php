@@ -21,7 +21,6 @@ class CreateStudentApplyJobsTable extends Migration
             #10: waiting
             #11: fail
             #12: success
-            #13: ended
             $table->timestamps();
         });
     }

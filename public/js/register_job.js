@@ -6,7 +6,15 @@ $(document).ready(function () {
 
     $('#sure').on('click',function (event) {
         event.preventDefault();
-        var intro = $('#intro').text();
+        if(document.getElementById("gpa_file").files.length == 0){
+            alert('You must upload a GPA file!');
+            return;
+        }
+        if(document.getElementById("cv_file").files.length == 0){
+            alert('You must upload a CV file!');
+            return;
+        }
+        var intro = $('#intro').val();
         var full_name = $('#full_name').text();
         if(full_name.length < 5){
             alert('Full name is not valid!');
@@ -65,6 +73,7 @@ $(document).ready(function () {
                             job_id: job_id,
                             intro: intro,
                             full_name: full_name,
+                            birthday: birthday,
                             gender: gender,
                             university: university,
                             major: major,

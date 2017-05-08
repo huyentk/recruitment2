@@ -96,6 +96,11 @@ Route::post('post-update-job',[
     'as' => 'post-update-job'
 ]);
 
+Route::post('post-delete-job',[
+    'uses' => 'JobsController@postDeleteJob',
+    'as' => 'delete-job'
+]);
+
 /*------------------Student--------------------*/
 Route::get('{id}/student-page',[
    'uses' => 'StudentController@getStudentPage',
@@ -116,7 +121,7 @@ Route::post('update-account-info-no-pass',[
 
 //update persional details
 Route::post('update-persional-detail',[
-    'uses' => 'StudentController@postUpdatePersionalDetails',
+    'uses' => 'StudentController@postUpdatePersonalDetails',
     'as' => 'update-persional-detail'
 ]);
 
@@ -126,55 +131,6 @@ Route::post('update-ava',[
     'as' => 'update-ava'
 ]);
 
-//Contact Us
-Route::get('contact-us',[
-    'uses' => 'HomeController@getContactUs',
-    'as' => 'get-contact'
-]);
-
-/*-----------------Article------------------*/
-
-//Articles List
-Route::get('articles',[
-    'uses' => 'ArticlesController@getArticlesList',
-    'as' => 'articles-list'
-]);
-
-//Articles Detail
-Route::get('/{id}/article-detail',[
-    'uses' => 'ArticlesController@getArticleDetail',
-    'as' => 'article-detail'
-]);
-
-//Post article
-Route::get('post-article', function(){
-    return view('articles.post_article');
-})->name('post-article');
-
-
-Route::post('add-article',[
-    'uses' => 'ArticleController@addArticle',
-    'as' => 'add-article'
-]);
-
-// Edit article
-Route::get('edit-article',[
-    'uses' => 'ArticlesController@getEditArticle',
-    'as' => 'edit-article'
-]);
-
-// Update article
-Route::post('update-article',[
-    'uses' => 'ArticleController@updateArticle',
-    'as' => 'update-article'
-]);
-
-
-//Delete article
-Route::get('/{id}/delete-article',[
-    'uses' => 'ArticlesController@deleteArticle',
-    'as' => 'delete-article'
-]);
 
 /*-----------------Company------------------*/
 Route::get('{id}/employee-page',[
@@ -183,7 +139,7 @@ Route::get('{id}/employee-page',[
 ]);
 
 Route::post('update-persional-detail-emp',[
-   'uses' => 'EmployeeController@postUpdatePersionalDetails',
+   'uses' => 'EmployeeController@postUpdatePersonalDetails',
     'as' => 'update-persional-detail-emp'
 ]);
 
@@ -216,3 +172,13 @@ Route::post('/create_account_company',[
 Route::get('introduce', function(){
     return view('introduce');
 })->name('introduce');
+
+Route::post('accept-join',[
+   'uses' => 'CompanyController@postAcceptJoin',
+    'as' => 'accept-join'
+]);
+
+Route::post('reject-join',[
+    'uses' => 'CompanyController@postRejectJoin',
+    'as' => 'reject-join'
+]);

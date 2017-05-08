@@ -13,6 +13,7 @@ $("#select_list").change(function(){
 });
 
 $('#edit').on('click', function (event) {
+    $("#delete").hide();
     event.preventDefault();
 
     var job_name = $('#job_name').text();
@@ -39,7 +40,7 @@ $('#edit').on('click', function (event) {
     $('#job_benefit').text(job_description);
 
     $(this).hide(); // hide the clicked button
-    $('#save-change').show(); // show the another button which is hidden
+    $('#save-change').show(); // show the Save change button
 });
 
 $('#save-change').on('click',function (event) {
