@@ -131,6 +131,55 @@ Route::post('update-ava',[
     'as' => 'update-ava'
 ]);
 
+//Contact Us
+Route::get('contact-us',[
+    'uses' => 'HomeController@getContactUs',
+    'as' => 'get-contact'
+]);
+
+/*-----------------Article------------------*/
+
+//Articles List
+Route::get('articles',[
+    'uses' => 'ArticlesController@getArticlesList',
+    'as' => 'articles-list'
+]);
+
+//Articles Detail
+Route::get('/{id}/article-detail',[
+    'uses' => 'ArticlesController@getArticleDetail',
+    'as' => 'article-detail'
+]);
+
+//Post article
+Route::get('post-article', function(){
+    return view('articles.post_article');
+})->name('post-article');
+
+
+Route::post('add-article',[
+    'uses' => 'ArticleController@addArticle',
+    'as' => 'add-article'
+]);
+
+// Edit article
+Route::get('edit-article',[
+    'uses' => 'ArticlesController@getEditArticle',
+    'as' => 'edit-article'
+]);
+
+// Update article
+Route::post('update-article',[
+    'uses' => 'ArticleController@updateArticle',
+    'as' => 'update-article'
+]);
+
+
+//Delete article
+Route::get('/{id}/delete-article',[
+    'uses' => 'ArticlesController@deleteArticle',
+    'as' => 'delete-article'
+]);
 
 /*-----------------Company------------------*/
 Route::get('{id}/employee-page',[
