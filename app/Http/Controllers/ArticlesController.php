@@ -42,12 +42,8 @@ class ArticlesController extends Controller
     public function getArticleDetail($id)
     {
         $article = Articles::find($id);
-        Log::info($article);
-
         $article->image = Storage::url('/articles/'.$article->id.'.png');
-        Log::info($article->image);
         if(!$article->image){
-            Log::info(22222);
             $article->image = Storage::url('/articles/default.png');
         }
         $others = Articles::where('id','<',$id)->limit(4)->get();

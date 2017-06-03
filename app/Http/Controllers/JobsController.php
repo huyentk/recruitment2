@@ -124,10 +124,6 @@ class JobsController extends Controller
     }
 
     public function getRegisterJob($job_id){
-        if(Auth::guest() || Auth::user()->role_id != 3){
-            $message = ['message_danger'=>'You do not have permission!'];
-            return redirect()->route('home')->with($message);
-        }
         $student_info = User::find(Auth::user()->id);
         $student_info->university = StudentProfile::where('id',Auth::user()->id)->first();
         return view('jobs.register_job')->with([
@@ -137,10 +133,6 @@ class JobsController extends Controller
     }
 
     public function postUpdateJob(Request $request){
-        if(Auth::guest() || Auth::user()->role_id != 2){
-            $message = ['message_danger'=>'You do not have permission!'];
-            return redirect()->route('home')->with($message);
-        }
         try{
             $job = Job::find($request['id']);
             $job->name = $request['name'];
@@ -165,10 +157,6 @@ class JobsController extends Controller
     }
 
     public function getCreateJob(){
-        if(Auth::guest() || Auth::user()->role_id != 2){
-            $message = ['message_danger'=>'You do not have permission!'];
-            return redirect()->route('home')->with($message);
-        }
         $id = Auth::user()->id;
         $company_id = CompanyProfile::where('id',$id)->pluck('company_id');
         $company = Company::find($company_id);
@@ -181,11 +169,6 @@ class JobsController extends Controller
     }
 
     public function postCreateJob(Request $request){
-        if(Auth::guest() || Auth::user()->role_id != 2){
-            $message = ['message_danger'=>'You do not have permission!'];
-            return redirect()->route('home')->with($message);
-        }
-
         $job = new Job();
         $job->name = $request['name'];
         $job->salary = $request['salary'];
@@ -208,11 +191,6 @@ class JobsController extends Controller
     }
 
     public function postDeleteJob(Request $request){
-        if(Auth::guest() || Auth::user()->role_id != 2){
-            $message = ['message_danger'=>'You do not have permission!'];
-            return redirect()->route('home')->with($message);
-        }
-
         $job = Job::find($request['job_id']);
         if($job->num_register != 0)
             return -1000;

@@ -18,18 +18,11 @@ class UserController extends Controller
 {
     public function postSignIn(Request $request)
     {
-        if(Auth::check()){
-            $message_warning = "You have already login";
-            return redirect()->route('home')->with($message_warning);
-        }
         $this->validate($request,[
             'email' => 'required|email',
             'password' => 'required'
         ]);
-        Auth::attempt(['email' => $request['email'], 'password' => $request['password']]);
-        $user = User::where('email',$request['email'])->first();
-        if($user){
-            Auth::login($user);
+        if(Auth::attempt(['email' => $request['email'], 'password' => $request['password']])){
             return redirect()->route('home');
         }
         $message = ['message_danger' => 'Sorry, unrecognised username or password.'];
@@ -38,11 +31,6 @@ class UserController extends Controller
 
     public function postSignUp(Request $request)
     {
-        if(Auth::check()) //if user already login
-        {
-            $message_warning = ['message_warning' => 'You are already logged in.'];
-            return redirect()->route('home')->with($message_warning);
-        }
         $this->validate( $request, [
             'email' => 'required|email|unique:users',
             'fullname' => 'required|max:120',
@@ -64,7 +52,7 @@ class UserController extends Controller
         $user->password = bcrypt($password);
         $user->save();
 
-        //create User
+        //create Student Profile
         $student_profile = new StudentProfile();
         $student_profile->id = $user->id;
         $student_profile->university = '';

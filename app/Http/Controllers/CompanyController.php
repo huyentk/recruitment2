@@ -53,11 +53,6 @@ class CompanyController extends Controller
     }
 
     public function getJobManagement(){
-        if(Auth::guest() || Auth::user()->role_id != 2){
-            $message = ['message_danger'=>'You do not have permission!'];
-            return redirect()->route('home')->with($message);
-        }
-
         $id = Auth::user()->id;
         $company_id = CompanyProfile::where('id',$id)->pluck('company_id');
         $company = Company::find($company_id);
@@ -118,19 +113,7 @@ class CompanyController extends Controller
         ]);
     }
 
-    public function getCreateCompanyAccount(){
-        if(Auth::guest() || Auth::user()->role_id != 1){
-            $message = ['message_danger'=>'You do not have permission!'];
-            return redirect()->route('home')->with($message);
-        }
-        return view('company/create_account');
-    }
-
     public function postCreateCompanyAccount(Request $request){
-        if(Auth::guest() || Auth::user()->role_id != 1){
-            $message = ['message_danger'=>'You do not have permission!'];
-            return redirect()->route('home')->with($message);
-        }
         $this->validate( $request,[
             'email' => 'required|email|unique:users',
             'fullname' => 'required|max:120',

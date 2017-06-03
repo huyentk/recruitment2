@@ -24,10 +24,6 @@ use Illuminate\Support\Facades\Validator;
 class StudentController extends Controller
 {
     public function getStudentPage($id){
-        if(Auth::guest() || Auth::user()->role_id != 3){
-            $message = ['message_danger'=>'You do not have permission!'];
-            return redirect()->route('home')->with($message);
-        }
         $student_info = User::find($id);
         $student_info->university = StudentProfile::where('id',$id)->first();
         $student_info->image = file_exists(public_path().'/storage/avatars/'.Auth::user()->id.'.png') ? Storage::url('/avatars/'.Auth::user()->id.'.png') : Storage::url('/avatars/user.png');
@@ -59,10 +55,6 @@ class StudentController extends Controller
     }
 
     public function postUpdateAccountInfoHasPass(Request $request){
-        if(Auth::guest()){
-            $message = ['message_danger'=>'You do not have permission!'];
-            return redirect()->route('home')->with($message);
-        }
         $this->validate($request,[
             'email' => 'email|required',
             'new_pass' => 'required',
@@ -83,10 +75,6 @@ class StudentController extends Controller
     }
 
     public function postUpdateAccountInfoNoPass(Request $request){
-        if(Auth::guest()){
-            $message = ['message_danger'=>'You do not have permission!'];
-            return redirect()->route('home')->with($message);
-        }
         $this->validate($request,[
             'email' => 'email|required',
         ]);
@@ -100,11 +88,6 @@ class StudentController extends Controller
     }
 
     public function postUpdatePersonalDetails(Request $request){
-        if(Auth::guest() || Auth::user()->role_id != 3){
-            $message = ['message_danger'=>'You do not have permission!'];
-            return redirect()->route('home')->with($message);
-        }
-
         $user = User::find(Auth::user()->id);
         $user->gender = $request['gender'];
         $user->address = $request['address'] != null ? $request['address'] : '';
@@ -138,10 +121,6 @@ class StudentController extends Controller
     }
 
     public function postRegisterJob(Request $request){
-        if(Auth::guest() || Auth::user()->role_id != 3){
-            $message = ['message_danger'=>'You do not have permission!'];
-            return redirect()->route('home')->with($message);
-        }
         $gpa = storage_path().'/app/public/GPA/'.Auth::user()->id . '-' . $request['job_id'] . '.pdf' ;
         $cv = storage_path().'/app/public/CV/'.Auth::user()->id . '-' . $request['job_id'] . '.pdf' ;
         $company = Job::select('created_by')->where('id',$request['job_id'])->first();
@@ -166,10 +145,6 @@ class StudentController extends Controller
     }
 
     public function postUpdateAva(Request $request){
-        if(Auth::guest()){
-            $message = ['message_danger'=>'You do not have permission!'];
-            return redirect()->route('home')->with($message);
-        }
         if($request->hasFile('update_ava')) {
             $validator = Validator::make($request->all(), [
                 'update_ava' => 'required'
