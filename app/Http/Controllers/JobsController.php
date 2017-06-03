@@ -216,7 +216,15 @@ class JobsController extends Controller
         $job = Job::find($request['job_id']);
         if($job->num_register != 0)
             return -1000;
-        $job->delete();
+
+        else{
+            $job_skills = JobSkill::where('job_id',$request['job_id'])->get();
+            foreach ($job_skills as $job_skill)
+                $job_skill->delete();
+            $job->delete();
+        }
+
         return 1000;
     }
+
 }

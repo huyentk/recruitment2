@@ -23,12 +23,12 @@
                             <input type="text" id="skill_tags" class="form-control" placeholder="Search for your skill (i.e: PHP, Python,...)" name="skill">
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="glyphicon glyphicon-map-marker" aria-hidden="true"></i></span>
-                            <input type="text" id="city" class="form-control" placeholder="City..." name="city">
-                        </div>
-                    </div>
+                    {{--<div class="col-md-4">--}}
+                        {{--<div class="input-group">--}}
+                            {{--<span class="input-group-addon"><i class="glyphicon glyphicon-map-marker" aria-hidden="true"></i></span>--}}
+                            {{--<input type="text" id="city" class="form-control" placeholder="City..." name="city">--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
                     <div class="col-md-2">
                         <input type="hidden" name="_token" value="{{ Session::token() }}">
                         <button type="submit" class="btn" style="width: 135px;text-align: center;background-color: #e58618;color: white;"><span class="glyphicon glyphicon-search"></span> Search</button>

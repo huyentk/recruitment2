@@ -50,18 +50,18 @@
             <hr style="margin-top: 0px;margin-bottom: 0px;margin-right: 20px;"/>
             <form method="post" action="{{ route('post-jobs-list') }}">
                 <div class="row" style="margin-top: 15px; padding-bottom: 20px;">
-                    <div class="col-md-6">
+                    <div class="col-md-10">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-tag" aria-hidden="true"></i></span>
                             <input type="text" id="skill_tags" class="form-control" placeholder="Search for your skill (i.e: PHP, Python,...)" name="skill">
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="glyphicon glyphicon-map-marker" aria-hidden="true"></i></span>
-                            <input type="text" id="city" class="form-control" placeholder="City..." name="city">
-                        </div>
-                    </div>
+                    {{--<div class="col-md-4">--}}
+                        {{--<div class="input-group">--}}
+                            {{--<span class="input-group-addon"><i class="glyphicon glyphicon-map-marker" aria-hidden="true"></i></span>--}}
+                            {{--<input type="text" id="city" class="form-control" placeholder="City..." name="city">--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
                     <div class="col-md-2">
                         <input type="hidden" name="_token" value="{{ Session::token() }}">
                         <button type="submit" class="btn" style="width: 135px;text-align: center;background-color: #e58618;color: white;"><span class="glyphicon glyphicon-search"></span> Search</button>
@@ -80,7 +80,7 @@
             <br/>
             <div class="row">
                 @foreach($jobs as $job)
-                    <div class="col-md-6" style="margin-bottom: 20px;">
+                    <div class="col-md-6" style="height: 150px;">
                         <div class="row">
                             <div class="col-md-5">
                                 <center><img class="img-circle" src="{{ $job->image }}" alt="logo" style="border:1px solid #262626;"></center>

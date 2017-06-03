@@ -27,7 +27,6 @@
                 <span style="font-size: 20px;"><i class="fa fa-map-marker"> {{ $company->address }}</i></span><br>
                 <span style="font-size: 20px;"><i class="fa fa-users"> {{ $company->num_employee }}+ Employee</i></span>
             </div>
-
         </div>
     </div>
     <div style="padding: 25px;">
@@ -44,23 +43,13 @@
             <hr style="margin-top: 0;"/>
             <div class="row">
                 @foreach($jobs as $job)
-                    <a href="{{ route('job_detail',['id' => $job->id]) }}">
-                        <div class="col-md-6" style="margin-bottom: 25px;">
-                            <div class="row">
-                                <div class="col-md-5">
-                                    <center><img class="img-circle" src="{{ $job->image }}" style="border:1px solid #262626;"></center>
-                                </div>
-                                <div class="col-md-7" style="text-align: center;">
-                                    <h4 style="font-weight: bold">{{ $job->name }}</h4>
-                                    <h4>{{ $job->salary }} / month</h4>
-                                    <h4>{{ $job->num_register }} registered</h4>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
+                    <div class="col-md-6">
+                        <h4 style="font-weight: bold"><a href="{{ route('job_detail',['id' => $job->id]) }}">{{ $job->name }}</a></h4>
+                        <h4>{{ $job->salary }} / month</h4>
+                        <h4>{{ $job->num_register }} registered</h4>
+                    </div>
                 @endforeach
             </div>
         </div>
     </center>
-
 @endsection

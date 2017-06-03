@@ -8,7 +8,7 @@
     <script src="{{ URL::to('js/create_job.js') }}"></script>
 @endsection
 @section('content')
-    <div class="row">
+    <div class="row" style="padding-top: 51px;">
         <div class="col-md-4">
             <div class="box">
                 <div class="company-info">
@@ -24,7 +24,7 @@
         </div>
         <div class="col-md-8">
             <div class="job_detail">
-                Name: <input style="margin-bottom: 20px; width:540px;" id="job_name" class="form-control input-lg" required/>
+                <h2>Job's Name: </h2><input style="margin-bottom: 20px; width:540px;" id="job_name" class="form-control input-lg" required/>
                 <div class="row" id="append_skill">
 
                 </div>

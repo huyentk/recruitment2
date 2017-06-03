@@ -22,7 +22,7 @@
                 <center><button class="btn" style="background-color: #124395;color: white;width: 150px;" type="submit">Sign in</button></center>
             </form>
             <br>
-            <center><a href="{{ route('auth-facebook') }}"><img src="{{ Storage::url('/facebook.png') }}"></a></center>
+            {{--<center><a href="{{ route('auth-facebook') }}"><img src="{{ Storage::url('/facebook.png') }}"></a></center>--}}
             {{--<center><button class="btn btn-info" type="submit">Sign in with Facebook</button></center>--}}
         </div>
     </div>

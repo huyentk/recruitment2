@@ -100,7 +100,6 @@ Route::post('post-delete-job',[
    'uses' => 'JobsController@postDeleteJob',
     'as' => 'delete-job'
 ]);
-
 /*------------------Student--------------------*/
 Route::get('{id}/student-page',[
    'uses' => 'StudentController@getStudentPage',
