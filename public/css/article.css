@@ -1,0 +1,146 @@
+.carousel-inner > .item > img{
+    width: 100%;
+    height: 100%;
+    margin: auto;
+}
+
+
+.tabs{
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+    text-align: left;
+}
+
+
+.article_content:hover {
+    background: #fdfdfd !important;
+    z-index: 5;
+    border-color: transparent;
+    box-shadow: 0 0 5px 1px #bcbcbc;
+}
+
+.job_content{
+    height: auto;
+    margin-left: 25px;
+    margin-top: 50px;
+    margin-right: 25px;
+}
+
+.article_content_div{
+    padding: 20px;
+    height: 100%;
+}
+
+.cut-text {
+    text-align: justify;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    line-height: 20px;     /* fallback */
+    max-height: 40px;      /* fallback */
+    -webkit-line-clamp: 2; /* number of lines to show */
+    /*-webkit-box-orient: vertical;*/
+}
+
+.ui-autocomplete {
+    width: 20%;
+    background: #ffffff;
+    border-radius: 1px;
+}
+
+
+.article_detail{
+    padding: 40px;
+}
+
+.paragraph{
+    font-size: 14px;
+    line-height: 25px;
+    padding-top: 30px;
+    text-align: justify
+}
+
+.head_post{
+    padding-left: 30px;
+    padding-top: 30px;
+    text-align: left;
+    font-weight: bold;
+}
+
+.author{
+    color: #aa4a24;
+    font-size: 20px;
+}
+
+.date{
+    color: #aa4a24;
+    font-size: 20px;
+}
+
+label{
+    line-height: 30px;
+}
+
+.image-list{
+    width: auto;
+    height: 250px;
+}
+
+.hr{
+    height: 10px;
+    border: 0;
+    box-shadow: 0 10px 10px -10px #124395 inset;
+
+}
+
+.hr1{
+    border: 0;
+    height: 1px;
+    background-image: -webkit-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+    background-image: -moz-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+    background-image: -ms-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+    background-image: -o-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+}
+
+.hr2{
+    border-top: 1px dashed #8c8b8b;
+}
+
+.hr3{
+    border-top: 1px dotted #8c8b8b;
+}
+
+.hr4{
+    border-top: 2px solid #8c8b8b;
+
+}
+
+.box{
+    width: 150px;
+    height: 50px;
+    background-color: #880000;
+}
+
+
+/*.list-item{border-width:1px 0;border-radius:0}*/
+.list-item{
+    position:relative;
+    display:block;
+    padding:10px 15px;
+    margin-bottom:-1px;
+    background-color:#fff;
+    /*border:1px solid #d3e0e9*/}
+
+.article-item{
+    border: solid #FFFFFF;
+    background-color: #FFFFFF;
+    width: auto;
+    box-shadow: 2px 1px 1px 1px #d5d5d5;
+}
+
+.head_article_detail{
+    text-align: left;
+    font-weight: bold;
+    color: #0c5582;
+}
