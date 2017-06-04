@@ -34,9 +34,9 @@
 </div>
 
 <style>
-    #messages{
-        padding-top: 25px;
-    }
+    /*#messages{*/
+        /*padding-top: 25px;*/
+    /*}*/
     .animated {
         -webkit-animation-duration: 15s;
         animation-duration: 15s;

@@ -177,4 +177,31 @@ class CompanyController extends Controller
         }
         return -1000;
     }
+
+    public function getEditCompany($id){
+        if(CompanyProfile::find(Auth::user()->id)->company_id != $id){
+            $message = ['message_danger' => 'You must in this company to edit this page'];
+            redirect()->back()->with($message);
+        }
+        $company_old = Company::find($id);
+        return view('company.edit_company_page',['company_old' => $company_old]);
+    }
+
+    public function postUpdateCompany(Request $request){
+        if($request->hasFile('company_banner')){
+            $company_banner = $request->file('company_banner');
+            Storage::put('/public/companies/banners/' .$request['company_id'].'.png', file_get_contents($company_banner->getRealPath()));
+        }
+        if($request->hasFile('company_logo')){
+            $company_logo = $request->file('company_logo');
+            Storage::put('/public/companies/' .$request['company_id'].'.png', file_get_contents($company_logo->getRealPath()));
+        }
+        $company = Company::find($request['company_id']);
+        $company->address = $request['address'];
+        $company->num_employee = $request['num_employee'];
+        $company->slogan = $request['slogan'];
+        $company->description = $request['description'];
+        $company->save();
+        return redirect()->route('get-company-page',['id' => $company->id]);
+    }
 }

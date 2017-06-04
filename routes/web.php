@@ -101,6 +101,7 @@ Route::post('post-delete-job',[
     'uses' => 'JobsController@postDeleteJob',
     'as' => 'delete-job'
 ])->middleware('checkUserIsEmployee');
+
 /*------------------Student--------------------*/
 Route::get('{id}/student-page',[
    'uses' => 'StudentController@getStudentPage',
@@ -129,7 +130,7 @@ Route::post('update-persional-detail',[
 Route::post('update-ava',[
     'uses' => 'StudentController@postUpdateAva',
     'as' => 'update-ava'
-])->middleware('checkUserIsGuess');
+])->middleware('checkUserIsGuest');
 
 /*-----------------Contact Us---------------*/
 Route::get('contact-us',[
@@ -201,18 +202,28 @@ Route::get('emp/{emp_id}/company-page',[
     'as' => 'employee-get-company-page'
 ])->middleware('checkUserIsEmployee');
 
-Route::get('/job_management',[
+Route::get('/job-management',[
     'uses' => 'CompanyController@getJobManagement',
     'as' => 'get-job-management'
 ])->middleware('checkUserIsCompany');
 
-Route::get('/create_account_company',function (){
+Route::get('/create-account-company',function (){
     return view('company/create_account');
 })->middleware('checkUserIsAdmin');
 
-Route::post('/create_account_company',[
+Route::post('/create-account-company',[
     'uses' => 'CompanyController@postCreateCompanyAccount',
     'as' => 'create-company-account'
+])->middleware('checkUserIsCompany');
+
+Route::get('/{id}/get-edit-company',[
+    'uses' => 'CompanyController@getEditCompany',
+    'as' => 'edit-company-page'
+])->middleware('checkUserIsCompany');
+
+Route::post('update-company-page',[
+    'uses' => 'CompanyController@postUpdateCompany',
+    'as' => 'update-company-page'
 ])->middleware('checkUserIsCompany');
 
 /*-----------------Introduce------------------*/
