@@ -11,6 +11,7 @@ use App\Models\Articles;
 use App\Models\Company;
 use App\Models\CompanyProfile;
 use App\Models\Job;
+use Composer\DependencyResolver\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
@@ -50,6 +51,7 @@ class HomeController extends Controller
     }
 
     public function getContactUs(){
-        return view('contact');
+        return view('basic.contact');
     }
+
 }

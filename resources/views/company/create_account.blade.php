@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-    Sign-up
+    Create Employee Account
 @endsection
 
 @section('content')

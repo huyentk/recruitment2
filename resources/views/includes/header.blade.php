@@ -47,6 +47,7 @@
                             @elseif(Auth::user()->role_id == 1)
                                 <li><a href="{{ route('create-company-account') }}">Create company account</a></li>
                                 <li><a href="{{ route('post-article') }}">Post article</a></li>
+                                <li><a href="{{ route('create-company') }}">Create New Company</a></li>
                             @endif
                                 <li role="separator" class="divider"></li>
                                 <li><a href="{{ route('log-out') }}">Logout</a></li>

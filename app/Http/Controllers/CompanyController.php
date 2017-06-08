@@ -204,4 +204,25 @@ class CompanyController extends Controller
         $company->save();
         return redirect()->route('get-company-page',['id' => $company->id]);
     }
+
+    public function postCreateCompany(Request $request){
+        $company = new Company();
+        $company->name = $request['name'];
+        $company->slogan = $request['slogan'];
+        $company->description = $request['description'];
+        $company->address = $request['address'];
+        $company->url = $request['url'];
+        $company->num_employee = $request['num_employee'];
+        $company->save();
+    }
+
+    public function getCompanyList(){
+        $companies = Company::paginate(5);
+        foreach ($companies as $company){
+            $company->image = Storage::url('/companies/'.$company->id.'.png');
+        }
+        return view('company.list_company')->with([
+            'companies'=> $companies
+        ]);
+    }
 }

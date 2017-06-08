@@ -38,12 +38,12 @@ Route::post('/sign-up',[
     'as' => 'sign-up'
 ])->middleware('checkUserAlreadyLogin');
 
-//facebook login
-Route::get('auth/facebook',[
-    'uses' => 'Auth\LoginController@redirectToProvider',
-    'as' => 'auth-facebook'
-]);
-Route::get('auth/facebook/callback', 'Auth\LoginController@handleProviderCallback');
+////facebook login
+//Route::get('auth/facebook',[
+//    'uses' => 'Auth\LoginController@redirectToProvider',
+//    'as' => 'auth-facebook'
+//]);
+//Route::get('auth/facebook/callback', 'Auth\LoginController@handleProviderCallback');
 
 /*-------------------Job--------------------*/
 Route::get('/{id}/job-detail',[
@@ -225,6 +225,20 @@ Route::post('update-company-page',[
     'uses' => 'CompanyController@postUpdateCompany',
     'as' => 'update-company-page'
 ])->middleware('checkUserIsCompany');
+
+Route::get('create-company',function (){
+   return view('company.create_company');
+})->middleware('checkUserIsAdmin')->name('create-company');
+
+Route::post('create-company',[
+    'uses' => 'CompanyController@postCreateCompany',
+    'as' => 'post-create-company'
+])->middleware('checkUserIsAdmin');
+
+Route::get('company-list', [
+    'uses' => 'CompanyController@getCompanyList',
+    'as' => 'get-company-list'
+]);
 
 /*-----------------Introduce------------------*/
 Route::get('introduce', function(){

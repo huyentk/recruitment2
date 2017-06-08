@@ -76,6 +76,8 @@
                         <button type="button" class="btn btn-success btn-lg" id="save-change" style="width: 130px;display: none" >Save</button>
                         <button type="button" class="btn btn-danger btn-lg" id="delete" style="width: 130px;">Delete</button>
                     @endif
+                @elseif(Auth::user()->role_id == 1)
+
                 @endif
                 <hr/>
                 <h3>Job Description</h3>
