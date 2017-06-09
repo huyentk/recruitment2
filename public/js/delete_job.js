@@ -17,7 +17,8 @@ $("#sureDelete").on('click',function (event) {
                 alert('Can not delele this job because any student has been registered!!!');
             }else{
                 $('#DeleteModal').modal('hide');
-                alert('Delete successfully!!!');
+                // // $('#modal').modal('toggle');
+
                 window.location.href = urlJobManagement;
             }
        }

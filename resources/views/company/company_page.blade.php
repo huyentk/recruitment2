@@ -13,10 +13,12 @@
     <div style="margin-bottom: -30px;max-height: 100%;overflow: hidden;">
         <img src="{{ $company->banner }}" class="img-responsive">
     </div>
-    <div style="height: 100%;display: flex; padding-top: 30px;padding-bottom:20px;background-color: transparent; z-index: 3;border: 1px solid #ded7d7">
+    <div class="company-page-above">
         <div class="logo-container">
             <div class="left-position-logo logo">
-                <img src="{{ $company->image }}" alt="logo" style="padding-left: 20px;">
+                <div>
+                    <img src="{{ $company->image }}" alt="logo" class="img-responsive" style="padding-left: 20px;">
+                </div>
             </div>
         </div>
         <div class="name-and-info">
@@ -30,9 +32,12 @@
         </div>
         <div style="text-align: center;padding: 15px;">
             <form action="{{ route('edit-company-page',['id' => $company->id]) }}" method="get">
-                <button class="btn btn-danger btn-lg" style="width: 150px;">Edit Page</button>
-            </form>
+                @if(Auth::guest() || Auth::user()->role_id !=2 )
 
+                @elseif(Auth::user()->company_Profile->company_id == $company->id)
+                    <button class="btn btn-danger btn-lg" style="width: 150px;">Edit Page</button>
+                @endif
+            </form>
         </div>
     </div>
     <div style="padding: 25px;">

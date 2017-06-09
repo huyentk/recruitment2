@@ -20,22 +20,22 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
-                    <li><a href="{{ route('get-jobs-list') }}">&nbsp Jobs</a></li>
+                    <li><a href="{{ route('get-jobs-list') }}" style="font-size: large">&nbsp Jobs</a></li>
                     {{--<li><a href="#">Companies</a></li>--}}
-                    <li><a href="{{ route('articles-list') }}">Articles</a></li>
-                    <li><a href="{{ route('introduce') }}">Introduce</a></li>
-                    <li><a href="{{ route('get-contact') }}">Contact Us</a></li>
+                    <li><a href="{{ route('articles-list') }}" style="font-size: large">Articles</a></li>
+                    <li><a href="{{ route('introduce') }}" style="font-size: large">Introduce</a></li>
+                    <li><a href="{{ route('get-contact') }}" style="font-size: large">Contact Us</a></li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Authentication Links -->
                     @if(Auth::guest())
-                        <button type="button" class="btn btn-success navbar-btn"><span class="glyphicon glyphicon-user"></span><a href="{{ route('get-sign-up') }}" style="text-decoration: none;">&nbsp; Sign up</a></button>
-                        <button type="button" class="btn btn-info navbar-btn"><span class="glyphicon glyphicon-log-in"></span><a href="{{ route('get-sign-in') }}" style="text-decoration: none;">&nbsp; Sign in</a></button>
+                        <button type="button" class="btn btn-success navbar-btn" style="margin-right: 5px;"><span class="glyphicon glyphicon-user"></span><a href="{{ route('get-sign-up') }}" style="text-decoration: none;">&nbsp; Sign up</a></button>
+                        <button type="button" class="btn btn-info navbar-btn" style="margin-right: 30px;"><span class="glyphicon glyphicon-log-in"></span><a href="{{ route('get-sign-in') }}" style="text-decoration: none;">&nbsp; Sign in</a></button>
                     @else
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="background-color: #2a88bd;">{{ Auth::user()->full_name }} <span class="caret"></span></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="background-color: #2a88bd;font-size: large">{{ Auth::user()->full_name }} <span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu" style="background-color: #3B4F6B;">
                             @if(Auth::user()->role_id == 3)
                                 <li><a href="{{ route('get-student-page',['id' => Auth::user()->id]) }}">My page (Your Account)</a></li>
@@ -45,7 +45,7 @@
                                 <li><a href="{{ route('get-create-job') }}">Create Job</a></li>
                                 <li><a href="{{ route('get-job-management') }}">Jobs Management</a></li>
                             @elseif(Auth::user()->role_id == 1)
-                                <li><a href="{{ route('create-company-account') }}">Create company account</a></li>
+                                <li><a href="{{ route('create-company-account') }}">Create Employee Account</a></li>
                                 <li><a href="{{ route('post-article') }}">Post article</a></li>
                                 <li><a href="{{ route('create-company') }}">Create New Company</a></li>
                             @endif

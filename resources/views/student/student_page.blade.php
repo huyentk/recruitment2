@@ -17,7 +17,7 @@
                 <img id="ava" class="img-responsive img-circle" src="{{ $student_info->image }}"/>
                 <input type="file" name="update_ava" accept="image/png" class="form-control" style="margin-top: 5px;" id="update_ava">
                 <input hidden value="{{ Session::token() }}" name="_token"/>
-                <input type="submit" class="form-control" style="margin-top: 5px;" id="button_update">
+                <center><input type="submit" class="form-control" id="button_update"></center>
             </form>
         </div>
         <div class="col-md-7" id="account_info">

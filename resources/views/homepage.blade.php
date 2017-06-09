@@ -111,8 +111,9 @@
     <hr style="border-color: #9a9a9a"/>
     <div class="row" style="padding-left: 15px;margin-left: 0;">
         <lable style="font-size: 24px;color: #2b1e9a;">Top Companies</lable>
-        <button class="btn btn-default btn-md" type="submit" style="float: right;margin-right: 35px;"><a href="{{ route('get-company-list') }}">View All</a></button>
+        <button class="btn btn-default btn-md" type="submit" style="float: right;margin-right: 35px;"><a href="{{ route('get-company-list') }}" style="text-decoration: none;">View All</a></button>
     </div>
+    <br/>
     <div class="row" style="padding-left: 15px;">
         @foreach($companies as $company)
             <a href="{{ route('get-company-page',['id' => $company->id]) }}">

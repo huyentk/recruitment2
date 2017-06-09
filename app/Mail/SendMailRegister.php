@@ -7,7 +7,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class OrderShipped extends Mailable
+class SendMailRegister extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -52,6 +52,6 @@ class OrderShipped extends Mailable
                 'as' => 'CV File',
                 'mime' => 'application/pdf'
             ))
-            ->view('sendEmailToCompany');
+            ->view('student.sendEmailToCompany');
     }
 }

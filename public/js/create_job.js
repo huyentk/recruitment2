@@ -40,7 +40,7 @@ $('#create').on('click',function (event) {
         },
         success: function (data) {
             if(data == 1000){
-                alert('Update successfully!');
+                alert('Create successfully!');
                 window.location.href = urlListJob;
             }
         }

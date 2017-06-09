@@ -32,10 +32,10 @@ class User extends Authenticatable
     }
 
     public function student_Profile(){
-        return $this->hasOne('App\Models\Student_Profile', 'id', 'id');
+        return $this->hasOne('App\Models\StudentProfile', 'id', 'id');
     }
 
     public function company_Profile(){
-        return $this->hasOne('App\Models\Company_Profile', 'id', 'id');
+        return $this->hasOne('App\Models\CompanyProfile', 'id', 'id');
     }
 }

@@ -207,14 +207,16 @@ Route::get('/job-management',[
     'as' => 'get-job-management'
 ])->middleware('checkUserIsCompany');
 
-Route::get('/create-account-company',function (){
-    return view('company/create_account');
-})->middleware('checkUserIsAdmin');
+
+Route::get('/create-account-company',[
+    'uses' => 'EmployeeController@getCreateEmployee',
+    'as' => 'get-create-employee'
+])->middleware('checkUserIsAdmin');
 
 Route::post('/create-account-company',[
     'uses' => 'CompanyController@postCreateCompanyAccount',
     'as' => 'create-company-account'
-])->middleware('checkUserIsCompany');
+])->middleware('checkUserIsAdmin');
 
 Route::get('/{id}/get-edit-company',[
     'uses' => 'CompanyController@getEditCompany',

@@ -23,7 +23,8 @@
                 <div class="info">
                     <div class="form-inline">
                         <label for="banner">New Banner: </label>
-                        <input type="file" name="company_banner" accept="image/png" class="form-control" style="margin-top: 5px;">                    </div>
+                        <input type="file" name="company_banner" accept="image/png" class="form-control" style="margin-top: 5px;">
+                    </div>
                 </div>
                 <div class="info">
                     <div class="form-inline">
@@ -64,7 +65,7 @@
             </div>
         </div>
         <center>
-            <input type="submit" value="Cập nhật">
+            <input type="submit" value="Update Company's Information">
         </center>
 
         <input hidden value="{{ $company_old->id }}" name="company_id"/>

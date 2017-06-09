@@ -8,13 +8,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Company;
 use App\Models\CompanyProfile;
 use App\Models\User;
-use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
 class EmployeeController extends Controller
@@ -42,5 +40,10 @@ class EmployeeController extends Controller
         $conmpany_profile->save();
 
         return $user;
+    }
+
+    public function getCreateEmployee(){
+        $companies = Company::all();
+        return view('company/create_account')->with(['companies' => $companies]);
     }
 }
