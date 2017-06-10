@@ -98,12 +98,12 @@
         <div class="col-md-4">
             <div class="row">
                 <lable style="font-size: 24px;color: #2b1e9a;">Lastest Articles</lable>
-                <button class="btn btn-default btn-md" type="submit" style="float: right;margin-right: 35px;">View All</button>
+                <button class="btn btn-default btn-md" type="submit" style="float: right;margin-right: 35px;"><a href="{{ route('articles-list') }}">View All</a></button>
             </div>
             <br/>
             @foreach($articles as $article)
                 <div class="row" style="padding-left: 50px;">
-                    <a href="#">
+                    <a href="{{ route('article-detail',['id' => $article->id]) }}">
                         <div class="col-md-6">
                             <img class="img-rounded" style="border: 1px solid #b1b7ba;" src="{{ $article->image }}">
                             <p style="width: 220px;font-size: 16px;font-weight: bold">{{ $article->title }}</p>

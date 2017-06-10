@@ -9,7 +9,9 @@
 @section('content')
     <section class="row new-post">
         <div  class="col-md-8 col-md-offset-2">
-            <form action="{{ route('update-article') }}">
+            <form action="{{ route('update-article') }}" method="post">
+                <input type="hidden" name="id" value="{{$article->id}}">
+                <input type = "hidden" name = "_token" value = "{{csrf_token()}}"/>
                 <h2>Edit article</h2>
                 <div>
                     <label>Title</label>
@@ -17,7 +19,7 @@
                 </div>
                 <div class="form-group">
                     <label>Content</label>
-                    <textarea required class="form-control" name="new-post" id="new-post" rows="10" value="$article->content"></textarea>
+                    <textarea required class="form-control" name="content" id="content" rows="15">{{$article->content}}</textarea>
                 </div>
                 <div class="form-group">
                     <label>Image</label>

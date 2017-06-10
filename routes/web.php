@@ -158,25 +158,25 @@ Route::get('post-article', function(){
 
 
 Route::post('add-article',[
-    'uses' => 'ArticleController@addArticle',
+    'uses' => 'ArticlesController@addArticle',
     'as' => 'add-article'
 ]);
 
 // Edit article
-Route::get('edit-article',[
+Route::get('/{id}/edit-article',[
     'uses' => 'ArticlesController@getEditArticle',
     'as' => 'edit-article'
 ]);
 
 // Update article
 Route::post('update-article',[
-    'uses' => 'ArticleController@updateArticle',
+    'uses' => 'ArticlesController@updateArticle',
     'as' => 'update-article'
 ]);
 
 
 //Delete article
-Route::get('/{id}/delete-article',[
+Route::post('delete-article',[
     'uses' => 'ArticlesController@deleteArticle',
     'as' => 'delete-article'
 ]);

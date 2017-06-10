@@ -5,6 +5,8 @@
 @endsection
 @section('script_and_style')
     <link type="text/css" rel="stylesheet" href="{{ URL::to('/css/article.css') }}"/>
+    {{--<script src="{{URL::to('js/edit_article.js')}}"></script>--}}
+    <script src="{{URL::to('js/delete_article.js')}}"></script>
 @endsection
 @section('content')
     <div class="row">
@@ -20,10 +22,33 @@
             </div>
             @if(Auth::guest())
 
-            @elseif(Auth::user()->role_id == 1)
-                <a href=" {{route('edit-article',['id' => $article->id])}}">Edit</a>
-                |
-                <a href=" {{route('delete-article',['id' => $article->id])}} " onclick= "return confirm('Do you want to delete this post?')">Delete</a>
+            @elseif(Auth::user()->role_id == 1 && Auth::user()->id == $article->created_by)
+                <div style="padding-left: 40px; font-weight: bold">
+                    {{--<a href=" {{route('edit-article',['id' => $article->id])}}">Edit</a>--}}
+                    <button type="button" class="btn btn-primary btn-lg" id="edit" style="width: 130px;">Edit</button>
+                    <button type="button" class="btn btn-danger btn-lg" id="delete" style="width: 130px;">Delete</button>
+                    {{--<a href=" {{route('delete-article',['id' => $article->id])}} ">Delete</a>--}}
+                </div>
+                {{-- delete article --}}
+                <div class="modal fade" id="deleteArticle">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Delete Article</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <p>Are you sure you want to delete this article?</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary" id="sureDelete">Sure</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             @endif
         </div>
         <div class="col-md-4">
@@ -37,26 +62,10 @@
             </ul>
         </div>
     </div>
-
-
-{{--    <div class="col-md-4">
-        <div class="row">
-            <lable style="font-size: 24px;color: #2b1e9a;">Lastest Articles</lable>
-            <button class="btn btn-default btn-md" type="submit" style="float: right;margin-right: 35px;">View All</button>
-        </div>
-        <br/>
-        @foreach($articles as $article)
-            <div class="row" style="padding-left: 50px;">
-                <a href="#">
-                    <div class="col-md-6">
-                        <img class="img-rounded" style="border: 1px solid #b1b7ba;" src="{{ $article->image }}">
-                        <p style="width: 220px;font-size: 16px;font-weight: bold">{{ $article->title }}</p>
-                    </div>
-                </a>
-            </div>
-            <br/>
-        @endforeach
-    </div>--}}
-
-
+    <script>
+        var article_id = '{{$article->id}}';
+        var _token = '{{ Session::token() }}';
+        var urlDeleteArticle = '{{route('delete-article')}}';
+        var urlArticlesList = '{{route('articles-list')}}';
+    </script>
 @endsection

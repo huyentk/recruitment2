@@ -166,10 +166,6 @@ class StudentController extends Controller
     }
 
     public function postUpdateAva(Request $request){
-        if(Auth::guest()){
-            $message = ['message_danger'=>'You do not have permission!'];
-            return redirect()->route('home')->with($message);
-        }
         if($request->hasFile('update_ava')) {
             $validator = Validator::make($request->all(), [
                 'update_ava' => 'required'
