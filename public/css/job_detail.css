@@ -15,7 +15,9 @@
 
 .paragraph{
     font-size: 18px;
-    padding-left: 25px;
+    padding-left: 20px;
+    padding-right: 25px;
+    text-align: justify;
 }
 
 .front{

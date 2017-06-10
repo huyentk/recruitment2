@@ -1,6 +1,6 @@
 $(document).ready(function () {
     $('#buttonsend').on('click',function (event) {
-        event.preventDefault();
+        event.preventDefault(); //ko load lại trang
         $('#ConfirmModal').modal();
     });
 

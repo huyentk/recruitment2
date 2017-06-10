@@ -9,5 +9,4 @@ class Company extends Model
     public function companyProfiles(){
         return $this->hasMany('App\Models\CompanyProfile','company_id');
     }
-
 }

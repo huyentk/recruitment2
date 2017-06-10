@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-    Sign-up
+    Create Employee Account
 @endsection
 
 @section('content')
@@ -32,12 +32,9 @@
                 <div class="form-group">
                     <label for="company">Company</label>
                     <select class="form-control" name="company">
-                        <option value="1">Vietnam Esports</option>
-                        <option value="2">FPT</option>
-                        <option value="3">Framgia</option>
-                        <option value="4">Arrow County Supplies</option>
-                        <option value="5">ABC</option>
-                        <option value="6">XYZ</option>
+                        @foreach($companies as $company)
+                            <option value="{{ $company->id }}">{{ $company->name }}</option>
+                        @endforeach
                     </select>
                 </div>
                 <input type="hidden" name='_token' value="{{ Session::token() }}">

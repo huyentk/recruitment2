@@ -13,10 +13,12 @@
     <div style="margin-bottom: -30px;max-height: 100%;overflow: hidden;">
         <img src="{{ $company->banner }}" class="img-responsive">
     </div>
-    <div style="height: 100%;display: flex; padding-top: 30px;padding-bottom:20px;background-color: transparent; z-index: 3;border: 1px solid #ded7d7">
+    <div class="company-page-above">
         <div class="logo-container">
             <div class="left-position-logo logo">
-                <img src="{{ $company->image }}" alt="logo" style="padding-left: 20px;">
+                <div>
+                    <img src="{{ $company->image }}" alt="logo" class="img-responsive" style="padding-left: 20px;">
+                </div>
             </div>
         </div>
         <div class="name-and-info">
@@ -27,7 +29,15 @@
                 <span style="font-size: 20px;"><i class="fa fa-map-marker"> {{ $company->address }}</i></span><br>
                 <span style="font-size: 20px;"><i class="fa fa-users"> {{ $company->num_employee }}+ Employee</i></span>
             </div>
+        </div>
+        <div style="text-align: center;padding: 15px;">
+            <form action="{{ route('edit-company-page',['id' => $company->id]) }}" method="get">
+                @if(Auth::guest() || Auth::user()->role_id !=2 )
 
+                @elseif(Auth::user()->company_Profile->company_id == $company->id)
+                    <button class="btn btn-danger btn-lg" style="width: 150px;">Edit Page</button>
+                @endif
+            </form>
         </div>
     </div>
     <div style="padding: 25px;">
@@ -44,23 +54,13 @@
             <hr style="margin-top: 0;"/>
             <div class="row">
                 @foreach($jobs as $job)
-                    <a href="{{ route('job_detail',['id' => $job->id]) }}">
-                        <div class="col-md-6" style="margin-bottom: 25px;">
-                            <div class="row">
-                                <div class="col-md-5">
-                                    <center><img class="img-circle" src="{{ $job->image }}" style="border:1px solid #262626;"></center>
-                                </div>
-                                <div class="col-md-7" style="text-align: center;">
-                                    <h4 style="font-weight: bold">{{ $job->name }}</h4>
-                                    <h4>{{ $job->salary }} / month</h4>
-                                    <h4>{{ $job->num_register }} registered</h4>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
+                    <div class="col-md-6" style="text-align: center;height: 120px;">
+                        <h4 style="font-weight: bold"><a href="{{ route('job_detail',['id' => $job->id]) }}">{{ $job->name }}</a></h4>
+                        <h4>{{ $job->salary }} / month</h4>
+                        <h4>{{ $job->num_register }} registered</h4>
+                    </div>
                 @endforeach
             </div>
         </div>
     </center>
-
 @endsection

@@ -37,9 +37,41 @@ hr{
     text-align: right;
     font-weight: normal !important;
 }
+
 .info .input_info{
     width: 67%;
 }
+
+.info1{
+    margin: 15px;
+}
+.label1{
+    padding-right: 10px;
+    font-size: 18px;
+    width: 40%;
+    text-align: left;
+    font-weight: normal !important;
+}
+
+.info1 .input_info{
+    width: 59%;
+}
+
+.info2{
+    margin: 15px;
+}
+.label2{
+    padding-right: 10px;
+    font-size: 18px;
+    width: 12%;
+    text-align: right;
+    font-weight: normal !important;
+}
+
+.info2 .input_info{
+    width: 86%;
+}
+
 /*to make placeholder italic*/
 ::-webkit-input-placeholder {
     font-style: italic;
@@ -76,4 +108,15 @@ tr td:first-child:before
 {
     counter-increment: Serial;      /* Increment the Serial counter */
     content: counter(Serial); /* Display the counter */
+}
+
+/*button update in edit company page*/
+input[type=submit] {
+    width: 50%;
+    background-color: #4CAF50;
+    color: white;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
 }

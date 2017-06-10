@@ -62,3 +62,11 @@
 .update_and_save #h2_1{
     width: 44%;
 }
+
+.company-page-above{
+    height: 100%;display: flex;
+    padding-top: 30px;
+    padding-bottom:20px;
+    background-color: transparent; z-index: 3;
+    border: 1px solid #ded7d7
+}

@@ -8,22 +8,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Company;
 use App\Models\CompanyProfile;
 use App\Models\User;
-use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
 class EmployeeController extends Controller
 {
     public function getEmployeePage($id){
-        if(Auth::guest() || Auth::user()->role_id != 2){
-            $message = ['message_danger'=>'You do not have permission!'];
-            return redirect()->route('home')->with($message);
-        }
         $emp_info = User::find($id);
         $emp_info->department = CompanyProfile::select('department')->where('id',$id)->first();
         $emp_info->company = CompanyProfile::find($id)->company;
@@ -34,11 +28,6 @@ class EmployeeController extends Controller
     }
 
     public function postUpdatePersonalDetails(Request $request){
-        if(Auth::guest() || Auth::user()->role_id != 2){
-            $message = ['message_danger'=>'You do not have permission!'];
-            return redirect()->route('home')->with($message);
-        }
-
         $user = User::find(Auth::user()->id);
         $user->gender = $request['gender'];
         $user->address = $request['address'] != null ? $request['address'] : '';
@@ -51,5 +40,10 @@ class EmployeeController extends Controller
         $conmpany_profile->save();
 
         return $user;
+    }
+
+    public function getCreateEmployee(){
+        $companies = Company::all();
+        return view('company/create_account')->with(['companies' => $companies]);
     }
 }

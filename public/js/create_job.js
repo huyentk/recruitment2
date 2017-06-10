@@ -2,14 +2,20 @@ var skill_array = [];
 $("#select_list").change(function(){
     var skill = $('option:selected',this).text();
     var id_skill = $('option:selected',this).val();
-    skill_array.push({
-        id: id_skill,
-        name: skill
+    var found = $.grep(skill_array,function (e) {
+        return e.id == id_skill;
     });
-    $('#append_skill').append('<div class="col-md-3">'+
-        '<p style="font-size: 18px;"><i class="fa fa-tag fa-lg" style="color: #9a5406;" aria-hidden="true"></i>&nbsp;'+
-        skill +
-        '</p></div>');
+    if(found.length == 0){
+        skill_array.push({
+            id: id_skill,
+            name: skill
+        });
+        $('#append_skill').append('<div class="col-md-3">'+
+            '<p style="font-size: 18px;">'+
+             skill+'&nbsp;<i class="fa fa-minus-circle fa-lg" id="'+id_skill+'" style="color: #9a5406;" aria-hidden="true" ' +
+            'onclick="delete_skill(this.id)"></i>'+
+            '</p></div>');
+    }
 });
 
 $('#create').on('click',function (event) {
@@ -34,9 +40,19 @@ $('#create').on('click',function (event) {
         },
         success: function (data) {
             if(data == 1000){
-                alert('Update successfully!');
-                window.location.href = urlJobDetail;
+                alert('Create successfully!');
+                window.location.href = urlListJob;
             }
         }
     });
 });
+
+function delete_skill(id) {
+    for(var i = 0; i < skill_array.length; i++) {
+        if(skill_array[i].id == id) {
+            skill_array.splice(i, 1);
+            $('#'+id).parent().parent().remove();
+            break;
+        }
+    }
+}

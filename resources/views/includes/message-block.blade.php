@@ -1,6 +1,6 @@
 <div id="messages">
     @if(Session::has('message_success'))
-        <div class="animated fadeOut  col-md-6 col-md-offset-3 alert alert-success alert-dismissible" role="alert"
+        <div class="animated fadeOut col-md-6 col-md-offset-3 alert alert-success alert-dismissible" role="alert"
              style="text-align: center;">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
                         aria-hidden="true">&times;</span></button>
@@ -34,7 +34,9 @@
 </div>
 
 <style>
-
+    /*#messages{*/
+        /*padding-top: 25px;*/
+    /*}*/
     .animated {
         -webkit-animation-duration: 15s;
         animation-duration: 15s;
@@ -49,7 +51,7 @@
         }
         100% {
             opacity: 0;
-            -webkit-transform: translateX(-20px);
+            -webkit-transform: translateX(-10px);
         }
     }
 
@@ -60,7 +62,7 @@
         }
         100% {
             opacity: 0;
-            transform: translateX(-20px);
+            transform: translateX(-10px);
         }
     }
 
