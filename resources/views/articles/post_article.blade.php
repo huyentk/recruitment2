@@ -19,11 +19,11 @@
                 <input type = "hidden" name = "_token" value = "{{csrf_token()}}"/>
                 <h2>Create a post</h2>
                 <div>
-                    <label>Title</label>
+                    <label for="title">Title</label>
                     <input required class="form-control" type="text" name="title" id="title">
                 </div>
                 <div class="form-group">
-                     <label>Content</label>
+                     <label for="content">Content</label>
                      <textarea required class="form-control" type = "text" name="content" id="content" rows="15"></textarea>
                 </div>
                 <div class="form-group">

@@ -87,6 +87,11 @@ class ArticlesController extends Controller
         $article = Articles::find($request['id']);
         $article->title = $request['title'];
         $article->content = $request['content'];
+        if($request->hasFile('image_article')){
+            Log::info('has file');
+            $image = $request->file('image_article');
+            Storage::put('/public/articles/'.$request['id'].'.png', file_get_contents($image->getRealPath()));
+        }
         $article->save();
         $message = ['message_success'=>'Update article successfully!'];
         return redirect()->route('article-detail',['id' => $article->id])->with($message);

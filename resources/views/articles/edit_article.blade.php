@@ -9,7 +9,7 @@
 @section('content')
     <section class="row new-post">
         <div  class="col-md-8 col-md-offset-2">
-            <form action="{{ route('update-article') }}" method="post">
+            <form action="{{ route('update-article') }}" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="id" value="{{$article->id}}">
                 <input type = "hidden" name = "_token" value = "{{csrf_token()}}"/>
                 <h2>Edit article</h2>
@@ -23,7 +23,8 @@
                 </div>
                 <div class="form-group">
                     <label>Image</label>
-{{--                    <input type="file" name="image" id="image">--}}
+                    <img class="img-rounded center-block img-thumbnail" src="{{ $article->image }}">
+                    <input type="file" name="image_article" id="image_article" accept="image/png">
                 </div>
                 <center><button type="submit" class="btn" style="background-color: #124395;color: white;width: 150px;">Update</button></center>
             </form>

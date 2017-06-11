@@ -32,15 +32,23 @@
     height: 100%;
 }
 
+.cut-text1{
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    line-height: 22px;
+
+}
+
 .cut-text {
     text-align: justify;
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
-    line-height: 20px;     /* fallback */
-    max-height: 40px;      /* fallback */
-    -webkit-line-clamp: 2; /* number of lines to show */
-    /*-webkit-box-orient: vertical;*/
+    line-height: 22px;
+    max-height: 66px;
+    -webkit-line-clamp: 3;
 }
 
 .ui-autocomplete {
@@ -68,9 +76,10 @@
     font-weight: bold;
 }
 
-.author{
+.time1{
     color: #aa4a24;
-    font-size: 20px;
+    font-size: 17px;
+    font-style: italic;
 }
 
 .date{
@@ -83,7 +92,7 @@ label{
 }
 
 .image-list{
-    width: auto;
+    width: 250px;
     height: 250px;
 }
 
@@ -141,6 +150,6 @@ label{
 
 .head_article_detail{
     text-align: left;
-    font-weight: bold;
     color: #0c5582;
+    font-family: Impact
 }

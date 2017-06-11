@@ -99,7 +99,7 @@
                 <div class="row" style="padding-left: 50px;">
                     <a href="{{ route('article-detail',['id' => $article->id]) }}">
                         <div class="col-md-6">
-                            <img class="img-rounded" style="border: 1px solid #b1b7ba;" src="{{ $article->image }}">
+                            <img class="img-rounded" style="border: 1px solid #b1b7ba; height: 230px; width: 230px" src="{{ $article->image }}">
                             <p style="width: 220px;font-size: 16px;font-weight: bold">{{ $article->title }}</p>
                         </div>
                     </a>

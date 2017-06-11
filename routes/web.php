@@ -244,7 +244,7 @@ Route::get('company-list', [
 
 /*-----------------Introduce------------------*/
 Route::get('introduce', function(){
-    return view('introduce');
+    return view('basic.introduce');
 })->name('introduce');
 
 Route::post('accept-join',[

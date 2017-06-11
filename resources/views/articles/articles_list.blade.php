@@ -12,24 +12,17 @@
     <div>
         <h2 class="head_post">Job's Articles List</h2>
     </div>
-    <div class="row">
+    <div class="row" style="margin-left: 20px; margin-right: 20px">
         @foreach($articles as $article)
             <div class="col-md-4">
-                <div style="margin: 10px;">
+                <div style="margin-top: 20px;">
                     <img class="image-list img-rounded center-block" src="{{ $article->image }}"/>
                 </div>
-                <div style="padding:10px;">
-                    <a style="font-weight: bold; " href="{{ route('article-detail',['id' => $article->id]) }}">{{ $article->title }}</a>
+                <div class="cut-text1" style="font-weight: bold;  padding-left: 30px; padding-right: 30px; padding-top: 15px; padding-bottom: 15px;height: 40px" >
+                    <a href="{{ route('article-detail',['id' => $article->id]) }}">{{ $article->title }}</a>
                 </div>
-                <div class="cut-text" style="color: #0c5582">
-                    <p style="padding-right: 15px;padding-left: 15px;">{{ $article->content }}</p>
-                </div>
-                {{--            <div class="col-md-8 article_content_div" style="padding-left: 0;">--}}
-                {{--<a style="font-weight: bold; width: 100%; padding: 10px;" href="{{ route('article-detail',['id' => $article->id]) }}">{{ $article->title }}</a>--}}
-                {{--<h5 class="author">{{ $article->created_by->full_name.' - at '.$article->updated_at}}</h5>--}}
-                {{--<h5 class="author">{{$article->updated_at}}</h5>--}}
-                {{--<div class="cut-text" style="color: #0c5582">{{ $article->content }}</div>--}}
-                {{--<a style="color: royalblue" href="{{ route('article-detail',['id' => $article->id]) }}"><b>See more...</b></a>--}}
+                <div class="cut-text" style="color: #0c5582; padding-left: 30px; padding-right: 30px">{{$article->content}}</div>
+                <hr class="hr1" width="90%">
             </div>
         @endforeach
     </div>
