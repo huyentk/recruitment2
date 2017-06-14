@@ -15,7 +15,7 @@
                 <img class="img-responsive" src="{{ Storage::url('/contactus/phone.png') }}"/>
             </div>
             <div>
-                <p>(+84)123456789</p>
+                <p>{{ $contact->phone }}</p>
             </div>
         </div>
         <div class="col-md-3 phone">
@@ -23,7 +23,7 @@
                 <img class="img-responsive" src="{{ Storage::url('/contactus/mail.png') }}"/>
             </div>
             <div>
-                <p>recruitment_uit@gmail.com</p>
+                <p>{{ $contact->email }}</p>
             </div>
         </div>
         <div class="col-md-3 phone">
@@ -31,7 +31,7 @@
                 <img class="img-responsive" src="{{ Storage::url('/contactus/location.png') }}"/>
             </div>
             <div>
-                <p>University Of Information Technology</p>
+                <p>{{ $contact->location }}</p>
             </div>
         </div>
         <div class="col-md-3 phone">
@@ -39,7 +39,7 @@
                 <img class="img-responsive" src="{{ Storage::url('/contactus/facebook.png') }}"/>
             </div>
             <div>
-                <p>fb.com/recruitment_uit</p>
+                <p>{{ $contact->fb }}</p>
             </div>
         </div>
     </div>

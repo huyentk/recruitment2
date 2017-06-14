@@ -10,6 +10,7 @@ namespace App\Http\Controllers;
 use App\Models\Articles;
 use App\Models\Company;
 use App\Models\CompanyProfile;
+use App\Models\Contact;
 use App\Models\Job;
 use Composer\DependencyResolver\Request;
 use Illuminate\Support\Facades\Log;
@@ -51,7 +52,18 @@ class HomeController extends Controller
     }
 
     public function getContactUs(){
-        return view('basic.contact');
+        $contact = Contact::all();
+        return view('basic.contact')->with(['contact' => $contact]);
     }
 
+    public function postUpdateContact(Request $request){
+        $contact = Contact::find(1);
+        $contact->phone = $request['phone'];
+        $contact->email = $request['email'];
+        $contact->location = $request['location'];
+        $contact->fb = $request['fb'];
+        $contact->save();
+
+        return redirect()->route('get-contact');
+    }
 }

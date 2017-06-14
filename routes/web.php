@@ -132,12 +132,6 @@ Route::post('update-ava',[
     'as' => 'update-ava'
 ])->middleware('checkUserIsGuest');
 
-/*-----------------Contact Us---------------*/
-Route::get('contact-us',[
-    'uses' => 'HomeController@getContactUs',
-    'as' => 'get-contact'
-]);
-
 /*-----------------Article------------------*/
 
 //Articles List
@@ -256,3 +250,18 @@ Route::post('reject-join',[
     'uses' => 'CompanyController@postRejectJoin',
     'as' => 'reject-join'
 ])->middleware('checkUserIsCompany');
+
+/*-----------------Contact------------------*/
+Route::get('contact-us',[
+    'uses' => 'HomeController@getContactUs',
+    'as' => 'get-contact'
+]);
+
+Route::get('update-contact', function (){
+    return view('basic.update_contact');
+})->middleware('checkUserIsAdmin')->name('get-update-contact');
+
+Route::post('update-contact',[
+    'uses' => 'HomeController@postUpdateContact',
+    'as' => 'post-update-contact'
+])->middleware('checkUserIsAdmin');

@@ -34,7 +34,7 @@
             <h3 style="line-height: 50px; font-weight: bold">Development team</h3>
             <div class="row" style="margin: 50px">
                 <div class="col-md-6">
-                    <center><img src="{{ Storage::url('introduce/huyen.jpg') }}" class="img-rounded " style="width: 200px; height: 200px; border-radius: 50%;"></center>
+                    <center><img src="{{ Storage::url('introduce/huyen.png') }}" class="img-rounded " style="width: 320px; height: 500px; border-radius: 50%;"></center>
                     <div style="text-align: center; font-size: 16px; font-family: Verdana">
                     <br>
                     Tran Khanh Huyen
@@ -43,7 +43,7 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <center><img src="{{ Storage::url('introduce/tram.jpg') }}" class="" style="width: 200px; height: 200px; border-radius: 50%;"></center>
+                    <center><img src="{{ Storage::url('introduce/tram.png') }}" class="img-rounded" style="width: 320px; height: 500px; border-radius: 50%;"></center>
                     <div style="text-align: center; font-size: 16px; font-family: Verdana">
                         <br>
                         Nguyen Thi Ngoc Tram
