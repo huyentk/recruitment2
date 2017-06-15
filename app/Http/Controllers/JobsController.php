@@ -38,6 +38,14 @@ class JobsController extends Controller
         $result = 0;
         $skills = Skill::all();
         //check if user is student
+        if(Auth::guest()){
+            return view('jobs.job_detail')->with([
+                'job' => $job,
+                'company' => $company,
+                'job_skills' => $job_skills,
+                'skills' => $skills
+            ]);
+        }
         if(Auth::user()->role_id == 3){
             $student_apply_job = StudentApplyJob::where('stu_id',Auth::user()->id)->where('job_id',$id)->first();
             if($student_apply_job != null)
@@ -79,12 +87,6 @@ class JobsController extends Controller
                 ]);
             }
         }
-        return view('jobs.job_detail')->with([
-            'job' => $job,
-            'company' => $company,
-            'job_skills' => $job_skills,
-            'skills' => $skills
-        ]);
     }
 
     public function getJobsList()
