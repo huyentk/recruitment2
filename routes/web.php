@@ -257,9 +257,10 @@ Route::get('contact-us',[
     'as' => 'get-contact'
 ]);
 
-Route::get('update-contact', function (){
-    return view('basic.update_contact');
-})->middleware('checkUserIsAdmin')->name('get-update-contact');
+Route::get('update-contact',[
+    'uses' => 'HomeController@getUpdateContact',
+    'as' => 'get-update-contact'
+])->middleware('checkUserIsAdmin');
 
 Route::post('update-contact',[
     'uses' => 'HomeController@postUpdateContact',

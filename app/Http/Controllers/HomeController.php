@@ -12,7 +12,7 @@ use App\Models\Company;
 use App\Models\CompanyProfile;
 use App\Models\Contact;
 use App\Models\Job;
-use Composer\DependencyResolver\Request;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
@@ -23,26 +23,26 @@ class HomeController extends Controller
         foreach ($jobs as $job) {
             $emp_id = $job->created_by;
             $company_id = CompanyProfile::where('id',$emp_id)->value('company_id');
-            $job->image = Storage::url('/companies/'.$company_id.'.png');
-            if(!$job->image){
+            if(Storage::exists('public/companies/'.$company_id.'.png'))
+                $job->image = Storage::url('/companies/'.$company_id.'.png');
+            else
                 $job->image = Storage::url('/companies/default.png');
-            }
         }
 
         $articles = Articles::orderBy('created_at','desc')->limit(2)->get();
         foreach ($articles as $article) {
-            $article->image = Storage::url('/articles/'.$article->id.'.png');
-            if(!$article->image){
+            if(Storage::exists('public/articles/'.$article->id.'.png'))
+                $article->image = Storage::url('/articles/'.$article->id.'.png');
+            else
                 $article->image = Storage::url('/articles/default.png');
-            }
         }
 
         $companies = Company::all();
         foreach ($companies as $company) {
-            $company->image = Storage::url('/companies/'.$company->id.'.png');
-            if(!$company->image){
+            if(Storage::exists('public/companies/'.$company->id.'.png'))
+                $company->image = Storage::url('/companies/'.$company->id.'.png');
+            else
                 $company->image = Storage::url('/companies/default.png');
-            }
         }
         return view('homepage')->with([
             'jobs' => $jobs,
@@ -52,10 +52,15 @@ class HomeController extends Controller
     }
 
     public function getContactUs(){
-        $contact = Contact::all();
+        $contact = Contact::find(1);
         return view('basic.contact')->with(['contact' => $contact]);
     }
 
+    public function getUpdateContact(){
+        $contact = Contact::find(1);
+        Log::info($contact);
+        return view('basic.update_contact')->with(['contact' => $contact]);
+    }
     public function postUpdateContact(Request $request){
         $contact = Contact::find(1);
         $contact->phone = $request['phone'];

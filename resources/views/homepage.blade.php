@@ -118,12 +118,11 @@
         @foreach($companies as $company)
             <a href="{{ route('get-company-page',['id' => $company->id]) }}">
                 <div class="col-md-2">
-                    <center><img src="{{ $company->image }}" class="img-rounded"></center>
+                    <center><img src="{{ $company->image }}" class="img-rounded" style="height: 130px; width: 130px;"></center>
                 </div>
             </a>
         @endforeach
     </div>
-    dhfksfdfds
     <script>
         var urlGetJobs = '{{ route('getJobSources') }}';
     </script>

@@ -63,7 +63,6 @@ class ArticlesController extends Controller
             ->where('table_name', '=', 'articles')
             ->pluck('auto_increment');
         $maxID = $maxID[0];
-        $id_new = Articles::max('id');
         if($request->hasFile('image_article')){
             $image = $request->file('image_article');
             Storage::put('/public/articles/'.$maxID.'.png', file_get_contents($image->getRealPath()));

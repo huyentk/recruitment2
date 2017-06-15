@@ -23,13 +23,15 @@ class CompanyController extends Controller
 {
     public function getCompanyPage($id){
         $company = Company::find($id);
-        $company->banner = Storage::url('/companies/banners/'.$id.'.png');
-        if(!$company->banner)
+        if(Storage::exists('public/companies/banners/'.$id.'.png'))
+            $company->banner = Storage::url('/companies/banners/'.$id.'.png');
+        else
             $company->banner = Storage::url('/companies/banners/default.png');
 
-        $company->image = Storage::url('/companies/'.$id.'.png');
-        if(!$company->banner)
-            $company->banner = Storage::url('/companies/default.png');
+        if(Storage::exists('public/companies/'.$id.'.png'))
+            $company->image = Storage::url('/companies/'.$id.'.png');
+        else
+            $company->image = Storage::url('/companies/default.png');
 
         $jobs_all = [];
         $emp_ids = CompanyProfile::where('company_id',$company->id)->get();
@@ -38,10 +40,14 @@ class CompanyController extends Controller
             foreach ($jobs as $job) {
                 $emp_id = $job->created_by;
                 $company_id = CompanyProfile::where('id',$emp_id)->value('company_id');
-                $job->image = Storage::url('/companies/'.$company_id.'.png');
-                if(!$job->image){
+//                $job->image = Storage::url('/companies/'.$company_id.'.png');
+//                if(!$job->image){
+//                    $job->image = Storage::url('/companies/default.png');
+//                }
+                if(Storage::exists('public/companies/'.$company_id.'.png'))
+                    $job->image = Storage::url('/companies/'.$company_id.'.png');
+                else
                     $job->image = Storage::url('/companies/default.png');
-                }
                 array_push($jobs_all, $job);
             }
         }
@@ -54,23 +60,24 @@ class CompanyController extends Controller
 
     public function getJobManagement(){
         $id = Auth::user()->id;
-        $company_id = CompanyProfile::where('id',$id)->pluck('company_id');
-        $company = Company::find($company_id);
-        $company->image = Storage::url('companies/'.$company->id.'.png');
-        if(!$company->image)
-            $company->image = Storage::url('companies/default.png');
+        $company_profile = CompanyProfile::where('id',$id)->first();
+        $company = Company::find($company_profile->company_id);
+
+        if(Storage::exists('public/companies/'.$id.'.png'))
+            $company->image = Storage::url('/companies/'.$company->id.'.png');
+        else
+            $company->image = Storage::url('/companies/default.png');
 
         $jobs_all = [];
-        $emp_ids = CompanyProfile::where('company_id',$company_id)->get();
+        $emp_ids = CompanyProfile::where('company_id',$company->id)->get();
         foreach ($emp_ids as $emp_id){
             $jobs = Job::where('created_by',$emp_id->id)->orderBy('created_at','desc')->get();
             foreach ($jobs as $job) {
                 $emp_id = $job->created_by;
-                $company_id = CompanyProfile::where('id',$emp_id)->value('company_id');
-                $job->image = Storage::url('/companies/'.$company_id.'.png');
-                if(!$job->image){
+                if(Storage::exists('public/companies/'.$company->id.'.png'))
+                    $job->image = Storage::url('/companies/'.$company->id.'.png');
+                else
                     $job->image = Storage::url('/companies/default.png');
-                }
                 array_push($jobs_all, $job);
             }
         }
@@ -84,13 +91,15 @@ class CompanyController extends Controller
     public function employee_getCompanyPage($emp_id){
         $company_id = CompanyProfile::where('id',$emp_id)->value('company_id');
         $company = Company::find($company_id);
-        $company->banner = Storage::url('/companies/banners/'.$company->id.'.png');
-        if(!$company->banner)
+        if(Storage::exists('public/companies/banners/'.$company->id.'.png'))
+            $company->banner = Storage::url('/companies/banners/'.$company->id.'.png');
+        else
             $company->banner = Storage::url('/companies/banners/default.png');
 
-        $company->image = Storage::url('/companies/'.$company->id.'.png');
-        if(!$company->banner)
-            $company->banner = Storage::url('/companies/default.png');
+        if(Storage::exists('public/companies/'.$company->id.'.png'))
+            $company->image = Storage::url('/companies/'.$company->id.'.png');
+        else
+            $company->image = Storage::url('/companies/default.png');
 
         $jobs_all = [];
         $emp_ids = CompanyProfile::where('company_id',$company->id)->get();
@@ -99,10 +108,10 @@ class CompanyController extends Controller
             foreach ($jobs as $job) {
                 $emp_id = $job->created_by;
                 $company_id = CompanyProfile::where('id',$emp_id)->value('company_id');
-                $job->image = Storage::url('/companies/'.$company_id.'.png');
-                if(!$job->image){
+                if(Storage::exists('public/companies/'.$company_id.'.png'))
+                    $job->image = Storage::url('/companies/'.$company_id.'.png');
+                else
                     $job->image = Storage::url('/companies/default.png');
-                }
                 array_push($jobs_all, $job);
             }
         }
@@ -214,12 +223,17 @@ class CompanyController extends Controller
         $company->url = $request['url'];
         $company->num_employee = $request['num_employee'];
         $company->save();
+
+        return redirect()->route('get-company-page',['id' => $company->id]);
     }
 
     public function getCompanyList(){
         $companies = Company::paginate(5);
         foreach ($companies as $company){
-            $company->image = Storage::url('/companies/'.$company->id.'.png');
+            if(Storage::exists('public/companies/'.$company->id.'.png'))
+                $company->image = Storage::url('/companies/'.$company->id.'.png');
+            else
+                $company->image = Storage::url('/companies/default.png');
         }
         return view('company.list_company')->with([
             'companies'=> $companies

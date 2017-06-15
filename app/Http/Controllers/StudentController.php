@@ -15,6 +15,7 @@ use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
@@ -24,7 +25,11 @@ class StudentController extends Controller
     public function getStudentPage($id){
         $student_info = User::find($id);
         $student_info->university = StudentProfile::where('id',$id)->first();
-        $student_info->image = file_exists(public_path().'/storage/avatars/'.Auth::user()->id.'.png') ? Storage::url('/avatars/'.Auth::user()->id.'.png') : Storage::url('/avatars/user.png');
+//        $student_info->image = file_exists(public_path().'/storage/avatars/'.Auth::user()->id.'.png') ? Storage::url('/avatars/'.Auth::user()->id.'.png') : Storage::url('/avatars/user.png');
+        if(Storage::exists('public/avatars/'.$id.'.png'))
+            $student_info->image = Storage::url('/avatars/'.$id.'.png');
+        else
+            $student_info->image = Storage::url('/avatars/user.png');
 
         $jobs = array();
         $student_apply_jobs = StudentApplyJob::where('stu_id',$id)->get();
@@ -142,6 +147,27 @@ class StudentController extends Controller
         return 1000;
     }
 
+//    public function postUpdateAva(Request $request){
+//        if($request->hasFile('update_ava')) {
+//            $validator = Validator::make($request->all(), [
+//                'update_ava' => 'required'
+//            ]);
+//            if ($validator->failed())
+//                return -1000;
+//            $ava = $request->file('update_ava');
+//            Storage::put('/public/avatars/' . Auth::user()->id .'.png', file_get_contents($ava->getRealPath()));
+//
+//            if(Storage::exists('public/avatars/'.Auth::user()->id.'.png'))
+//                $ava_update = Storage::url('/avatars/'.Auth::user()->id.'.png');
+//            else
+//                $student_info->image = Storage::url('/avatars/user.png');
+//
+//            $ava_update = Storage::url('/avatars/'.Auth::user()->id.'.png');
+////                storage_path().'/app/public/avatars/'.Auth::user()->id . '.png';
+//            return $ava_update;
+//        }
+//        return -1000;
+//    }
     public function postUpdateAva(Request $request){
         if($request->hasFile('update_ava')) {
             $validator = Validator::make($request->all(), [
@@ -151,6 +177,7 @@ class StudentController extends Controller
                 return -1000;
             $ava = $request->file('update_ava');
             Storage::put('/public/avatars/' . Auth::user()->id .'.png', file_get_contents($ava->getRealPath()));
+            Log::info('done');
             $ava_update = Storage::url('/avatars/'.Auth::user()->id.'.png');
 //                storage_path().'/app/public/avatars/'.Auth::user()->id . '.png';
             return $ava_update;

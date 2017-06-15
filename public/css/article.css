@@ -33,7 +33,6 @@
 }
 
 .cut-text1{
-
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
@@ -42,13 +41,14 @@
 }
 
 .cut-text {
+    height: 180px;
     text-align: justify;
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
     line-height: 22px;
     max-height: 66px;
-    -webkit-line-clamp: 3;
+    -webkit-line-clamp: 2;
 }
 
 .ui-autocomplete {

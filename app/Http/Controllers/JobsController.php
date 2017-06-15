@@ -31,9 +31,10 @@ class JobsController extends Controller
         foreach ($job_skills as $job_skill){
             $job_skill->skill_name = Skill::select('name')->where('id',$job_skill->skill_id)->first();
         }
-        $company->image = Storage::url('companies/'.$company->id.'.png');
-        if(!$company->image)
-            $company->image = Storage::url('companies/default.png');
+        if(Storage::exists('public/companies/'.$company->id.'.png'))
+            $company->image = Storage::url('/companies/'.$company->id.'.png');
+        else
+            $company->image = Storage::url('/companies/default.png');
         $result = 0;
         if(Auth::user())
         {
@@ -93,7 +94,10 @@ class JobsController extends Controller
             $company_id = CompanyProfile::where('id',$job->created_by)->value('company_id');
             $company = Company::select('name')->where('id',$company_id)->first();
             $job->company_name = $company->name;
-            $job->image = Storage::url('/companies/'.$company_id.'.png');
+            if(Storage::exists('public/companies/'.$company_id.'.png'))
+                $job->image = Storage::url('/companies/'.$company_id.'.png');
+            else
+                $job->image = Storage::url('/companies/default.png');
             $skills = JobSkill::select('skill_name')->where('job_id', $job->id)->get();
             $job->skills = $skills;
         }
@@ -113,7 +117,10 @@ class JobsController extends Controller
             $company_id = CompanyProfile::where('id',$job->created_by)->value('company_id');
             $company = Company::select('name')->where('id',$company_id)->first();
             $job->company_name = $company->name;
-            $job->image = Storage::url('/companies/'.$company_id.'.png');
+            if(Storage::exists('public/companies/'.$company_id.'.png'))
+                $job->image = Storage::url('/companies/'.$company_id.'.png');
+            else
+                $job->image = Storage::url('/companies/default.png');
             $skills = JobSkill::select('skill_name')->where('job_id', $job->id)->get();
             $job->skills = $skills;
         }
@@ -158,11 +165,14 @@ class JobsController extends Controller
 
     public function getCreateJob(){
         $id = Auth::user()->id;
-        $company_id = CompanyProfile::where('id',$id)->pluck('company_id');
-        $company = Company::find($company_id);
-        $company->image = Storage::url('companies/'.$company->id.'.png');
-        if(!$company->image)
-            $company->image = Storage::url('companies/default.png');
+        $company_profile = CompanyProfile::where('id',$id)->first();
+        $company = Company::find($company_profile->company_id);
+
+        if(Storage::exists('public/companies/'.$company->id.'.png'))
+            $company->image = Storage::url('/companies/'.$company->id.'.png');
+        else
+            $company->image = Storage::url('/companies/default.png');
+
         return view('jobs.create_job')->with([
             'company' => $company,
         ]);

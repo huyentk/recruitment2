@@ -21,7 +21,11 @@ class EmployeeController extends Controller
         $emp_info = User::find($id);
         $emp_info->department = CompanyProfile::select('department')->where('id',$id)->first();
         $emp_info->company = CompanyProfile::find($id)->company;
-        $emp_info->image = file_exists(public_path().'/storage/avatars/'.Auth::user()->id.'.png') ? Storage::url('/avatars/'.Auth::user()->id.'.png') : Storage::url('/avatars/user.png');
+//        $emp_info->image = file_exists(public_path().'/storage/avatars/'.Auth::user()->id.'.png') ? Storage::url('/avatars/'.Auth::user()->id.'.png') : Storage::url('/avatars/user.png');
+        if(Storage::exists('public/avatars/'.$id.'.png'))
+            $emp_info->image = Storage::url('/avatars/'.$id.'.png');
+        else
+            $emp_info->image = Storage::url('/avatars/user.png');
         return view('company.employee_page')->with([
             'emp_info' => $emp_info
         ]);

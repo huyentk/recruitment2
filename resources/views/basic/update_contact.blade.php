@@ -15,19 +15,19 @@
             <form action="{{ route('post-update-contact') }}" method="post">
                 <div class="form-group">
                     <label for="phone">Phone:</label>
-                    <input class="form-control" type="text" name="phone">
+                    <input class="form-control" type="text" name="phone" value="{{ $contact->phone}}">
                 </div>
                 <div class="form-group">
                     <label for="email">Email Adress</label>
-                    <input class="form-control" type="email" name="email">
+                    <input class="form-control" type="email" name="email" value="{{ $contact->email }}">
                 </div>
                 <div class="form-group">
                     <label for="location">Location</label>
-                    <input class="form-control" type="text" name="location">
+                    <input class="form-control" type="text" name="location" value="{{ $contact->location }}">
                 </div>
                 <div class="form-group">
                     <label for="fb">Facebook</label>
-                    <input class="form-control" type="text" name="fb">
+                    <input class="form-control" type="text" name="fb" value="{{ $contact->fb }}">
                 </div>
                 <input type="hidden" name='_token' value="{{ Session::token() }}">
                 <br/>
