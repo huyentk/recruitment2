@@ -42,7 +42,7 @@ return [
         'mysql' => [
             'driver' => 'mysql',
             'host' => env('DB_HOST', '127.0.0.1'),
-            'port' => env('DB_PORT', '54365'),
+            'port' => env('DB_PORT', '53499'),
             'database' => env('DB_DATABASE', 'recruitment'),
             'username' => env('DB_USERNAME', 'azure'),
             'password' => env('DB_PASSWORD', '6#vWHD_$'),
