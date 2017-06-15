@@ -71,9 +71,12 @@ $('#save-change').on('click',function (event) {
             _token: _token
         },
         success: function (data) {
-            if(data == 1000) alert('Update successfully!');
+            if(data == 1000) {
+                alert('Update successfully!');
+                window.location.href = urlJobDetail;
+            }
             else alert('Check if you forget to add skills!');
-            window.location.href = urlJobDetail;
+
         }
     });
 });

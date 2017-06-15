@@ -36,6 +36,7 @@ class JobsController extends Controller
         else
             $company->image = Storage::url('/companies/default.png');
         $result = 0;
+        $skills = Skill::all();
         //check if user is student
         if(Auth::user()->role_id == 3){
             $student_apply_job = StudentApplyJob::where('stu_id',Auth::user()->id)->where('job_id',$id)->first();
@@ -45,7 +46,8 @@ class JobsController extends Controller
                 'job' => $job,
                 'company' => $company,
                 'job_skills' => $job_skills,
-                'result' => $result
+                'result' => $result,
+                'skills' => $skills
             ]);
         }
         if(Auth::user()->role_id == 2){
@@ -64,6 +66,7 @@ class JobsController extends Controller
                     'company' => $company,
                     'students_apply_job' => $students_apply_job,
                     'job_skills' => $job_skills,
+                    'skills' => $skills
                 ]);
             }
             else{
@@ -72,6 +75,7 @@ class JobsController extends Controller
                     'do_not_show_edit' => '1',
                     'company' => $company,
                     'job_skills' => $job_skills,
+                    'skills' => $skills
                 ]);
             }
         }
@@ -79,6 +83,7 @@ class JobsController extends Controller
             'job' => $job,
             'company' => $company,
             'job_skills' => $job_skills,
+            'skills' => $skills
         ]);
     }
 
@@ -164,6 +169,7 @@ class JobsController extends Controller
         $id = Auth::user()->id;
         $company_profile = CompanyProfile::where('id',$id)->first();
         $company = Company::find($company_profile->company_id);
+        $skills = Skill::all();
 
         if(Storage::exists('public/companies/'.$company->id.'.png'))
             $company->image = Storage::url('/companies/'.$company->id.'.png');
@@ -172,6 +178,7 @@ class JobsController extends Controller
 
         return view('jobs.create_job')->with([
             'company' => $company,
+            'skills' => $skills
         ]);
     }
 

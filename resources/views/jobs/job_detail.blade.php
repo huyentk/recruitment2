@@ -43,12 +43,9 @@
                 <div class="row" style="display: none;padding: 15px;width:550px;" id="select_skill">
                     <label for="select_list">Select skill (select one):</label>
                     <select class="form-control" id="select_list">
-                        <option value="1">PHP</option>
-                        <option value="2">HTML/CSS</option>
-                        <option value="3">SQL</option>
-                        <option value="4">Java</option>
-                        <option value="5">R</option>
-                        <option value="6">Python</option>
+                        @foreach($skills as $skill)
+                            <option value="{{ $skill->id }}">{{ $skill->name }}</option>
+                        @endforeach
                     </select>
                 </div>
                 <div class="row" style="display: flex" >
@@ -98,7 +95,7 @@
             </div>
         </div>
     </div>
-    @if(isset($students_apply_job))
+    @if(isset($students_apply_job)))
         <div class="row" style="margin: 25px;">
             <table class="table table-striped" id="table">
                 <thead style="text-align: center">

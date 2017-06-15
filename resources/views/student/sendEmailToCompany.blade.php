@@ -1,14 +1,14 @@
-<div class="row">
-
+<div style="background-color: #dde3de; font-size: larger; padding: 20px;">
+    <h3 style="font-weight: bold;">Intro: {{ $intro }}</h3>
+    <h3>Full name: {{ $full_name }}</h3>
+    <h3>Gender: {{ $gender }}</h3>
+    <h3>Birthday: {{ $birthday }}</h3>
+    <h3>Email: {{ $email }}</h3>
+    <h3>Address: {{ $address }}</h3>
+    <h3>Phone: {{ $phone }}</h3>
+    <h3>University: {{ $university }}</h3>
+    <h3>Major: {{ $major }}</h3>
+    <h3>Skype: {{ $skype_id }}</h3>
 </div>
-<p>Intro: {{ $intro }}</p>
-<p>Full name: {{ $full_name }}</p>
-<p>Gender: {{ $gender }}</p>
-<p>Birthday: {{ $birthday }}</p>
-<p>Email: {{ $email }}</p>
-<p>Address: {{ $address }}</p>
-<p>Phone: {{ $phone }}</p>
-<p>University: {{ $university }}</p>
-<p>Major: {{ $major }}</p>
-<p>Skype: {{ $skype_id }}</p>
+
 

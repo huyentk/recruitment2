@@ -18,6 +18,16 @@ $("#select_list").change(function(){
     }
 });
 
+function delete_skill(id) {
+    for(var i = 0; i < skill_array.length; i++) {
+        if(skill_array[i].id == id) {
+            skill_array.splice(i, 1);
+            $('#'+id).parent().parent().remove();
+            break;
+        }
+    }
+}
+
 $('#create').on('click',function (event) {
     event.preventDefault();
     // console.log(skill_array);
@@ -47,12 +57,3 @@ $('#create').on('click',function (event) {
     });
 });
 
-function delete_skill(id) {
-    for(var i = 0; i < skill_array.length; i++) {
-        if(skill_array[i].id == id) {
-            skill_array.splice(i, 1);
-            $('#'+id).parent().parent().remove();
-            break;
-        }
-    }
-}
