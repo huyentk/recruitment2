@@ -157,10 +157,10 @@ class StudentController extends Controller
         if($request->hasFile('update_ava')) {
             $ava = $request->file('update_ava');
             Storage::put('/public/avatars/' . Auth::user()->id .'.png', file_get_contents($ava->getRealPath()));
-//            $ava_update = Storage::url('/avatars/'.Auth::user()->id.'.png');
-//            return $ava_update;
-            return 1000;
+            $ava_update = Storage::url('/avatars/'.Auth::user()->id.'.png');
+            return $ava_update;
+//            return 1000;
         }
-        return -1000;
+//        return -1000;
     }
 }

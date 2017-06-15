@@ -82,7 +82,8 @@ $('#button_update').on('click',function (event) {
             data: new FormData($('#file_upload')[0]),
             success: function (data) {
                 // $('#ava').attr('src',data);
-                window.location.href = url_student_page;
+                // window.location.href = url_student_page;
+                alert(data);
             }
         })
     }
