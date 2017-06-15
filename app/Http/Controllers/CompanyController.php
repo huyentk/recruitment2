@@ -14,6 +14,7 @@ use App\Models\Job;
 use App\Models\StudentJoinedJob;
 use App\Models\User;
 use App\Models\StudentApplyJob;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -161,7 +162,7 @@ class CompanyController extends Controller
         $job_id = $request['job_id'];
         $accept = $request['accept'];
         if($accept){
-            $application = StudentApplyJob::where('stu_id', $id)->first();
+            $application = StudentApplyJob::find($id);
             $application->result = 12;
             $application->save();
 
@@ -175,6 +176,25 @@ class CompanyController extends Controller
         }
         return -1000;
     }
+
+    public function postEndJoin(Request $request){
+        $id = $request['id'];
+        $job_id = $request['job_id'];
+
+        $application = StudentApplyJob::find($id);
+        $application->result = 13;
+        $application->save();
+
+        $stu_id = $application->stu_id;
+
+        $join = StudentJoinedJob::where('stu_id', $stu_id)->where('job_id', $job_id)->first();
+        $join->end_date = Carbon::now();
+        $join->save();
+
+        return 1000;
+
+    }
+
     public function postRejectJoin(Request $request){
         $id = $request['id'];
         $accept = $request['accept'];
@@ -238,5 +258,17 @@ class CompanyController extends Controller
         return view('company.list_company')->with([
             'companies'=> $companies
         ]);
+    }
+
+    public function getDeleteCompany($id){
+        Log::info('d');
+        $employee = CompanyProfile::where('company_id',$id)->first();
+        if($employee){
+            $message = ['message_danger' => 'Can not delete company because this company has employee.'];
+        }else{
+            $company = Company::find($id)->delete();
+            $message = ['message_success' => 'Delete company successfully!'];
+        }
+        return redirect()->route('get-company-list')->with($message);
     }
 }

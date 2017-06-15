@@ -4,7 +4,7 @@ $('#save-account-info').on('click',function (event) {
     var new_pass = $('#new_pass').val();
     new_pass = new_pass == "" ? null : new_pass;
     var confirm_pass = $('#confirm_pass').val();
-    confirm_pass = new_pass != null ? confirm_pass : null;
+    confirm_pass = confirm_pass != null ? confirm_pass : null;
     if(new_pass != null){
         $.ajax({
             method: 'POST',
@@ -16,8 +16,9 @@ $('#save-account-info').on('click',function (event) {
                 confirm_pass: confirm_pass,
                 _token: _token
             }
-        }).done(function (msg) {
-            alert('Saved your changes!')
+        }).done(function (data) {
+            if(data == 1000)
+                alert('Saved your changes!')
         });
     }
     else {
@@ -30,8 +31,9 @@ $('#save-account-info').on('click',function (event) {
                 email: email,
                 _token: _token
             }
-        }).done(function (msg) {
-            alert('Saved your changes!');
+        }).done(function (data) {
+            if(data == 1000)
+                alert('Saved your changes!')
         });
     }
 });
@@ -56,7 +58,12 @@ $('#save-personal-detail').on('click', function (event) {
             skype_id: skypeId,
             _token: _token
         }
-    }).done(function (msg) {
+    }).done(function (data) {
+        $('#university').val(data.university);
+        $('#major').val(data.major);
+        $('#address').val(data.address);
+        $('#phone').val(data.phone);
+        $('#skypeId').val(data.skype_id);
         alert('Saved your changes!');
     });
 });

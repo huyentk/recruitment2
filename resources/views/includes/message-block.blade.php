@@ -1,4 +1,4 @@
-<div id="messages">
+<div id="messages" class="row">
     @if(Session::has('message_success'))
         <div class="animated fadeOut col-md-6 col-md-offset-3 alert alert-success alert-dismissible" role="alert"
              style="text-align: center;">

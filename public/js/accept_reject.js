@@ -11,6 +11,12 @@ $('#reject').on('click',function (event) {
     $('#RejectModal').modal();
 });
 
+$('#end').on('click',function (event) {
+    event.preventDefault();
+    id = $(this).closest('tr').attr('id');
+    $('#EndModal').modal();
+});
+
 $('#sure').on('click',function (event) {
     $.ajax({
         method:'POST',
@@ -34,7 +40,6 @@ $('#sure').on('click',function (event) {
 });
 
 $('#sureReject').on('click',function (event) {
-    // console.log(id);
     $.ajax({
         method:'POST',
         url: urlReject,
@@ -47,6 +52,27 @@ $('#sureReject').on('click',function (event) {
             if(data == 1000){
                 window.location.href = urlJobDetail;
                 $('#RejectModal').modal('hide');
+            }
+            else{
+                alert('Error occurs!');
+            }
+        }
+    });
+});
+
+$('#sureEnd').on('click',function (event) {
+    $.ajax({
+        method:'POST',
+        url: urlEnd,
+        data: {
+            id: id,
+            job_id: job_id,
+            _token: _token
+        },
+        success: function (data) {
+            if(data == 1000){
+                window.location.href = urlJobDetail;
+                $('#EndModal').modal('hide');
             }
             else{
                 alert('Error occurs!');

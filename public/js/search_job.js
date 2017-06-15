@@ -10,15 +10,5 @@ $(document).ready(function () {
             source: jobs
         });
     });
-
-    var cities = [
-        'Hà Nội',
-        'Hồ Chí Minh',
-        'Đà Nẵng',
-        'Phú Yên'
-    ];
-    $("#city").autocomplete({
-        source: cities
-    });
 });
 

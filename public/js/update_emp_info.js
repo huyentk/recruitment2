@@ -35,8 +35,9 @@ $('#save-account-info').on('click',function (event) {
                 confirm_pass: confirm_pass,
                 _token: _token
             }
-        }).done(function (msg) {
-            alert('Saved your changes!')
+        }).done(function (data) {
+            if(data == 1000)
+                alert('Saved your changes!');
         });
     }
     else {
@@ -49,8 +50,9 @@ $('#save-account-info').on('click',function (event) {
                 email: email,
                 _token: _token
             }
-        }).done(function (msg) {
-            alert('Saved your changes!');
+        }).done(function (data) {
+            if(data == 1000)
+                alert('Saved your changes!');
         });
     }
 });
@@ -74,7 +76,11 @@ $('#save-persional-detail').on('click', function (event) {
             skype_id: skypeId,
             _token: _token
         }
-    }).done(function (msg) {
+    }).done(function (data) {
+        $('#department').val(data.department);
+        $('#address').val(data.address);
+        $('#phone').val(data.phone);
+        $('#skypeId').val(data.skype_id);
         alert('Saved your changes!');
     });
 });

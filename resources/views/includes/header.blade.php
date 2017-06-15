@@ -35,7 +35,7 @@
                         <button type="button" class="btn btn-info navbar-btn" style="margin-right: 30px;"><span class="glyphicon glyphicon-log-in"></span><a href="{{ route('get-sign-in') }}" style="text-decoration: none;">&nbsp; Sign in</a></button>
                     @else
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="background-color: #2a88bd;font-size: large">{{ Auth::user()->full_name }} <span class="caret"></span></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="background-color: #2a88bd;font-size: large;">{{ Auth::user()->full_name }} <span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu" style="background-color: #3B4F6B;">
                             @if(Auth::user()->role_id == 3)
                                 <li><a href="{{ route('get-student-page',['id' => Auth::user()->id]) }}">My page (Your Account)</a></li>
@@ -46,7 +46,7 @@
                                 <li><a href="{{ route('get-job-management') }}">Jobs Management</a></li>
                             @elseif(Auth::user()->role_id == 1)
                                 <li><a href="{{ route('create-company-account') }}">Create Employee Account</a></li>
-                                <li><a href="{{ route('post-article') }}">Post article</a></li>
+                                <li><a href="{{ route('post-article') }}">Create New Article</a></li>
                                 <li><a href="{{ route('create-company') }}">Create New Company</a></li>
                                 <li><a href="{{ route('get-update-contact') }}">Update Contact Info</a></li>
                             @endif

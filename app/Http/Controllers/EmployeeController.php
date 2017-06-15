@@ -43,6 +43,8 @@ class EmployeeController extends Controller
         $conmpany_profile->department = $request['department'] != null ? $request['department'] : '';
         $conmpany_profile->save();
 
+        $user->department = $conmpany_profile->department;
+
         return $user;
     }
 

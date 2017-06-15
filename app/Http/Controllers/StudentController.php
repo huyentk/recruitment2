@@ -12,10 +12,9 @@ use App\Models\Job;
 use App\Models\StudentApplyJob;
 use App\Models\StudentProfile;
 use App\Models\User;
-use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
@@ -45,6 +44,8 @@ class StudentController extends Controller
                     $job->result = 'Fail';
                 if($result == 12)
                     $job->result = 'Joining';
+                if($result == 13)
+                    $job->result = 'Finished';
                 array_push($jobs, $job);
             }
             return view('student.student_page')->with([
@@ -72,9 +73,10 @@ class StudentController extends Controller
         $user = User::find(Auth::user()->id);
         $user->full_name = $request['full_name'];
         $user->email = $request['email'];
-        $user->password = bcrypt($password);
+        $user->password = Hash::make($password);
         $user->save();
-        return redirect()->back();
+//        return redirect()->back();
+        return 1000;
     }
 
     public function postUpdateAccountInfoNoPass(Request $request){
@@ -87,7 +89,8 @@ class StudentController extends Controller
         $user->email = $request['email'];
         $user->save();
 
-        return $user;
+//        return $user;
+        return 1000;
     }
 
     public function postUpdatePersonalDetails(Request $request){
@@ -102,6 +105,9 @@ class StudentController extends Controller
         $student_profile->university = $request['university'] != null ? $request['university'] : '';
         $student_profile->major = $request['major'] != null ? $request['major'] : '';
         $student_profile->save();
+
+        $user->university = $student_profile->university;
+        $user->major = $student_profile->major;
 
         return $user;
     }
@@ -147,40 +153,13 @@ class StudentController extends Controller
         return 1000;
     }
 
-//    public function postUpdateAva(Request $request){
-//        if($request->hasFile('update_ava')) {
-//            $validator = Validator::make($request->all(), [
-//                'update_ava' => 'required'
-//            ]);
-//            if ($validator->failed())
-//                return -1000;
-//            $ava = $request->file('update_ava');
-//            Storage::put('/public/avatars/' . Auth::user()->id .'.png', file_get_contents($ava->getRealPath()));
-//
-//            if(Storage::exists('public/avatars/'.Auth::user()->id.'.png'))
-//                $ava_update = Storage::url('/avatars/'.Auth::user()->id.'.png');
-//            else
-//                $student_info->image = Storage::url('/avatars/user.png');
-//
-//            $ava_update = Storage::url('/avatars/'.Auth::user()->id.'.png');
-////                storage_path().'/app/public/avatars/'.Auth::user()->id . '.png';
-//            return $ava_update;
-//        }
-//        return -1000;
-//    }
     public function postUpdateAva(Request $request){
         if($request->hasFile('update_ava')) {
-            $validator = Validator::make($request->all(), [
-                'update_ava' => 'required'
-            ]);
-            if ($validator->failed())
-                return -1000;
             $ava = $request->file('update_ava');
             Storage::put('/public/avatars/' . Auth::user()->id .'.png', file_get_contents($ava->getRealPath()));
-            Log::info('done');
-            $ava_update = Storage::url('/avatars/'.Auth::user()->id.'.png');
-//                storage_path().'/app/public/avatars/'.Auth::user()->id . '.png';
-            return $ava_update;
+//            $ava_update = Storage::url('/avatars/'.Auth::user()->id.'.png');
+//            return $ava_update;
+            return 1000;
         }
         return -1000;
     }

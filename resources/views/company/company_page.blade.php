@@ -31,13 +31,18 @@
             </div>
         </div>
         <div style="text-align: center;padding: 15px;">
-            <form action="{{ route('edit-company-page',['id' => $company->id]) }}" method="get">
-                @if(Auth::guest() || Auth::user()->role_id !=2 )
+                @if(Auth::guest() || Auth::user()->role_id == 3)
 
+                @elseif(Auth::user()->role_id == 1)
+                    <form action="{{ route('delete-company-page',['id' => $company->id]) }}" method="get">
+                        <button class="btn btn-danger btn-lg" style="width: 170px;">Delete Company</button>
+                    </form>
                 @elseif(Auth::user()->company_Profile->company_id == $company->id)
-                    <button class="btn btn-danger btn-lg" style="width: 150px;">Edit Page</button>
+                    <form action="{{ route('edit-company-page',['id' => $company->id]) }}" method="get">
+                        <button class="btn btn-danger btn-lg" style="width: 150px;">Edit Page</button>
+                    </form>
                 @endif
-            </form>
+
         </div>
     </div>
     <div style="padding: 25px;">

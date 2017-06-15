@@ -5,6 +5,15 @@
 @endsection
 
 @section('content')
+    @if (count($errors) > 0)
+        <div class="alert alert-danger" style="padding: 10px;">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <div class="row" style="height: 717px;">
         <div class="col-md-6 col-md-offset-3">
             <h3 style="line-height: 50px;">Sign up</h3>

@@ -149,31 +149,31 @@ Route::get('/{id}/article-detail',[
 //Post article
 Route::get('post-article', function(){
     return view('articles.post_article');
-})->name('post-article');
+})->middleware('checkUserIsAdmin')->name('post-article');
 
 
 Route::post('add-article',[
     'uses' => 'ArticlesController@addArticle',
     'as' => 'add-article'
-]);
+])->middleware('checkUserIsAdmin');
 
 // Edit article
 Route::get('/{id}/edit-article',[
     'uses' => 'ArticlesController@getEditArticle',
     'as' => 'edit-article'
-]);
+])->middleware('checkUserIsAdmin');
 
 // Update article
 Route::post('update-article',[
     'uses' => 'ArticlesController@updateArticle',
     'as' => 'update-article'
-]);
+])->middleware('checkUserIsAdmin');
 
 //Delete article
 Route::post('delete-article',[
     'uses' => 'ArticlesController@deleteArticle',
     'as' => 'delete-article'
-]);
+])->middleware('checkUserIsAdmin');
 
 /*-----------------Company------------------*/
 Route::get('{id}/employee-page',[
@@ -231,11 +231,15 @@ Route::post('create-company',[
     'as' => 'post-create-company'
 ])->middleware('checkUserIsAdmin');
 
+Route::get('/{id}/delete-company', [
+    'uses' => 'CompanyController@getDeleteCompany',
+    'as' => 'delete-company-page'
+])->middleware('checkUserIsAdmin');
+
 Route::get('company-list', [
     'uses' => 'CompanyController@getCompanyList',
     'as' => 'get-company-list'
 ]);
-
 /*-----------------Introduce------------------*/
 Route::get('introduce', function(){
     return view('basic.introduce');
@@ -249,6 +253,11 @@ Route::post('accept-join',[
 Route::post('reject-join',[
     'uses' => 'CompanyController@postRejectJoin',
     'as' => 'reject-join'
+])->middleware('checkUserIsCompany');
+
+Route::post('end-join',[
+    'uses' => 'CompanyController@postEndJoin',
+    'as' => 'end-join'
 ])->middleware('checkUserIsCompany');
 
 /*-----------------Contact------------------*/

@@ -120,9 +120,11 @@
                                     <i class="fa fa-check-circle fa-2x fa-icon-button" id='accept' style="color: green; padding-right: 35px;" aria-hidden="true"></i>
                                     <i class="fa fa-times-circle fa-2x fa-icon-button" id='reject' style="color: red" aria-hidden="true"></i>
                                 @elseif($student_apply_job->result == 12)
-                                    Accepted!
+                                    Accepted!&nbsp;<i class="fa fa-times-circle fa-2x fa-icon-button" id='end' style="color: blue" aria-hidden="true"></i>
                                 @elseif($student_apply_job->result == 11)
                                     Rejected!
+                                @elseif($student_apply_job->result == 13)
+                                    Finished!
                                 @endif
                             </td>
                         </tr>
@@ -169,6 +171,25 @@
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
 
+    {{--for end--}}
+    <div class="modal fade" tabindex="-1" role="dialog" id="EndModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">End Process</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure to end this intership?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="sureEnd">Sure</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
     {{--for delete job--}}
     <div class="modal fade" tabindex="-1" role="dialog" id="DeleteModal">
         <div class="modal-dialog" role="document">
@@ -187,6 +208,9 @@
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
+
+
+
     <script>
         var urlJobDetail = '{{ route('job_detail',['id'=>$job->id]) }}';
         var urlUpdateJob = '{{ route('post-update-job') }}';
@@ -194,6 +218,7 @@
         var _token = '{{ Session::token() }}';
         var urlAccept = '{{ route('accept-join') }}';
         var urlReject = '{{ route('reject-join') }}';
+        var urlEnd = '{{ route('end-join') }}'
         var urlDeleteJob = '{{ route('delete-job') }}';
         var urlJobManagement = '{{ route('get-job-management') }}';
     </script>

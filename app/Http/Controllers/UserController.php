@@ -12,8 +12,6 @@ use App\Models\StudentProfile;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
-
 class UserController extends Controller
 {
     public function postSignIn(Request $request)
@@ -45,6 +43,7 @@ class UserController extends Controller
             $message_warning = ['message_warning' => 'Password did not match'];
             return redirect()->back()->with($message_warning);
         }
+
         //create User
         $user = new User();
         $user->full_name = $fullname;

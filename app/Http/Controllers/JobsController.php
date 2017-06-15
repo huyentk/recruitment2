@@ -36,46 +36,43 @@ class JobsController extends Controller
         else
             $company->image = Storage::url('/companies/default.png');
         $result = 0;
-        if(Auth::user())
-        {
-            //check if user is student
-            if(Auth::user()->role_id == 3){
-                $student_apply_job = StudentApplyJob::where('stu_id',Auth::user()->id)->where('job_id',$id)->first();
-                if($student_apply_job != null)
-                    $result = $student_apply_job->result;
+        //check if user is student
+        if(Auth::user()->role_id == 3){
+            $student_apply_job = StudentApplyJob::where('stu_id',Auth::user()->id)->where('job_id',$id)->first();
+            if($student_apply_job != null)
+                $result = $student_apply_job->result;
+            return view('jobs.job_detail')->with([
+                'job' => $job,
+                'company' => $company,
+                'job_skills' => $job_skills,
+                'result' => $result
+            ]);
+        }
+        if(Auth::user()->role_id == 2){
+            if(CompanyProfile::where('id',Auth::user()->id)->value('company_id') == $company->id){
+                $students_apply_job = StudentApplyJob::where('job_id',$id)->get();
+                if($students_apply_job != null){
+                    foreach ($students_apply_job as $student_apply_job){
+                        $student_info = StudentProfile::find($student_apply_job->stu_id)->first();
+                        $student_apply_job->fullname = User::find($student_info->id)->value('full_name');
+                        $student_apply_job->university = $student_info->university;
+                        $student_apply_job->major = $student_info->major;
+                    }
+                }
                 return view('jobs.job_detail')->with([
                     'job' => $job,
                     'company' => $company,
+                    'students_apply_job' => $students_apply_job,
                     'job_skills' => $job_skills,
-                    'result' => $result
                 ]);
             }
-            if(Auth::user()->role_id == 2){
-                if(CompanyProfile::where('id',Auth::user()->id)->value('company_id') == $company->id){
-                    $students_apply_job = StudentApplyJob::where('job_id',$id)->get();
-                    if($students_apply_job != null){
-                        foreach ($students_apply_job as $student_apply_job){
-                            $student_info = StudentProfile::find($student_apply_job->stu_id)->first();
-                            $student_apply_job->fullname = User::find($student_info->id)->value('full_name');
-                            $student_apply_job->university = $student_info->university;
-                            $student_apply_job->major = $student_info->major;
-                        }
-                    }
-                    return view('jobs.job_detail')->with([
-                        'job' => $job,
-                        'company' => $company,
-                        'students_apply_job' => $students_apply_job,
-                        'job_skills' => $job_skills,
-                    ]);
-                }
-                else{
-                    return view('jobs.job_detail')->with([
-                        'job' => $job,
-                        'do_not_show_edit' => '1',
-                        'company' => $company,
-                        'job_skills' => $job_skills,
-                    ]);
-                }
+            else{
+                return view('jobs.job_detail')->with([
+                    'job' => $job,
+                    'do_not_show_edit' => '1',
+                    'company' => $company,
+                    'job_skills' => $job_skills,
+                ]);
             }
         }
         return view('jobs.job_detail')->with([
