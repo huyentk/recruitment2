@@ -10,7 +10,7 @@
 @endsection
 @section('content')
     <div class="front"></div>
-    <div class="row">
+    <div class="row" style="height: 665px;">
         <div class="col-md-4">
             <div class="box">
                 <div class="company-info">

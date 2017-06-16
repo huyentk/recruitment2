@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-    <div class="row" style="height: 717px;">
+    <div class="row" style="height: 665px;">
         <div class="col-md-6 col-md-offset-3">
             <h3 style="line-height: 50px;">Sign in</h3>
             <form action="{{ route('sign-in') }}" method="post">

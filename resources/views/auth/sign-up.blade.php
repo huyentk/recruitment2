@@ -14,7 +14,7 @@
             </ul>
         </div>
     @endif
-    <div class="row" style="height: 717px;">
+    <div class="row" style="height: 715px;">
         <div class="col-md-6 col-md-offset-3">
             <h3 style="line-height: 50px;">Sign up</h3>
             <form action="{{ route('sign-up') }}" method="post">
