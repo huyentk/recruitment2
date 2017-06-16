@@ -19,7 +19,7 @@
         @foreach($companies as $company)
             <div class="row job_content">
                 <div class="col-md-2 job_content_div">
-                    <img src="{{ $company->image }}" class="img-rounded"/>
+                    <img src="{{ $company->image }}" style="width: 113px;height: 113px;" class="img-rounded"/>
                 </div>
                 <div class="col-md-8 job_content_div" style="padding-left: 0;">
                     <h3 style="margin-top: 0;">{{ $company->name }}</h3>

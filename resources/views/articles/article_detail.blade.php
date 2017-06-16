@@ -22,7 +22,6 @@
 
             @elseif(Auth::user()->role_id == 1 && Auth::user()->id == $article->created_by)
                 <div style="padding-left: 40px; font-weight: bold">
-                    {{--<a href=" {{route('edit-article',['id' => $article->id])}}">Edit</a>--}}
                     <a href=" {{route('edit-article',['id' => $article->id])}}"><button type="button" class="btn btn-primary btn-lg" style="width: 130px;">Edit</button></a>
                     <button type="button" class="btn btn-danger btn-lg" id="delete" style="width: 130px;">Delete</button>
                 </div>

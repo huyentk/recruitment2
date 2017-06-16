@@ -24,15 +24,14 @@ class ArticlesController extends Controller
         $articles = Articles::orderBy('id','desc')->paginate(6);
 //        Log::info($articles);
         foreach($articles as $article){
-            $article->image = Storage::url('/articles/'.$article->id.'.png');
-            if(!$article->image){
+            if(Storage::exists('public/articles/'.$article->id.'.png'))
+                $article->image = Storage::url('/articles/'.$article->id.'.png');
+            else
                 $article->image = Storage::url('/articles/default.png');
-            }
             $article->created_by = User::select('full_name')->where('id',$article->created_by)->first();
         }
         /*Log::info($article);*/
         return view('articles.articles_list')->with(['articles'=> $articles]);
-
     }
 
     /**
@@ -42,11 +41,14 @@ class ArticlesController extends Controller
     public function getArticleDetail($id)
     {
         $article = Articles::find($id);
-        $article->image = Storage::url('/articles/'.$article->id.'.png');
-        if(!$article->image){
+
+        if(Storage::exists('public/articles/'.$article->id.'.png'))
+            $article->image = Storage::url('/articles/'.$article->id.'.png');
+        else
             $article->image = Storage::url('/articles/default.png');
-        }
+
         $others = Articles::where('id','<',$id)->limit(4)->get();
+
         return view('articles.article_detail')->with([
             'article' => $article,
             'others' => $others
