@@ -10,15 +10,7 @@
 @endsection
 
 @section('content')
-    @if (count($errors) > 0)
-        <div class="alert alert-danger" style="padding: 10px;">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
+
     {{--Account Information--}}
     <div class="row">
         <div class="col-md-4" id="avatar">
@@ -30,6 +22,15 @@
             </form>
         </div>
         <div class="col-md-7" id="account_info">
+            @if (count($errors) > 0)
+                <div class="alert alert-danger" style="padding: 10px;">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <h2>Account Information</h2>
             <hr/>
             <div class="update_and_save">
@@ -55,7 +56,7 @@
             <div class="info">
                 <div class="form-inline">
                     <label for="currentPassword">Current Password</label>
-                    <input class="input_info form-control" id="current-pass" type="password" name="current_password" value="{{ $student_info->password }}"/>
+                    <input class="input_info form-control" id="current-pass" type="password" name="current_password" value="{{ $student_info->password }}" disabled/>
                 </div>
             </div>
             <div class="info">

@@ -95,7 +95,7 @@
             </div>
         </div>
     </div>
-    @if(isset($students_apply_job)))
+    @if(isset($students_apply_job))
         <div class="row" style="margin: 25px;">
             <table class="table table-striped" id="table">
                 <thead style="text-align: center">

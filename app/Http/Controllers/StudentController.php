@@ -59,11 +59,18 @@ class StudentController extends Controller
     }
 
     public function postUpdateAccountInfoHasPass(Request $request){
-        $this->validate($request,[
+        $validator = Validator::make($request->all(), [
             'email' => 'email|required',
-            'new_pass' => 'required',
+            'new_pass' => 'required|min:4',
             'confirm_pass' => 'required'
         ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
         $password = $request['new_pass'];
         $password_confirm = $request['confirm_pass'];
         if($password != $password_confirm) {
@@ -134,6 +141,7 @@ class StudentController extends Controller
         $cv = storage_path().'/app/public/CV/'.Auth::user()->id . '-' . $request['job_id'] . '.pdf' ;
         $company = Job::select('created_by')->where('id',$request['job_id'])->first();
         $email = User::select('email')->where('id',$company->created_by)->first();
+
         Mail::to($email->email)->send(new SendMailRegister(
                         $request['intro'], $request['full_name'], $request['gender'],
                         $request['birthday'], $request['university'], $request['major'],
@@ -157,10 +165,10 @@ class StudentController extends Controller
         if($request->hasFile('update_ava')) {
             $ava = $request->file('update_ava');
             Storage::put('/public/avatars/' . Auth::user()->id .'.png', file_get_contents($ava->getRealPath()));
-            $ava_update = Storage::url('/avatars/'.Auth::user()->id.'.png');
-            return $ava_update;
-//            return 1000;
+//            $ava_update = Storage::url('/avatars/'.Auth::user()->id.'.png');
+//            return $ava_update;
+            return 1000;
         }
-//        return -1000;
+        return -1000;
     }
 }
